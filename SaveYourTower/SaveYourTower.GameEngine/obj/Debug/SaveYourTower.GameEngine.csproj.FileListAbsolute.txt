@@ -1,0 +1,5 @@
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine\bin\Debug\SaveYourTower.GameEngine.dll
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine\bin\Debug\SaveYourTower.GameEngine.pdb
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine\obj\Debug\SaveYourTower.GameEngine.dll
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine\obj\Debug\SaveYourTower.GameEngine.pdb
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine\obj\Debug\SaveYourTower.GameEngine.csprojResolveAssemblyReference.cache

@@ -1,0 +1,8 @@
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.DesktopUI\bin\Debug\SaveYourTower.DesktopUI.exe.config
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.DesktopUI\bin\Debug\SaveYourTower.DesktopUI.exe
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.DesktopUI\bin\Debug\SaveYourTower.DesktopUI.pdb
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.DesktopUI\obj\Debug\SaveYourTower.DesktopUI.csprojResolveAssemblyReference.cache
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.DesktopUI\obj\Debug\SaveYourTower.DesktopUI.Properties.Resources.resources
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.DesktopUI\obj\Debug\SaveYourTower.DesktopUI.csproj.GenerateResource.Cache
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.DesktopUI\obj\Debug\SaveYourTower.DesktopUI.exe
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.DesktopUI\obj\Debug\SaveYourTower.DesktopUI.pdb
