@@ -8,9 +8,56 @@ namespace SaveYourTower.GameEngine.GameObjects
 {
     public class Enemy : GameObject, IEnemy
     {
-        public Enemy(Point position, UnitVector2 direction, int colliderRaius, int velosity)
-            : base(position, direction, colliderRaius, velosity)
+        public Enemy(
+            Field gameField,
+            Point position, 
+            int colliderRaius,
+            double velosity,
+            int lifePoints)
+            : base(
+                gameField,
+                position,
+                colliderRaius : colliderRaius, 
+                velosity : velosity,
+                lifePoints : lifePoints)
         {
+
+        }
+
+        public override void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
+        {
+            if ((gameObject is CannonBall) && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+            {
+                this.ReceiveDamage(gameObject.Damage);
+
+                if(this.LifePoints <= 0)
+                {
+                    this.IsAlive = false;
+                    GameField.GameScore.AddPoint(1);
+                }
+            }
+            else if ((gameObject is Tower) && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+            {
+                this.IsAlive = false;
+            }
+            else if ((gameObject is Turret) && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+            {
+                this.IsAlive = false;
+            }
+            else if (gameObject is Mine)
+            {
+                if ((collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+                {
+                    this.IsAlive = false;
+                }
+                else if ((collisionEventArgs.OtherCollider.Tag == "ExplosionCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+                {
+                    if ((gameObject as Mine).IsExplose)
+                    {
+                        this.IsAlive = false;
+                    }
+                }
+            }
 
         }
     }

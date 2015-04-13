@@ -10,56 +10,34 @@ namespace SaveYourTower.GameEngine.GameLogic
 {
     static class CollisionDetector
     {
-        public static void FindCollision(Field gameField)
+        public static void FindCollisions(Field gameField)
         {
-            var enemies = gameField.GameObjects.FindAll( o => { return (o is Enemy); } );
-            var tower = gameField.GameObjects.Find( o => { return (o is Tower); } );
+            GameObject[] gameObjects = gameField.GameObjects.ToArray(); 
 
-            gameField.GameObjects.ForEach( obj =>
+            for (int i = 0; i < gameField.GameObjects.Count; i++)
+            {
+                for (int j = (gameField.GameObjects.Count - (gameField.GameObjects.Count - i)); j < gameField.GameObjects.Count; j++)
                 {
-                    if ((obj is CannonBall) && obj.Visible)
+                    foreach (Collider colliderLeft in gameObjects[i].Colliders)
                     {
-                        foreach (var enemie in enemies)
+                        foreach (Collider colliderRight in gameObjects[j].Colliders)
                         {
-                            if (Collision(obj, enemie))
+                            if (CheckOnConllisions(colliderLeft, colliderRight))
                             {
-                                if (HitDamage(obj, enemie))
-                                {
-                                    gameField.GameScore.AddPoint();
-                                    enemie.Visible = false;
-                                }
-
-                                obj.Visible = false;
+                                colliderLeft.DoCollision(gameObjects[j], new CollisionEventArgs(colliderLeft, colliderRight));
+                                colliderRight.DoCollision(gameObjects[i], new CollisionEventArgs(colliderRight, colliderLeft));
                             }
                         }
                     }
-                    else if (obj is Enemy)
-                    {
-                        if (Collision(obj, tower))
-                        {
-                            HitDamage(obj, tower);
-                            obj.Visible = false;
-                        }
-                    }
                 }
-            );
-
-            gameField.GameObjects.RemoveAll(obj => { return !obj.Visible; } );
+            }
         }
 
-        public static bool HitDamage(GameObject striker, GameObject receiver)
+        public static bool CheckOnConllisions(Collider left, Collider right)
         {
-            receiver.ReceiveDamage(striker.Damage);
-
-            return receiver.LifePoints <= 0;
+            return (Distance(left.Position, right.Position) - (left.Radius + left.Radius) <= 0);
         }
-
-        public static bool Collision(GameObject striker, GameObject receiver)
-        {
-             return ((Distance(striker.Position, receiver.Position)
-                 - (striker.ColliderRadius + receiver.ColliderRadius)) <= 0);
-        }
-
+        
         public static double Distance(Point left, Point right)
         { 
             return Math.Sqrt(Math.Pow((left.X - right.X), 2) 

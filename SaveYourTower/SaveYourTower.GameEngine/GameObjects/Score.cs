@@ -10,10 +10,23 @@ namespace SaveYourTower.GameEngine.GameObjects
     {
         public int Value { get; private set; }
 
-        public void AddPoint()
+        public void AddPoint(int value)
         {
-            Value++;
+            Value += value;
         }
+
+        public bool SpendPoints(int value)
+        {
+            if (value < Value)
+            {
+                Value -= value;
+                return true;
+            }
+
+            return false;
+        }
+
+
 
         public void Clean()
         {

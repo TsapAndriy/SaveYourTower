@@ -2,67 +2,80 @@
 using System.Collections.Generic;
 using SaveYourTower.GameEngine.DataContainers;
 
+using SaveYourTower.GameEngine.GameLogic;
+using SaveYourTower.GameEngine.GameObjects.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects.Base
 {
-    public class GameObject
+    public class GameObject : ICollisional
     {
-        #region Fields
-        // Give tower posibility to create game objects.
-        public InstantineDelegate Instantine;
+        #region Properties
 
-        public bool Visible { get; set; }
+        public int Cost { get; private set; }        
         public int LifePoints { get; private set; }
         public int Damage { get; private set; }
-        public int ColliderRadius { get; private set; }
-        public int Velosity { get; set; }
-        public UnitVector2 Direction { get; set; }
+        public List<Collider> Colliders { get; private set; }
         public Point Position { get; private set; }
+        public Field GameField { get; private set; }
 
+        public bool IsAlive { get; set; }
+        public double Velosity { get; set; }
+        public UnitVector2 Direction { get; set; }
+       
         #endregion
 
         #region Constructors
 
-        public GameObject(Point position, UnitVector2 direction,
-            int colliderRaius, int velosity, int damage = 1, int lifePoints = 1)
+        public GameObject(
+            Field gameField, 
+            Point position,
+            UnitVector2 direction = null,
+            int colliderRaius = 1,
+            double velosity = 0,
+            int damage = 1, 
+            int lifePoints = 1,
+            int cost = int.MaxValue)
         {
-            Visible = true;
-            Velosity = velosity;
-            Direction = direction;
+            GameField = gameField;
             Position = position;
-            ColliderRadius = colliderRaius;
+            Direction = (direction == null) ? new UnitVector2(0) : direction;
+            Velosity = velosity;
             Damage = damage;
             LifePoints = lifePoints;
+            Cost = cost;
+
+            Colliders = new List<Collider>();
+            Collider bodyCollider = new Collider(position, colliderRaius, "BodyCollider");
+            bodyCollider.CollisionEventHandler += OnCollision;
+            Colliders.Add(bodyCollider);
+            
+            IsAlive = true;
         }
 
         #endregion
 
         #region Methods
 
-        // Move game object using direction and velosity fields.
-        public void MoveOnVelosity()
+        public virtual void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
         {
-            if (Velosity > 0)
-            {
-                Point newPosition = new Point((int)(Direction.X * Velosity), (int)(Direction.Y * Velosity));
 
-                // Do one forced simplest move when velosity is to low.
-                if ((newPosition.X == 0) && (newPosition.Y == 0))
-                {
-                    newPosition.X = Position.X + Math.Sign(Direction.X);
-                    newPosition.Y = Position.Y + Math.Sign(Direction.Y);
-                }
-                else
-                {
-                    newPosition.X += Position.X;
-                    newPosition.Y += Position.Y;
-                }
-
-                Position = newPosition;
-            }
         }
 
-        #region Change direction
+        // Do every update event actions.
+        public virtual void Live()
+        { 
+            
+        }
+
+        // Move game object using direction and velosity.
+        public void MoveOnVelosity()
+        {
+            if (Velosity != 0)
+            {
+                Position.X += (Direction.X * Velosity);
+                Position.Y += (Direction.Y * Velosity);
+            }
+        }
 
         public void ReceiveDamage(int damage)
         {
@@ -72,8 +85,8 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
         // Set game object direction to the specific point.
         public void LookAt(Point point)
         {
-            int newX = point.X - Position.X;
-            int newY = point.Y - Position.Y;
+            double newX = point.X - Position.X;
+            double newY = point.Y - Position.Y;
 
             if ((newX == 0) && (newY == 0))
             {
@@ -88,8 +101,6 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
         {
             this.Direction.Angle += angle;
         }
-
-        #endregion
 
         #endregion
     }

@@ -39,7 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContainers\CollisionEventArgs.cs" />
+    <Compile Include="GameLogic\Collider.cs" />
     <Compile Include="GameLogic\CollisionDetector.cs" />
+    <Compile Include="GameLogic\EnemiesGenerator.cs" />
     <Compile Include="GameObjects\Field.cs" />
     <Compile Include="DataContainers\Point.cs" />
     <Compile Include="DataContainers\UnitVector2.cs" />
@@ -47,11 +50,16 @@
     <Compile Include="GameObjects\Base\GameObject.cs" />
     <Compile Include="GameObjects\CannonBall.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
+    <Compile Include="GameObjects\Interfaces\ICollisional.cs" />
+    <Compile Include="GameObjects\Interfaces\IMine.cs" />
+    <Compile Include="GameObjects\Interfaces\ITurret.cs" />
+    <Compile Include="GameObjects\Mine.cs" />
     <Compile Include="GameObjects\Score.cs" />
     <Compile Include="GameObjects\Interfaces\ICannonBall.cs" />
     <Compile Include="GameObjects\Interfaces\IEnemy.cs" />
     <Compile Include="GameObjects\Interfaces\ITower.cs" />
     <Compile Include="GameObjects\Tower.cs" />
+    <Compile Include="GameObjects\Turret.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

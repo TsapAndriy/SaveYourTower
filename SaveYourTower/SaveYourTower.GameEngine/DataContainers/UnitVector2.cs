@@ -46,7 +46,9 @@ namespace SaveYourTower.GameEngine.DataContainers
 		// Convert random vector to unit vector.
 		public void Normalize()
 		{
-			double magnitude = Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2));
+            double magnitude = Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2));
+
+            magnitude = (magnitude == 0 ? (-1 * double.MinValue) : magnitude);
 
 			X = X / magnitude;
 			Y = Y / magnitude;

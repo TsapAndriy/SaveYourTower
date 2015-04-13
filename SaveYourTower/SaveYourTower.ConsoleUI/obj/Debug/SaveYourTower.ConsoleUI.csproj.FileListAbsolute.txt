@@ -6,3 +6,11 @@ C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYou
 C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.ConsoleUI\obj\Debug\SaveYourTower.ConsoleUI.csprojResolveAssemblyReference.cache
 C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.ConsoleUI\obj\Debug\SaveYourTower.ConsoleUI.exe
 C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.ConsoleUI\obj\Debug\SaveYourTower.ConsoleUI.pdb
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower - Copy\SaveYourTower\SaveYourTower.ConsoleUI\bin\Debug\SaveYourTower.ConsoleUI.exe.config
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower - Copy\SaveYourTower\SaveYourTower.ConsoleUI\obj\Debug\SaveYourTower.ConsoleUI.exe
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower - Copy\SaveYourTower\SaveYourTower.ConsoleUI\obj\Debug\SaveYourTower.ConsoleUI.pdb
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower - Copy\SaveYourTower\SaveYourTower.ConsoleUI\bin\Debug\SaveYourTower.ConsoleUI.exe
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower - Copy\SaveYourTower\SaveYourTower.ConsoleUI\bin\Debug\SaveYourTower.ConsoleUI.pdb
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower - Copy\SaveYourTower\SaveYourTower.ConsoleUI\bin\Debug\SaveYourTower.GameEngine.dll
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower - Copy\SaveYourTower\SaveYourTower.ConsoleUI\bin\Debug\SaveYourTower.GameEngine.pdb
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower - Copy\SaveYourTower\SaveYourTower.ConsoleUI\obj\Debug\SaveYourTower.ConsoleUI.csprojResolveAssemblyReference.cache
