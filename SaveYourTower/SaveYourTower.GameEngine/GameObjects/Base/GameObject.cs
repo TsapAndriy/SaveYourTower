@@ -7,7 +7,7 @@ using SaveYourTower.GameEngine.GameObjects.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects.Base
 {
-    public class GameObject : ICollisional
+    public abstract class GameObject : ICollisional
     {
         #region Properties
 
@@ -56,15 +56,12 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
 
         #region Methods
 
-        public virtual void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
-        {
-
-        }
+        public abstract void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs);
 
         // Do every update event actions.
         public virtual void Live()
-        { 
-            
+        {
+
         }
 
         // Move game object using direction and velosity.

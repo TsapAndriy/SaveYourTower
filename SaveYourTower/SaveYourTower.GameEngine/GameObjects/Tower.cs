@@ -8,27 +8,32 @@ namespace SaveYourTower.GameEngine.GameObjects
 {
     public class Tower : GameObject, ITower
     {
+        #region Constructors
+
         public Tower(
             Field gameField,
-            Point position, 
+            Point position,
             UnitVector2 direction,
-            int colliderRaius, 
+            int colliderRaius,
             int lifePoints)
             : base(
                 gameField,
                 position,
-                direction, 
+                direction,
                 colliderRaius,
-                0, 
+                0,
                 lifePoints: lifePoints)
         {
 
-        }
+        } 
+
+        #endregion
+
+        #region Methods
 
         public void Fire()
         {
-            //Instantine(new CannonBall(GameField, Position.Clone(), new UnitVector2(Direction.Angle), 1, 2, 10));
-            GameField.AddGameObject(new CannonBall(GameField, Position.Clone(), new UnitVector2(Direction.Angle), 1, 2, 10));
+            GameField.AddGameObject(new CannonBall(GameField, Position.Clone(), new UnitVector2(Direction.Angle), 1, 2, 1, 10));
         }
 
         public override void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
@@ -38,5 +43,8 @@ namespace SaveYourTower.GameEngine.GameObjects
                 this.ReceiveDamage(gameObject.Damage);
             }
         }
+
+        
+        #endregion
     }
 }

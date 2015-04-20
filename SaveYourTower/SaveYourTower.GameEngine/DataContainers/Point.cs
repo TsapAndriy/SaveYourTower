@@ -40,10 +40,8 @@ namespace SaveYourTower.GameEngine.DataContainers
         public override bool Equals(Object obj)
         {
             Point point = obj as Point;
-            if (point == null)
-                return false;
-            else
-                return ((this.X == point.X) && (this.Y == point.Y));
+        
+            return ((this.X == point.X) && (this.Y == point.Y));
         }
     }
 }

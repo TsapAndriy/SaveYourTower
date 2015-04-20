@@ -8,7 +8,13 @@ namespace SaveYourTower.GameEngine.GameObjects
 {
     public class Score
     {
-        public int Value { get; private set; }
+        #region Properties
+
+        public int Value { get; private set; } 
+
+        #endregion
+
+        #region Methods
 
         public void AddPoint(int value)
         {
@@ -17,7 +23,7 @@ namespace SaveYourTower.GameEngine.GameObjects
 
         public bool SpendPoints(int value)
         {
-            if (value < Value)
+            if (value <= Value)
             {
                 Value -= value;
                 return true;
@@ -26,11 +32,11 @@ namespace SaveYourTower.GameEngine.GameObjects
             return false;
         }
 
-
-
         public void Clean()
         {
             Value = 0;
-        }
+        } 
+
+        #endregion
     }
 }

@@ -3,3 +3,5 @@ C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYou
 C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine.Test\obj\Debug\SaveYourTower.GameEngine.Test.csprojResolveAssemblyReference.cache
 C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine.Test\obj\Debug\SaveYourTower.GameEngine.Test.dll
 C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine.Test\obj\Debug\SaveYourTower.GameEngine.Test.pdb
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine.Test\bin\Debug\SaveYourTower.GameEngine.dll
+C:\Users\Andriy\SkyDrive\Files\EPAM\Projects\SaveYourTower\SaveYourTower\SaveYourTower.GameEngine.Test\bin\Debug\SaveYourTower.GameEngine.pdb

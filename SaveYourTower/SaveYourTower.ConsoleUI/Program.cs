@@ -17,12 +17,12 @@ namespace SaveYourTower.ConsoleUI
             Console.WriteLine("Save Your Tower\n\n\n\n\tPress any key to start");
             Console.ReadKey();
 
-            Game game = new Game();
+            Game game = new Game(new Point(50, 30));
             game.Output += ReDraw;
             game.Input += Input;
             game.Start();
 
-            if (game.IsExit)
+            if (game.GameStatus == Status.IsExit)
             {
                 Console.Clear();
                 Console.WriteLine("Thanks for playing. \n\n\n \t \t Your score: {0}", game.GetScore());
@@ -31,27 +31,32 @@ namespace SaveYourTower.ConsoleUI
 
         public static void Input(Game game)
         {
-            Point position = new Point((game.GameField.Size.X / 2), (game.GameField.Size.Y / 2));
-
             switch (ListenKey())
             {
                 case ConsoleKey.Escape:
-                    game.IsExit = true;
+                    game.Stop();
                     break;
                 case ConsoleKey.P:
-                    game.IsPaused = !game.IsPaused;
+                    if (game.GameStatus == Status.IsRuning)
+                    {
+                        game.Pause();
+                    }
+                    else if (game.GameStatus == Status.IsPaused)
+                    {
+                        game.Restore();
+                    }
                     break;
                 case ConsoleKey.LeftArrow:
-                    game.Rotate(10d / 180d * 3.14d);
+                    game.Rotate(10d / 180d * Math.PI);
                     break;
                 case ConsoleKey.RightArrow:
-                    game.Rotate(-10d / 180d * 3.14d);
+                    game.Rotate(-10d / 180d * Math.PI);
                     break;
                 case ConsoleKey.Spacebar:
                     game.Fire();
                     break;
                 case ConsoleKey.D1:
-                    game.BuyGameObject(new Turret(game.GameField, AskPosition(game.GameField), 1, 10, cost: 1));
+                    game.BuyGameObject(new Turret(game.GameField, AskPosition(game.GameField), 1, 5, 10, cost: 1));
                     break;
                 case ConsoleKey.D2:
                     game.BuyGameObject(new Mine(game.GameField, AskPosition(game.GameField), cost: 1));
@@ -81,24 +86,25 @@ namespace SaveYourTower.ConsoleUI
                             if (obj is Tower)
                             {
                                 output += '0';
-                            }
-                            if (obj is Enemy)
+                            } 
+                            else if (obj is Enemy)
                             {
                                 output += '*';
                             }
-                            if (obj is CannonBall)
+                            else if (obj is CannonBall)
                             {
                                 output += '.';
                             }
-                            if (obj is Turret)
+                            else if (obj is Turret)
                             {
                                 output += 'o';
                             }
-                            if (obj is Mine)
+                            else if (obj is Mine)
                             {
                                 output += '+';
                             }
                             playerC++;
+                            break;
                         }
                     }
 
@@ -115,7 +121,6 @@ namespace SaveYourTower.ConsoleUI
             }
 
             var tower = gameField.GameObjects.Find(obj => { return (obj is Tower); });
-
             Console.WriteLine("Score : {0} \t\tAngle:{1:00}\t\t LifePoints: {2}", gameField.GameScore.Value, tower.Direction.Angle * 180 / 3.14, tower.LifePoints);
 
             output += "\n";
@@ -143,7 +148,6 @@ namespace SaveYourTower.ConsoleUI
             {
                 Console.ReadKey(true);
             }
-
         }
 
         public static Point AskPosition(Field gameField)
@@ -178,56 +182,5 @@ namespace SaveYourTower.ConsoleUI
                 Console.SetCursorPosition((int)position.Y, (int)position.X + 1);
             }
         }
-
-        //public static GameObject PlaceGameObject(GameObject gameObject)
-        //{
-        //    while (true)
-        //    {
-        //        ConsoleKey key = Console.ReadKey().Key;
-
-        //        switch (key)
-        //        {
-        //            case ConsoleKey.UpArrow:
-
-        //                gameObject.Position.X = gameObject.Position.X > 2 ? gameObject.Position.X++ : gameObject.Position.X--;
-
-        //                if (gameObject.Position.X > 2)
-        //                {
-        //                    gameObject.Position.X--;
-        //                }
-        //                break;
-        //            case ConsoleKey.DownArrow:
-        //                if (gameObject.Position.X < gameObject.GameField.Size.X - 2)
-        //                {
-        //                    gameObject.Position.X++;
-        //                }
-        //                break;
-        //            case ConsoleKey.LeftArrow:
-        //                if (gameObject.Position.Y > 1)
-        //                {
-        //                    gameObject.Position.Y--;
-        //                }
-        //                break;
-        //            case ConsoleKey.RightArrow:
-        //                if (gameObject.Position.Y < gameObject.GameField.Size.Y - 2)
-        //                {
-        //                    gameObject.Position.Y++;
-        //                }
-        //                break;
-        //            case ConsoleKey.Enter:
-        //                if (gameObject.GameField.GameObjects.Find(obj => { return obj.Position.Equals(gameObject.Position); }) != null)
-        //                {
-        //                    return null;
-        //                }
-        //                return gameObject;
-        //            case ConsoleKey.Escape:
-        //                return null;
-        //        }
-        //        ReDraw(gameObject.GameField);
-
-        //        Console.CursorSize = 100;
-        //        Console.SetCursorPosition((int)gameObject.Position.Y, (int)gameObject.Position.X + 1);
-        //    }
-        //}
     }
 }

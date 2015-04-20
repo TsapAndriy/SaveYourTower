@@ -50,9 +50,31 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="DataContainers\CollisionEventArgsTest.cs" />
+    <Compile Include="DataContainers\PointTest.cs" />
+    <Compile Include="DataContainers\UnitVector2Test.cs" />
+    <Compile Include="GameLogic\ColliderTest.cs" />
+    <Compile Include="GameLogic\CollisionDetectorTest.cs" />
+    <Compile Include="GameLogic\EnemiesGeneratorTest.cs" />
+    <Compile Include="GameObjects\MineTest.cs" />
+    <Compile Include="GameObjects\ScoreTest.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="GameObjects\EnemyTest.cs" />
+    <Compile Include="GameObjects\FieldTest.cs" />
+    <Compile Include="GameObjects\CannonBallTest.cs" />
+    <Compile Include="GameObjects\TowerTest.cs" />
+    <Compile Include="GameObjects\TurretTest.cs" />
+    <Compile Include="GameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SaveYourTower.GameEngine\SaveYourTower.GameEngine.csproj">
+      <Project>{b4bf2bbc-c979-446b-b532-058e3f31f534}</Project>
+      <Name>SaveYourTower.GameEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
