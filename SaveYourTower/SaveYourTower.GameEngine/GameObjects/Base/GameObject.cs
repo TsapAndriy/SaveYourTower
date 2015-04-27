@@ -7,8 +7,20 @@ using SaveYourTower.GameEngine.GameObjects.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects.Base
 {
-    public abstract class GameObject : ICollisional
+    public abstract class GameObject
     {
+        #region Fields
+
+        private double _velosity;
+
+        #endregion
+
+        #region StaticProperties
+
+        public static double VelositiDivisor { get; set; }
+
+        #endregion
+
         #region Properties
 
         public int Cost { get; private set; }        
@@ -19,12 +31,22 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
         public Field GameField { get; private set; }
 
         public bool IsAlive { get; set; }
-        public double Velosity { get; set; }
         public UnitVector2 Direction { get; set; }
-       
+
+        public double Velosity
+        {
+            get { return (_velosity / VelositiDivisor); }
+            set { _velosity = value; }
+        }
+
         #endregion
 
         #region Constructors
+
+        static GameObject()
+        {
+            VelositiDivisor = 1;
+        }
 
         public GameObject(
             Field gameField, 
@@ -45,9 +67,6 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
             Cost = cost;
 
             Colliders = new List<Collider>();
-            Collider bodyCollider = new Collider(position, colliderRaius, "BodyCollider");
-            bodyCollider.CollisionEventHandler += OnCollision;
-            Colliders.Add(bodyCollider);
             
             IsAlive = true;
         }
@@ -55,14 +74,6 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
         #endregion
 
         #region Methods
-
-        public abstract void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs);
-
-        // Do every update event actions.
-        public virtual void Live()
-        {
-
-        }
 
         // Move game object using direction and velosity.
         public void MoveOnVelosity()

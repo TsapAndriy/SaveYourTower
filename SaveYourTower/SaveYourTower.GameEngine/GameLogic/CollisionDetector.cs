@@ -8,11 +8,14 @@ using SaveYourTower.GameEngine.GameObjects.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameLogic
 {
+
     public class CollisionDetector
     {
+        #region Methods
+
         public void FindCollisions(Field gameField)
         {
-            GameObject[] gameObjects = gameField.GameObjects.ToArray(); 
+            GameObject[] gameObjects = gameField.GameObjects.ToArray();
 
             for (int i = 0; i < gameField.GameObjects.Count; i++)
             {
@@ -42,11 +45,13 @@ namespace SaveYourTower.GameEngine.GameLogic
         {
             return (Distance(left.Position, right.Position) - (left.Radius + left.Radius) <= 0);
         }
-        
+
         double Distance(Point left, Point right)
-        { 
-            return Math.Sqrt(Math.Pow((left.X - right.X), 2) 
+        {
+            return Math.Sqrt(Math.Pow((left.X - right.X), 2)
                 + Math.Pow((left.Y - right.Y), 2));
-        }
+        } 
+
+    #endregion
     }
 }

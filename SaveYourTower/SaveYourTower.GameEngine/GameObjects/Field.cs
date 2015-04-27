@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects.Interfaces;
+using SaveYourTower.GameEngine.Spells.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects
 {
@@ -13,16 +14,18 @@ namespace SaveYourTower.GameEngine.GameObjects
         public Point Size { get; private set; }
         public Score GameScore { get; private set; }
         public List<GameObject> GameObjects { get; private set; }
- 
+        public int CurrenGameLevel { get; set; }
+
         #endregion
 
         #region Constructors
 
-        public Field(Point size)
+        public Field(Point size, int gameLevel)
         {
             Size = size;
             GameScore = new Score();
             GameObjects = new List<GameObject>();
+            CurrenGameLevel = gameLevel;
         } 
 
         #endregion
@@ -40,7 +43,12 @@ namespace SaveYourTower.GameEngine.GameObjects
             {
                 GameObjects.Remove(gameObject);
             }
-        } 
+        }
+
+        public void Clean()
+        {
+            GameObjects.Clear();
+        }
 
         #endregion
     }

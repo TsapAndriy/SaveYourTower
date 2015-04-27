@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -56,15 +57,17 @@
     <Compile Include="GameLogic\ColliderTest.cs" />
     <Compile Include="GameLogic\CollisionDetectorTest.cs" />
     <Compile Include="GameLogic\EnemiesGeneratorTest.cs" />
-    <Compile Include="GameObjects\MineTest.cs" />
+    <Compile Include="GameObjects\RealObjects\MineTest.cs" />
     <Compile Include="GameObjects\ScoreTest.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="GameObjects\EnemyTest.cs" />
+    <Compile Include="GameObjects\RealObjects\EnemyTest.cs" />
     <Compile Include="GameObjects\FieldTest.cs" />
-    <Compile Include="GameObjects\CannonBallTest.cs" />
-    <Compile Include="GameObjects\TowerTest.cs" />
-    <Compile Include="GameObjects\TurretTest.cs" />
+    <Compile Include="GameObjects\RealObjects\CannonBallTest.cs" />
+    <Compile Include="GameObjects\RealObjects\TowerTest.cs" />
+    <Compile Include="GameObjects\RealObjects\TurretTest.cs" />
+    <Compile Include="GameObjects\Spells\AllHilSpellTest.cs" />
+    <Compile Include="GameObjects\Spells\AllSlowSpellTest.cs" />
     <Compile Include="GameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -74,7 +77,12 @@
       <Name>SaveYourTower.GameEngine</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Spells\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
