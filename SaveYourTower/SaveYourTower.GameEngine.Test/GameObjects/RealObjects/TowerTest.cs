@@ -18,7 +18,6 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             Field field = new Field(new Point(10, 10), 1);
             Point position = new Point(1, 1);
             UnitVector2 direction = new UnitVector2(0);
-
             Tower tower = new Tower(field, position, direction, 2, 10);
 
             Assert.IsNotNull(tower);
@@ -34,7 +33,6 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             Field field = new Field(new Point(10, 10), 1);
             Point position = new Point(1, 1);
             UnitVector2 direction = new UnitVector2(0);
-
             Tower tower = new Tower(field, position, direction, 2, 10);
 
             tower.Live();
@@ -77,7 +75,6 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             field.AddGameObject(enemy);
 
             CollisionDetector collisionDetector = new CollisionDetector();
-
             collisionDetector.FindCollisions(field);
 
             Assert.IsFalse(tower.IsAlive);
@@ -95,42 +92,4 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             Assert.IsTrue(tower.IsAlive);
         }
     }
-
-        // #region Constructors
-
-        //public Tower(
-        //    Field gameField,
-        //    Point position,
-        //    UnitVector2 direction,
-        //    int colliderRaius,
-        //    int lifePoints)
-        //    : base(
-        //        gameField,
-        //        position,
-        //        direction,
-        //        colliderRaius,
-        //        0,
-        //        lifePoints: lifePoints)
-        //{
-
-        //} 
-
-        //#endregion
-
-        //#region Methods
-
-        //public void Fire()
-        //{
-        //    GameField.AddGameObject(new CannonBall(GameField, Position.Clone(), new UnitVector2(Direction.Angle), 1, 2, 1, 10));
-        //}
-
-        //public override void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
-        //{
-        //    if ((gameObject is Enemy) && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
-        //    {
-        //        this.ReceiveDamage(gameObject.Damage);
-        //    }
-        //} 
-
-        //#endregion
 }

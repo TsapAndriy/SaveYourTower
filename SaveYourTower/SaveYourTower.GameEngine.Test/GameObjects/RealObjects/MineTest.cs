@@ -30,7 +30,6 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         {
             Field field = new Field(new Point(10, 10), 1);
             Point position = new Point(1, 1);
-
             Mine mine = new Mine(field, position);
 
             mine.Explode();
@@ -43,12 +42,13 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         {
             Field field = new Field(new Point(10, 10), 1);
             Point position = new Point(1, 1);
-
             Mine mine = new Mine(field, position);
             
             Assert.IsTrue(mine.IsAlive);
+
             mine.Explode();
             mine.Live();
+
             Assert.IsFalse(mine.IsAlive);
         }
 
@@ -58,14 +58,12 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
 
             Field field = new Field(new Point(10, 10), 1);
             Mine mine = new Mine(field, new Point(1, 1), 2, 2);
-
             GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 10);
 
             field.AddGameObject(mine);
             field.AddGameObject(enemy);
 
             CollisionDetector collisionDetector = new CollisionDetector();
-
             collisionDetector.FindCollisions(field);
             mine.Live();
 

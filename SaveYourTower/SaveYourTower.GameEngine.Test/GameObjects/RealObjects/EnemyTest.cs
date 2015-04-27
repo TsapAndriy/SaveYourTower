@@ -29,7 +29,6 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             Assert.AreEqual(4, enemy.LifePoints);
         }
 
-
         [TestMethod]
         public void TestOnCollisionWithCannonBall()
         {
@@ -55,14 +54,12 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
 
             Field field = new Field(new Point(10, 10), 1);
             Tower tower = new Tower(field, new Point(1, 1), null, 2, 10);
-
             GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
 
             field.AddGameObject(tower);
             field.AddGameObject(enemy);
 
             CollisionDetector collisionDetector = new CollisionDetector();
-
             collisionDetector.FindCollisions(field);
 
             Assert.IsFalse(enemy.IsAlive);
@@ -73,16 +70,13 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         {
 
             Field field = new Field(new Point(10, 10), 1);
-
             Turret turret = new Turret(field, new Point(1, 1), 1, 5, 10);
-
             GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
 
             field.AddGameObject(turret);
             field.AddGameObject(enemy);
 
             CollisionDetector collisionDetector = new CollisionDetector();
-
             collisionDetector.FindCollisions(field);
 
             Assert.IsFalse(enemy.IsAlive);
@@ -91,9 +85,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestOnCollisionWithMine()
         {
-
             Field field = new Field(new Point(10, 10), 1);
-
             Mine mine = new Mine(field, new Point(1, 1), 2, 20);
 
             GameObject enemyBodyKilled = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
@@ -104,7 +96,6 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             field.AddGameObject(enemyExplosionKilled);
 
             CollisionDetector collisionDetector = new CollisionDetector();
-
             collisionDetector.FindCollisions(field);
 
             Assert.IsFalse(enemyBodyKilled.IsAlive);
@@ -142,48 +133,4 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             Assert.IsFalse(enemy.Direction.Equals(oldDirection));
         }
     }
-
-
-
-     //   #endregion
-
-     //   #region Methods
-
-     //   public override void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
-     //   {
-     //       if ((gameObject is CannonBall) && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
-     //       {
-     //           this.ReceiveDamage(gameObject.Damage);
-
-     //           if (this.LifePoints <= 0)
-     //           {
-     //               this.IsAlive = false;
-     //               GameField.GameScore.AddPoint(1);
-     //           }
-     //       }
-     //       else if ((gameObject is Tower) && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
-     //       {
-     //           this.IsAlive = false;
-     //       }
-     //       else if ((gameObject is Turret) && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
-     //       {
-     //           this.IsAlive = false;
-     //       }
-     //       else if (gameObject is Mine)
-     //       {
-     //           if ((collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
-     //           {
-     //               this.IsAlive = false;
-     //           }
-     //           else if ((collisionEventArgs.OtherCollider.Tag == "ExplosionCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
-     //           {
-     //               if ((gameObject as Mine).IsExplose)
-     //               {
-     //                   this.IsAlive = false;
-     //               }
-     //           }
-     //       }
-     //   } 
-
-     //   #endregion
 }

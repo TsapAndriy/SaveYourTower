@@ -18,7 +18,6 @@ namespace SaveYourTower.GameEngine.Test.DataContainers
 
             Assert.AreSame(collisionEventArgs.MyCollider, collider1);
             Assert.AreSame(collisionEventArgs.OtherCollider, collider2);
-
         }
     }
 }
