@@ -4,7 +4,7 @@ using SaveYourTower.GameEngine.GameObjects.Base;
 
 namespace SaveYourTower.GameEngine.GameObjects.Interfaces
 {
-    interface ITurret : ICollisional
+    interface ITurret : ICollisional, ILive
     {
         void Fire();
     }

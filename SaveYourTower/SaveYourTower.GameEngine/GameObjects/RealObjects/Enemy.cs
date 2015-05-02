@@ -7,7 +7,7 @@ using SaveYourTower.GameEngine.GameObjects.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects
 {
-    public class Enemy : GameObject, IEnemy, ILive
+    public class Enemy : GameObject, IEnemy
     {
         #region Properties
 

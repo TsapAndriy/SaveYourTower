@@ -9,7 +9,7 @@ using SaveYourTower.GameEngine.GameLogic;
 
 namespace SaveYourTower.GameEngine.GameObjects
 {
-    public class CannonBall : GameObject, ICannonBall, ILive
+    public class CannonBall : GameObject, ICannonBall
     {
         #region Fields
 

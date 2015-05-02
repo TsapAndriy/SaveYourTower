@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SaveYourTower.GameEngine.GameObjects.Interfaces
 {
-    interface IMine
+    interface IMine : ICollisional, ILive 
     {
         void Explode();
     }

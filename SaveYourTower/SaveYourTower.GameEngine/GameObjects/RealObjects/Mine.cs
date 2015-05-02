@@ -8,13 +8,11 @@ using SaveYourTower.GameEngine.GameLogic;
 
 namespace SaveYourTower.GameEngine.GameObjects
 {
-    public class Mine : GameObject, IMine, ILive
+    public class Mine : GameObject, IMine
     {
         #region Properties
 
-        public int _fireTimer;
         public bool IsExplose { get; private set; }
-        public int ExlosionRadius { get; private set; } 
 
         #endregion
 

@@ -8,7 +8,7 @@ using SaveYourTower.GameEngine.GameLogic;
 
 namespace SaveYourTower.GameEngine.GameObjects
 {
-    public class Turret : GameObject, ITurret, ILive
+    public class Turret : GameObject, ITurret
     {
         #region Fields
 

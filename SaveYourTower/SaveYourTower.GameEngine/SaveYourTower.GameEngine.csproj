@@ -57,7 +57,7 @@
     <Compile Include="GameObjects\RealObjects\Interfaces\ITurret.cs" />
     <Compile Include="GameObjects\RealObjects\Mine.cs" />
     <Compile Include="GameObjects\Score.cs" />
-    <Compile Include="GameObjects\Interfaces\ICannonBall.cs" />
+    <Compile Include="GameObjects\RealObjects\Interfaces\ICannonBall.cs" />
     <Compile Include="GameObjects\RealObjects\Interfaces\IEnemy.cs" />
     <Compile Include="GameObjects\RealObjects\Interfaces\ITower.cs" />
     <Compile Include="GameObjects\RealObjects\Tower.cs" />
