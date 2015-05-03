@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.GameObjects.Interfaces;
@@ -47,23 +49,36 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
             double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
             GameObject.VelositiDivisor += divisor;
             this.IsUsed = true;
+            int interval = int.Parse(ConfigurationManager.AppSettings["AllSlowSpellDuration"]);
+            System.Timers.Timer timer = new System.Timers.Timer(interval);
+            timer.AutoReset = false;
+            timer.Elapsed += new ElapsedEventHandler(FinishEffect);
+            timer.Enabled = true;
+            timer.Start();
+        }
+
+        public void FinishEffect(object source, ElapsedEventArgs e)
+        {
+            double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
+            GameObject.VelositiDivisor -= divisor;
+            this.IsAlive = false;
         }
 
         public void Live()
         {
-            if ((this.IsAlive) && (this.IsUsed))
-            {
-                if (ReloadingTime > 0)
-                {
-                    ReloadingTime--;
-                }
-                else
-                {
-                    double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
-                    GameObject.VelositiDivisor -= divisor;
-                    this.IsAlive = false;
-                }
-            }
+            //if ((this.IsAlive) && (this.IsUsed))
+            //{
+            //    if (ReloadingTime > 0)
+            //    {
+            //        //ReloadingTime--;
+            //    }
+            //    else
+            //    {
+            //        //double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
+            //        //GameObject.VelositiDivisor -= divisor;
+            //        //this.IsAlive = false;
+            //    }
+            //}
         } 
 
         #endregion

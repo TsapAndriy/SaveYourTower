@@ -19,7 +19,7 @@ namespace SaveYourTower.GameEngine.GameLogic
 
             for (int i = 0; i < gameField.GameObjects.Count; i++)
             {
-                for (int j = i; j < gameField.GameObjects.Count; j++)
+                for (int j = 0; j < gameField.GameObjects.Count; j++)
                 {
                     CheckColliders(gameObjects[i], gameObjects[j]);
                 }
@@ -46,7 +46,7 @@ namespace SaveYourTower.GameEngine.GameLogic
             return (Distance(left.Position, right.Position) - (left.Radius + left.Radius) <= 0);
         }
 
-        double Distance(Point left, Point right)
+        public double Distance(Point left, Point right)
         {
             return Math.Sqrt(Math.Pow((left.X - right.X), 2)
                 + Math.Pow((left.Y - right.Y), 2));

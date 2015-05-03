@@ -27,8 +27,7 @@ namespace SaveYourTower.DesktopUI.GamePages
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            PageEventHandler(typeof(MainPage));
-            this.Dispose();
+            Application.Exit();
         }
     }
 }

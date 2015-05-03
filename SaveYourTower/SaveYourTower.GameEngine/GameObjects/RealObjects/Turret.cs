@@ -22,7 +22,8 @@ namespace SaveYourTower.GameEngine.GameObjects
         public int FindingColliderRadius { get; private set; }
         public int FireSpeedDivisor { get; private set; }
         public GameObject Target { get; private set; }
-
+        private List<GameObject> _targets = new List<GameObject>();
+        Random _rand = new Random();
         #endregion
 
         #region Constructors
@@ -51,6 +52,8 @@ namespace SaveYourTower.GameEngine.GameObjects
             Colliders.Add(bodyCollider);
 
             FireSpeedDivisor = fireSpeedDivisor;
+
+            FindingColliderRadius = findingColliderRadius;
         }
 
         #endregion
@@ -59,17 +62,20 @@ namespace SaveYourTower.GameEngine.GameObjects
 
         public void Fire()
         {
-            if ((Target != null) && (Target.IsAlive) && (_fireCounter == FireSpeedDivisor))
+            if ((Target != null) && (Target.IsAlive))
             {
-                LookAt(Target.Position);
-                GameField.AddGameObject(new CannonBall(
-                    GameField,
-                    (Point)Position.Clone(), 
-                    new UnitVector2(Direction.Angle), 1,
-                    1, 
-                    int.Parse(ConfigurationManager.AppSettings["TowerCannonDamage"]),
-                    int.Parse(ConfigurationManager.AppSettings["TowerCannonBallLifeTime"])
-                    ));
+                if (_fireCounter == FireSpeedDivisor)
+                {
+                    LookAt(Target.Position);
+                    GameField.AddGameObject(new CannonBall(
+                        GameField,
+                        (Point) Position.Clone(),
+                        new UnitVector2(Direction.Angle), 1,
+                        5,
+                        int.Parse(ConfigurationManager.AppSettings["TowerCannonDamage"]),
+                        int.Parse(ConfigurationManager.AppSettings["TowerCannonBallLifeTime"])
+                        ));
+                }
             }
             else
             {
@@ -78,15 +84,25 @@ namespace SaveYourTower.GameEngine.GameObjects
 
             _fireCounter = (_fireCounter < FireSpeedDivisor ? (_fireCounter + 1) : 0);
         }
-
+        
         public void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
         {
+            if (gameObject is Enemy
+                && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") 
+                && (collisionEventArgs.MyCollider.Tag == "FindingCollider"))
+            {
+                if (_targets.Find(obj => obj.Equals(gameObject)) == null)
+                {
+                    _targets.Add(gameObject);
+                }
+            }
+
             if (!_hasTarget 
                 && (gameObject is Enemy) 
                 && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") 
                 && (collisionEventArgs.MyCollider.Tag == "FindingCollider"))
             {
-                Target = gameObject;
+                RandomTarget();
                 _hasTarget = true;
             }
             else if ((gameObject is Enemy) 
@@ -105,7 +121,35 @@ namespace SaveYourTower.GameEngine.GameObjects
         public void Live()
         {
             Fire();
+            RemoveOutOfRangeTargets();
+            _targets.RemoveAll(obj => !obj.IsAlive);
         }
+
+        public void RemoveOutOfRangeTargets()
+        {
+            _targets.RemoveAll(obj =>
+            {
+                double d = Distance(this.Position, obj.Position);
+                return (FindingColliderRadius < (int)Distance(this.Position, obj.Position));
+            });
+        }
+
+        public void RandomTarget()
+        {
+            int targetID = 0;
+
+            if (_targets.Count > 0)
+            {
+                targetID = _rand.Next(_targets.Count);
+            }
+            Target = _targets.ToArray()[targetID];
+        }
+
+        public double Distance(Point left, Point right)
+        {
+            return Math.Sqrt(Math.Pow((left.X - right.X), 2)
+                + Math.Pow((left.Y - right.Y), 2));
+        } 
 
         #endregion
     }

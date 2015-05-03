@@ -63,6 +63,16 @@ namespace SaveYourTower.DesktopUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap default_30 {
+            get {
+                object obj = ResourceManager.GetObject("default_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ENRGA0 {
             get {
                 object obj = ResourceManager.GetObject("ENRGA0", resourceCulture);

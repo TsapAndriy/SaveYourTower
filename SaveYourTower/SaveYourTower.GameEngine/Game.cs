@@ -126,10 +126,6 @@ namespace SaveYourTower.GameEngine
                 CheckLevelWin();
             }
             
-            if (Output != null)
-            {
-                Output(this);
-            }
             
             if (Input != null)
             {
@@ -154,6 +150,11 @@ namespace SaveYourTower.GameEngine
                 GameEmeniesGenerator.Generate(GameField);
                 RemoveOutOfFieldObjects();
                 _collisionDetector.FindCollisions(GameField);
+            }
+
+            if (Output != null)
+            {
+                Output(this);
             }
         }
 
@@ -308,6 +309,7 @@ namespace SaveYourTower.GameEngine
                 GameStatus = Status.IsExit;
                 _exitEvent.Set();
                 _gameTimer.Stop();
+                Update(null, null);
             }
         }
         
@@ -364,7 +366,7 @@ namespace SaveYourTower.GameEngine
             bool enemiesNotExist = !this.GameField.GameObjects.Exists(obj => obj is Enemy);
             bool towerLive = this.GameField.GameObjects.Exists(obj => obj is Tower);
 
-            if (towerLive && enemiesNotExist && GameEmeniesGenerator.EnemiesAreEnded)
+            if (towerLive && enemiesNotExist && GameEmeniesGenerator.EnemiesAreEnded && GameStatus != Status.IsWinned)
             {
                 GameStatus = Status.IsWinnedLevel;
 

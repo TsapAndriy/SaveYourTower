@@ -92,6 +92,11 @@ namespace SaveYourTower.GameEngine.GameObjects
 
         public void Live()
         {
+            if (LifePoints <= 0)
+            {
+                this.IsAlive = false;
+            }
+
             LookAt(LookingTower.Position);
 
             MoveOnVelosity();
