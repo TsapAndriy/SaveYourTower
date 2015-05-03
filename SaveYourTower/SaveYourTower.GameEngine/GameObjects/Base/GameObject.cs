@@ -22,7 +22,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
         #endregion
 
         #region Properties
-
+        public object View { get; set; }
         public int Cost { get; private set; }        
         public int LifePoints { get; private set; }
         public int Damage { get; private set; }

@@ -32,8 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,8 +54,58 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GamePages\HelpPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GamePages\HelpPage.Designer.cs">
+      <DependentUpon>HelpPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GamePages\ILoadable.cs" />
+    <Compile Include="GamePages\LosePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GamePages\LosePage.Designer.cs">
+      <DependentUpon>LosePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GamePages\MainPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GamePages\MainPage.Designer.cs">
+      <DependentUpon>MainPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GamePages\PlayingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GamePages\PlayingPage.Designer.cs">
+      <DependentUpon>PlayingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GamePages\WinPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GamePages\WinPage.Designer.cs">
+      <DependentUpon>WinPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewObject.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GamePages\HelpPage.resx">
+      <DependentUpon>HelpPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GamePages\LosePage.resx">
+      <DependentUpon>LosePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GamePages\MainPage.resx">
+      <DependentUpon>MainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GamePages\PlayingPage.resx">
+      <DependentUpon>PlayingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GamePages\WinPage.resx">
+      <DependentUpon>WinPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -60,6 +114,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -72,7 +127,45 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SaveYourTower.GameEngine\SaveYourTower.GameEngine.csproj">
+      <Project>{b4bf2bbc-c979-446b-b532-058e3f31f534}</Project>
+      <Name>SaveYourTower.GameEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enemy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cannonball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\100px-AbilityIcon_IronCannonBall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\F67_Water-Tower-top-down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2319539-green-short-grass-baclground-close-up.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ENRGA0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\large.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

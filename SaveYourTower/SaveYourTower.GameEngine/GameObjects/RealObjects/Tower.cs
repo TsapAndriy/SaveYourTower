@@ -69,12 +69,13 @@ namespace SaveYourTower.GameEngine.GameObjects
                     GameField,
                     (Point) Position.Clone(),
                     new UnitVector2(Direction.Angle),
-                    1,
-                    2,
+                    10,
+                    10,
                     int.Parse(ConfigurationManager.AppSettings["TowerCannonDamage"]),
                     int.Parse(ConfigurationManager.AppSettings["TowerCannonBallLifeTime"])
                     ));
             }
+            _isFiring = false;
         }
         
         #endregion

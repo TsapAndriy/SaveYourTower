@@ -79,7 +79,7 @@ namespace SaveYourTower.GameEngine
                     new Point((GameField.Size.X / 2), 
                     (GameField.Size.Y / 2)), 
                     new UnitVector2(0, 0), 
-                    1,
+                    10,
                     int.Parse(ConfigurationManager.AppSettings["TowerLife"])));
         }
 
@@ -139,6 +139,8 @@ namespace SaveYourTower.GameEngine
             if (GameStatus == Status.IsStarted)
             {
                 // Remove dead game objects.
+                CleanViewOfDeadObjects();
+
                 GameField.GameObjects.RemoveAll(obj => (!obj.IsAlive));
 
                 // Do life cikle step.
@@ -225,6 +227,17 @@ namespace SaveYourTower.GameEngine
         public int GetScore()
         {
             return GameField.GameScore.Value;
+        }
+
+        public void CleanViewOfDeadObjects()
+        {
+            GameField.GameObjects.ForEach(obj =>
+            {
+                if ((!obj.IsAlive) && (obj.View is IDisposable))
+                {
+                    ((IDisposable)obj.View).Dispose();
+                }
+            });
         }
 
         public void SaleGameObject(GameObject gameObject)
