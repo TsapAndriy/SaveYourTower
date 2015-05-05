@@ -60,7 +60,7 @@
     <Compile Include="GamePages\HelpPage.Designer.cs">
       <DependentUpon>HelpPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="GamePages\ILoadable.cs" />
+    <Compile Include="GamePages\Interfaces\ILoadable.cs" />
     <Compile Include="GamePages\LosePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -116,6 +116,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,18 +130,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\SaveYourTower.GameEngine\SaveYourTower.GameEngine.csproj">
       <Project>{b4bf2bbc-c979-446b-b532-058e3f31f534}</Project>
       <Name>SaveYourTower.GameEngine</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Enemy.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Image1.png" />
@@ -156,9 +151,6 @@
     <None Include="Resources\top.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Tower.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\2319539-green-short-grass-baclground-close-up.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +161,66 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\default_30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enemy6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enemy7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Field.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tower2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enemy5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tower1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CannonBAll3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil-nebula-wide-1600.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Star-field-5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outer-space-star-field.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hubble-Ultra-Deep-Field-space-7992397-2544-2560.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Space_field_by_blood_mind.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enemy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Turret2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outer-space-star-field1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Light_speed_Wallpaper_og91z.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hm-img.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maxresdefault.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

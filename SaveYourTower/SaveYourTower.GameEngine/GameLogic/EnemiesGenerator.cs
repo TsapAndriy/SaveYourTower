@@ -55,7 +55,7 @@ namespace SaveYourTower.GameEngine.GameLogic
                 gameField.AddGameObject(new Enemy(
                     gameField, 
                     StickToTheSide(gameField),
-                    10,
+                    8,
                     GetDoubleFromConfig("Level1EnemyVelocity"),
                     GetIntFromConfig("Level1EnemyDamage"),
                     GetIntFromConfig("Level1EnemyLife")
@@ -69,7 +69,7 @@ namespace SaveYourTower.GameEngine.GameLogic
                 gameField.AddGameObject(new Enemy(
                     gameField, 
                     StickToTheSide(gameField), 
-                    10, 
+                    8, 
                     GetDoubleFromConfig("Level2EnemyVelocity"),
                     GetIntFromConfig("Level2EnemyDamage"),
                     GetIntFromConfig("Level2EnemyLife")
@@ -83,10 +83,10 @@ namespace SaveYourTower.GameEngine.GameLogic
                 gameField.AddGameObject(new Enemy(
                     gameField, 
                     StickToTheSide(gameField), 
-                    10,
+                    8,
                     GetDoubleFromConfig("Level3EnemyVelocity"),
                     GetIntFromConfig("Level3EnemyDamage"),
-                    GetIntFromConfig("Level3EnemyLife")
+                    GetIntFromConfig("Level3EnemyLife") * (int)_power
                     ));
 
                 _enemiesCounter++;

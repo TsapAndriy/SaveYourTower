@@ -46,7 +46,7 @@ namespace SaveYourTower.GameEngine
         #endregion
 
         #region Properties
-
+         
         public event Action<Game> Input;
         public event Action<Game> Output;
         public event Action WinLevel;
@@ -63,6 +63,8 @@ namespace SaveYourTower.GameEngine
         {
             GameStatus = Status.IsReadyToRun;
             GameField = new Field(filedSize, gameLevel);
+            
+            
 
             _exitEvent = new System.Threading.ManualResetEvent(false);
             _collisionDetector = new CollisionDetector();
@@ -134,9 +136,6 @@ namespace SaveYourTower.GameEngine
 
             if (GameStatus == Status.IsStarted)
             {
-                // Remove dead game objects.
-                CleanViewOfDeadObjects();
-
                 GameField.GameObjects.RemoveAll(obj => (!obj.IsAlive));
 
                 // Do life cikle step.
@@ -209,7 +208,7 @@ namespace SaveYourTower.GameEngine
 
         #region TowerControllMethos
 
-        public void Fire()
+        public void Fire(object view)
         {
             Tower tower = (Tower)GameField.GameObjects.Find(obj => obj is Tower);
             tower.Fire();
@@ -228,17 +227,6 @@ namespace SaveYourTower.GameEngine
         public int GetScore()
         {
             return GameField.GameScore.Value;
-        }
-
-        public void CleanViewOfDeadObjects()
-        {
-            GameField.GameObjects.ForEach(obj =>
-            {
-                if ((!obj.IsAlive) && (obj.View is IDisposable))
-                {
-                    ((IDisposable)obj.View).Dispose();
-                }
-            });
         }
 
         public void SaleGameObject(GameObject gameObject)
@@ -287,11 +275,41 @@ namespace SaveYourTower.GameEngine
 
         private bool IsPlaceBusy(GameObject gameObject)
         {
-            return (gameObject.GameField.GameObjects.Find(obj =>
+            if (gameObject.Colliders != null)
             {
-                return obj.Position.Equals(gameObject.Position);
-            }) != null);
+                return (gameObject.GameField.GameObjects.Exists(obj =>
+                {
+                    return IsCollision(obj, gameObject);
+                }));
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        private bool IsCollision(GameObject leftGameObject, GameObject rightGameObject)
+        {
+            bool collision = false;
+            Collider leftCollider = leftGameObject.Colliders.Find(col => col.Tag == "BodyCollider");
+            Collider rightCollider = rightGameObject.Colliders.Find(col => col.Tag == "BodyCollider");
+
+            if ((leftCollider != null) && (rightCollider != null))
+            {
+                collision = (Distance(leftGameObject.Position, rightGameObject.Position) 
+                    <= (leftCollider.Radius + rightCollider.Radius));
+            }
+
+            return collision;
+        }
+
+        public double Distance(Point left, Point right)
+        {
+            return Math.Sqrt(Math.Pow((left.X - right.X), 2)
+                + Math.Pow((left.Y - right.Y), 2));
+        }
+
+
 
         private bool IsObejectOnTheField(GameObject gameObject)
         {
@@ -312,7 +330,6 @@ namespace SaveYourTower.GameEngine
                 Update(null, null);
             }
         }
-        
 
         #endregion
 

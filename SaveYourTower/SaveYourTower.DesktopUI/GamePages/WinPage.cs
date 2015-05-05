@@ -17,6 +17,8 @@ namespace SaveYourTower.DesktopUI.GamePages
         public WinPage()
         {
             InitializeComponent();
+            this.Dock = DockStyle.Fill;
+
         }
 
         private void button1_Click(object sender, EventArgs e)

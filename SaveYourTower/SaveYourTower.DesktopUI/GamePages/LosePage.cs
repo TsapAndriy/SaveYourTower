@@ -17,6 +17,8 @@ namespace SaveYourTower.DesktopUI.GamePages
         public LosePage()
         {
             InitializeComponent();
+            this.Dock = DockStyle.Fill;
+
         }
 
         private void button1_Click(object sender, EventArgs e)

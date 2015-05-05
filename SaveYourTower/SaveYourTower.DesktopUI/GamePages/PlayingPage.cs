@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -32,11 +33,14 @@ namespace SaveYourTower.DesktopUI
         public event Action<Type> PageEventHandler;
         private static Game _game;
         private static object _sync = new object();
+        private Cursor defaultCursor;
 
         public PlaingPage()
         {
             InitializeComponent();
             RunGame();
+            defaultCursor = this.Cursor;
+            this.Dock = DockStyle.Fill;
         }
 
         private async void RunGame()
@@ -46,30 +50,10 @@ namespace SaveYourTower.DesktopUI
             _game.Input += Input;
             Task task = new Task(_game.Run);
             task.Start();
-
             await task;
         }
 
-        private void MyControl_KeyDown(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show("j");
-            //if (e.KeyCode == Keys.Up)
-            //{
-            //    Player.Location = new Point(Player.Location.X, Player.Location.Y - 10);
-            //}
-            //else if (e.KeyCode == Keys.Down)
-            //{
-            //    Player.Location = new Point(Player.Location.X, Player.Location.Y + 10);
-            //}
-            //else if (e.KeyCode == Keys.Right)
-            //{
-            //    Player.Location = new Point(Player.Location.X + 10, Player.Location.Y);
-            //}
-            //else if (e.KeyCode == Keys.Left)
-            //{
-            //    Player.Location = new Point(Player.Location.X - 10, Player.Location.Y);
-            //}
-        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -183,15 +167,15 @@ namespace SaveYourTower.DesktopUI
                 {
                     Graphics g = Graphics.FromImage(result);
 
-                    Image image = RotateImage(Properties.Resources.top, RadianToDegree((float)obj.Direction.Angle) + 90);
+                    Image image = RotateImage(Properties.Resources.Enemy, RadianToDegree((float)obj.Direction.Angle) + 90);
                     g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2, ((int)obj.Position.Y) - image.Height / 2);
                     g.Dispose();
                 }
                 else if (obj is CannonBall)
                 {
                     Graphics g = Graphics.FromImage(result);
+                    Image image = RotateImage(Properties.Resources.CannonBAll3, RadianToDegree((float)obj.Direction.Angle) + 90);
 
-                    Image image = Properties.Resources.ENRGA0;
                     g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2, ((int)obj.Position.Y) - image.Height / 2);
                     g.Dispose();
                 }
@@ -199,7 +183,7 @@ namespace SaveYourTower.DesktopUI
                 {
                     Graphics g = Graphics.FromImage(result);
 
-                    Image image = RotateImage(Properties.Resources.Tower, RadianToDegree((float)obj.Direction.Angle) + 90);
+                    Image image = RotateImage(Properties.Resources.Turret, RadianToDegree((float)obj.Direction.Angle) + 90);
 
                     g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2, ((int)obj.Position.Y) - image.Height / 2);
                     g.Dispose();
@@ -207,6 +191,9 @@ namespace SaveYourTower.DesktopUI
             }
 
             DrawText(_game.GetScore().ToString(), result, new System.Drawing.Point(0, 0));
+
+            var towerLife = _game.GameField.GameObjects.Find(obj => obj is Tower).LifePoints;
+            DrawText(towerLife.ToString(), result, new System.Drawing.Point(this.Size.Width / 2, 0));
 
             pFieldView.Image = result;
         }
@@ -254,7 +241,7 @@ namespace SaveYourTower.DesktopUI
                 lookPoint.Y = pFieldView.PointToClient(MousePosition).Y;
                 tower.LookAt(lookPoint);
 
-                _game.Fire(); 
+                _game.Fire(Properties.Resources.CannonBAll3); 
             }
             else if (_cursorStatus == CursorStatus.Turret)
             {
@@ -262,9 +249,12 @@ namespace SaveYourTower.DesktopUI
                 turretPosision.X = pFieldView.PointToClient(MousePosition).X;
                 turretPosision.Y = pFieldView.PointToClient(MousePosition).Y;
 
-                _game.BuyGameObject(new Turret(_game.GameField, turretPosision, 10, 500, 30, 10, cost: 1));
+                Image view = Properties.Resources.Turret;
+                _game.BuyGameObject(new Turret(_game.GameField, turretPosision, 17, 500, 30, 50, cost: 1));
                 _cursorStatus = CursorStatus.Fire;
             }
+
+            this.Cursor = new Cursor((Properties.Resources.Mark).GetHicon());
         }
 
 
@@ -305,6 +295,8 @@ namespace SaveYourTower.DesktopUI
         private void btnTurret_Click(object sender, EventArgs e)
         {
             _cursorStatus = CursorStatus.Turret;
+
+            this.Cursor = new Cursor((Properties.Resources.Turret).GetHicon());
         }
 
     }

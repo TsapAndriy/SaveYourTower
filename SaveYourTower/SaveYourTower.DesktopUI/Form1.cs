@@ -34,8 +34,6 @@ namespace SaveYourTower.DesktopUI
             LoadPage(typeof(MainPage));
         }
 
-      
-
         public void LoadPage(Type pageType)
         {
             if (typeof(ILoadable).IsAssignableFrom(pageType))
@@ -45,37 +43,5 @@ namespace SaveYourTower.DesktopUI
                 pFieldView.Controls.Add(((UserControl) page));
             }
         }
-
-      
-    
-
-        private void Player_KeyDown(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show("fdf");
-            //if (e.KeyCode == Keys.Up)
-            //{
-            //    Player.Location = new Point(Player.Location.X, Player.Location.Y - 10);
-            //}
-            //else if (e.KeyCode == Keys.Down)
-            //{
-            //    Player.Location = new Point(Player.Location.X, Player.Location.Y + 10);
-            //}
-            //else if (e.KeyCode == Keys.Right)
-            //{
-            //    Player.Location = new Point(Player.Location.X + 10, Player.Location.Y);
-            //}
-            //else if (e.KeyCode == Keys.Left)
-            //{
-            //    Player.Location = new Point(Player.Location.X - 10, Player.Location.Y);
-            //}
-        }
-
-        private void pFieldView_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
     }
 }

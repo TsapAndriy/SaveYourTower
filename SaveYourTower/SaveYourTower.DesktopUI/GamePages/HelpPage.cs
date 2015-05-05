@@ -17,12 +17,25 @@ namespace SaveYourTower.DesktopUI.GamePages
         public HelpPage()
         {
             InitializeComponent();
+            this.Dock = DockStyle.Fill;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             PageEventHandler(typeof(MainPage));
             this.Dispose();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            PageEventHandler(typeof(MainPage));
+            this.Dispose();
+        }
+
+        private void pctEnemy_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

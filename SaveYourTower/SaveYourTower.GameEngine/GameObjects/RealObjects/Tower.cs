@@ -69,7 +69,7 @@ namespace SaveYourTower.GameEngine.GameObjects
                     GameField,
                     (Point) Position.Clone(),
                     new UnitVector2(Direction.Angle),
-                    10,
+                    3,
                     10,
                     int.Parse(ConfigurationManager.AppSettings["TowerCannonDamage"]),
                     int.Parse(ConfigurationManager.AppSettings["TowerCannonBallLifeTime"])
