@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.GameObjects;
+using SaveYourTower.GameEngine.GameObjects.RealObjects;
 using SaveYourTower.GameEngine.GameLogic;
 
 namespace SaveYourTower.GameEngine.Test.GameObjects

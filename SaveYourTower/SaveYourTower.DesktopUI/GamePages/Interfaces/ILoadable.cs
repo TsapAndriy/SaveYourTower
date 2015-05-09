@@ -8,6 +8,6 @@ namespace SaveYourTower.DesktopUI.GamePages
 {
     interface ILoadable
     {
-        event Action<Type> PageEventHandler;
+        event EventHandler<PageEventArgs> PageEventHandler;
     }
 }

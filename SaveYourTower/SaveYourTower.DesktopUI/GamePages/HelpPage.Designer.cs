@@ -28,143 +28,193 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pctEnemy = new System.Windows.Forms.PictureBox();
-            this.pctTurret = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pctEnemy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctTurret)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.dbLayoutPanel1 = new GameUserElements.DBLayoutPanel();
+            this.dbLayoutPanel2 = new GameUserElements.DBLayoutPanel();
+            this.btnPrevHelpPage = new System.Windows.Forms.Button();
+            this.dbLayoutPanel3 = new GameUserElements.DBLayoutPanel();
+            this.btnNextHelpPage = new System.Windows.Forms.Button();
+            this.dbLayoutPanel4 = new GameUserElements.DBLayoutPanel();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.dbLayoutPanel5 = new GameUserElements.DBLayoutPanel();
+            this.pbHelpView = new System.Windows.Forms.PictureBox();
+            this.dbLayoutPanel1.SuspendLayout();
+            this.dbLayoutPanel2.SuspendLayout();
+            this.dbLayoutPanel3.SuspendLayout();
+            this.dbLayoutPanel4.SuspendLayout();
+            this.dbLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHelpView)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // dbLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.91954F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.08046F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Controls.Add(this.pctEnemy, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pctTurret, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.31034F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.68966F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 193F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(389, 405);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.dbLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.dbLayoutPanel1.ColumnCount = 3;
+            this.dbLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.dbLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.dbLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.dbLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.dbLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.dbLayoutPanel1.Controls.Add(this.dbLayoutPanel2, 0, 1);
+            this.dbLayoutPanel1.Controls.Add(this.dbLayoutPanel3, 2, 1);
+            this.dbLayoutPanel1.Controls.Add(this.dbLayoutPanel4, 1, 2);
+            this.dbLayoutPanel1.Controls.Add(this.dbLayoutPanel5, 1, 1);
+            this.dbLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.dbLayoutPanel1.Name = "dbLayoutPanel1";
+            this.dbLayoutPanel1.RowCount = 3;
+            this.dbLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.dbLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.dbLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.dbLayoutPanel1.Size = new System.Drawing.Size(395, 411);
+            this.dbLayoutPanel1.TabIndex = 0;
             // 
-            // pctEnemy
+            // dbLayoutPanel2
             // 
-            this.pctEnemy.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pctEnemy.Image = global::SaveYourTower.DesktopUI.Properties.Resources.top;
-            this.pctEnemy.InitialImage = global::SaveYourTower.DesktopUI.Properties.Resources.Grass;
-            this.pctEnemy.Location = new System.Drawing.Point(3, 3);
-            this.pctEnemy.Name = "pctEnemy";
-            this.pctEnemy.Size = new System.Drawing.Size(32, 79);
-            this.pctEnemy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pctEnemy.TabIndex = 3;
-            this.pctEnemy.TabStop = false;
-            this.pctEnemy.Click += new System.EventHandler(this.pctEnemy_Click);
+            this.dbLayoutPanel2.ColumnCount = 1;
+            this.dbLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.dbLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.dbLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.dbLayoutPanel2.Controls.Add(this.btnPrevHelpPage, 0, 1);
+            this.dbLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbLayoutPanel2.Location = new System.Drawing.Point(3, 53);
+            this.dbLayoutPanel2.Name = "dbLayoutPanel2";
+            this.dbLayoutPanel2.RowCount = 3;
+            this.dbLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.dbLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.dbLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.dbLayoutPanel2.Size = new System.Drawing.Size(44, 290);
+            this.dbLayoutPanel2.TabIndex = 1;
             // 
-            // pctTurret
+            // btnPrevHelpPage
             // 
-            this.pctTurret.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pctTurret.Image = global::SaveYourTower.DesktopUI.Properties.Resources.default_30;
-            this.pctTurret.InitialImage = global::SaveYourTower.DesktopUI.Properties.Resources.default_30;
-            this.pctTurret.Location = new System.Drawing.Point(3, 88);
-            this.pctTurret.Name = "pctTurret";
-            this.pctTurret.Size = new System.Drawing.Size(32, 66);
-            this.pctTurret.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pctTurret.TabIndex = 3;
-            this.pctTurret.TabStop = false;
+            this.btnPrevHelpPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPrevHelpPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrevHelpPage.Font = new System.Drawing.Font("Agency FB", 25F, System.Drawing.FontStyle.Bold);
+            this.btnPrevHelpPage.ForeColor = System.Drawing.Color.Lime;
+            this.btnPrevHelpPage.Location = new System.Drawing.Point(3, 99);
+            this.btnPrevHelpPage.Name = "btnPrevHelpPage";
+            this.btnPrevHelpPage.Size = new System.Drawing.Size(38, 90);
+            this.btnPrevHelpPage.TabIndex = 0;
+            this.btnPrevHelpPage.Text = "<";
+            this.btnPrevHelpPage.UseVisualStyleBackColor = true;
+            this.btnPrevHelpPage.Click += new System.EventHandler(this.btnPrevHelpPage_Click);
             // 
-            // pictureBox1
+            // dbLayoutPanel3
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.InitialImage = global::SaveYourTower.DesktopUI.Properties.Resources.default_30;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 160);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 48);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.dbLayoutPanel3.ColumnCount = 1;
+            this.dbLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.dbLayoutPanel3.Controls.Add(this.btnNextHelpPage, 0, 1);
+            this.dbLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbLayoutPanel3.Location = new System.Drawing.Point(348, 53);
+            this.dbLayoutPanel3.Name = "dbLayoutPanel3";
+            this.dbLayoutPanel3.RowCount = 3;
+            this.dbLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.dbLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.dbLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.dbLayoutPanel3.Size = new System.Drawing.Size(44, 290);
+            this.dbLayoutPanel3.TabIndex = 2;
             // 
-            // label1
+            // btnNextHelpPage
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 52);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Cruel enemies\r\n\r\nThey want to destroy YOUR tower. \r\nYou must kill them to win.";
+            this.btnNextHelpPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnNextHelpPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNextHelpPage.Font = new System.Drawing.Font("Agency FB", 25F, System.Drawing.FontStyle.Bold);
+            this.btnNextHelpPage.ForeColor = System.Drawing.Color.Lime;
+            this.btnNextHelpPage.Location = new System.Drawing.Point(3, 99);
+            this.btnNextHelpPage.Name = "btnNextHelpPage";
+            this.btnNextHelpPage.Size = new System.Drawing.Size(38, 90);
+            this.btnNextHelpPage.TabIndex = 0;
+            this.btnNextHelpPage.Text = ">";
+            this.btnNextHelpPage.UseVisualStyleBackColor = true;
+            this.btnNextHelpPage.Click += new System.EventHandler(this.btnNextHelpPage_Click);
             // 
-            // label2
+            // dbLayoutPanel4
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 157);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(224, 39);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Brawe Tower.\r\n\r\nMain thing in the game. Save it and get a gift).";
+            this.dbLayoutPanel4.ColumnCount = 3;
+            this.dbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.dbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.dbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.dbLayoutPanel4.Controls.Add(this.btnBack, 1, 0);
+            this.dbLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbLayoutPanel4.Location = new System.Drawing.Point(53, 349);
+            this.dbLayoutPanel4.Name = "dbLayoutPanel4";
+            this.dbLayoutPanel4.RowCount = 2;
+            this.dbLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.dbLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.dbLayoutPanel4.Size = new System.Drawing.Size(289, 59);
+            this.dbLayoutPanel4.TabIndex = 3;
             // 
-            // label3
+            // btnBack
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 85);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(240, 65);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Helpfull turrets.\r\n\r\nIf you have anought points, you can buy\r\nthis awesome turren" +
-    "t. And they will defend you to \r\nthe last bit of thear hearts.";
+            this.btnBack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Font = new System.Drawing.Font("Agency FB", 25F, System.Drawing.FontStyle.Bold);
+            this.btnBack.ForeColor = System.Drawing.Color.Lime;
+            this.btnBack.Location = new System.Drawing.Point(47, 3);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(194, 44);
+            this.btnBack.TabIndex = 0;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // button1
+            // dbLayoutPanel5
             // 
-            this.button1.Location = new System.Drawing.Point(41, 214);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 34);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Exit";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.dbLayoutPanel5.ColumnCount = 3;
+            this.dbLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.923077F));
+            this.dbLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96.15384F));
+            this.dbLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.923077F));
+            this.dbLayoutPanel5.Controls.Add(this.pbHelpView, 1, 1);
+            this.dbLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbLayoutPanel5.Location = new System.Drawing.Point(53, 53);
+            this.dbLayoutPanel5.Name = "dbLayoutPanel5";
+            this.dbLayoutPanel5.RowCount = 3;
+            this.dbLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0.0998004F));
+            this.dbLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 99.8004F));
+            this.dbLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0.0998004F));
+            this.dbLayoutPanel5.Size = new System.Drawing.Size(289, 290);
+            this.dbLayoutPanel5.TabIndex = 4;
+            // 
+            // pbHelpView
+            // 
+            this.pbHelpView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbHelpView.Location = new System.Drawing.Point(8, 3);
+            this.pbHelpView.Name = "pbHelpView";
+            this.pbHelpView.Size = new System.Drawing.Size(271, 283);
+            this.pbHelpView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbHelpView.TabIndex = 0;
+            this.pbHelpView.TabStop = false;
             // 
             // HelpPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.dbLayoutPanel1);
             this.Name = "HelpPage";
             this.Size = new System.Drawing.Size(395, 411);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pctEnemy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctTurret)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.dbLayoutPanel1.ResumeLayout(false);
+            this.dbLayoutPanel2.ResumeLayout(false);
+            this.dbLayoutPanel3.ResumeLayout(false);
+            this.dbLayoutPanel4.ResumeLayout(false);
+            this.dbLayoutPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbHelpView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.PictureBox pctTurret;
-        private System.Windows.Forms.PictureBox pctEnemy;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private GameUserElements.DBLayoutPanel dbLayoutPanel1;
+        private System.Windows.Forms.PictureBox pbHelpView;
+        private GameUserElements.DBLayoutPanel dbLayoutPanel2;
+        private System.Windows.Forms.Button btnPrevHelpPage;
+        private GameUserElements.DBLayoutPanel dbLayoutPanel3;
+        private System.Windows.Forms.Button btnNextHelpPage;
+        private GameUserElements.DBLayoutPanel dbLayoutPanel4;
+        private System.Windows.Forms.Button btnBack;
+        private GameUserElements.DBLayoutPanel dbLayoutPanel5;
+
 
     }
 }

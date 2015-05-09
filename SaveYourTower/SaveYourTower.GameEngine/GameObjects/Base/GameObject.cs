@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using SaveYourTower.GameEngine.DataContainers;
+﻿using System.Collections.Generic;
 
+using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameLogic;
-using SaveYourTower.GameEngine.GameObjects.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects.Base
 {
@@ -48,7 +46,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
             VelositiDivisor = 1;
         }
 
-        public GameObject(
+        protected GameObject(
             Field gameField, 
             Point position,
             UnitVector2 direction = null,
@@ -60,7 +58,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
         {
             GameField = gameField;
             Position = position;
-            Direction = (direction == null) ? new UnitVector2(0) : direction;
+            Direction = direction ?? new UnitVector2(0);
             Velosity = velosity;
             Damage = damage;
             LifePoints = lifePoints;
@@ -78,7 +76,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
         // Move game object using direction and velosity.
         public void MoveOnVelosity()
         {
-            if (Velosity != 0)
+            if (!Velosity.Equals(0))
             {
                 Position.X += (Direction.X * Velosity);
                 Position.Y += (Direction.Y * Velosity);
@@ -87,7 +85,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
 
         public void ReceiveDamage(int damage)
         {
-            this.LifePoints -= damage;
+            LifePoints -= damage;
         }
 
         // Set game object direction to the specific point.
@@ -96,7 +94,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
             double newX = point.X - Position.X;
             double newY = point.Y - Position.Y;
 
-            if ((newX == 0) && (newY == 0))
+            if (newX.Equals(0) && newY.Equals(0))
             {
                 Velosity = 0;
                 return;
@@ -107,7 +105,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
 
         public void Rotate(double angle)
         {
-            this.Direction.Angle += angle;
+            Direction.Angle += angle;
         }
 
         #endregion

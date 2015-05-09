@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Configuration;
-using System.Collections.Generic;
-//using System.Threading;
 using System.Timers;
 
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameLogic;
 using SaveYourTower.GameEngine.GameObjects;
+using SaveYourTower.GameEngine.GameObjects.RealObjects;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.GameObjects.Interfaces;
-using SaveYourTower.GameEngine.Spells;
-using SaveYourTower.GameEngine.Spells.Interfaces;
+using SaveYourTower.GameEngine.GameObjects.Spells.Interfaces;
 
 
 namespace SaveYourTower.GameEngine
@@ -41,15 +39,19 @@ namespace SaveYourTower.GameEngine
         private Timer _gameTimer;
         private System.Threading.ManualResetEvent _exitEvent;
         private int _maxLevel;
-        private int _gameIterationLatency;
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler DieEventHandler;
+        public event EventHandler InputEventHandler;
+        public event EventHandler OutputEventHandler;
+        public event EventHandler WinLevelEventHandler;
 
         #endregion
 
         #region Properties
-         
-        public event Action<Game> Input;
-        public event Action<Game> Output;
-        public event Action WinLevel;
 
         public Status GameStatus { get; private set; }
         public EnemiesGenerator GameEmeniesGenerator { get; private set; }
@@ -64,15 +66,14 @@ namespace SaveYourTower.GameEngine
             GameStatus = Status.IsReadyToRun;
             GameField = new Field(filedSize, gameLevel);
             
-            
-
             _exitEvent = new System.Threading.ManualResetEvent(false);
             _collisionDetector = new CollisionDetector();
             _maxLevel = int.Parse(ConfigurationManager.AppSettings["MaxLevel"]);
 
             int gameIteraionLatency = int.Parse(ConfigurationManager.AppSettings["IterationLatency"]);
             _gameTimer = new Timer(gameIteraionLatency);
-            _gameTimer.Elapsed += new ElapsedEventHandler(Update);
+
+            _gameTimer.Elapsed += Update;
 
             GameEmeniesGenerator = new EnemiesGenerator();
 
@@ -123,26 +124,31 @@ namespace SaveYourTower.GameEngine
 
         public void Update(object source, ElapsedEventArgs e)
         {
+            _gameTimer.Enabled = false;
             if (GameStatus == Status.IsStarted)
             {
                 CheckLevelWin();
             }
             
-            
-            if (Input != null)
+            if (InputEventHandler != null)
             {
-                Input(this);
+                InputEventHandler(this, new EventArgs());
             }
 
             if (GameStatus == Status.IsStarted)
             {
+                RaiseDieEvent();
+
                 GameField.GameObjects.RemoveAll(obj => (!obj.IsAlive));
 
-                // Do life cikle step.
-                List<GameObject> liveList = GameField.GameObjects.FindAll(obj => obj is ILive);
-                foreach (ILive liveObject in liveList)
+                foreach (var gameObject in GameField.GameObjects.ToArray())
                 {
-                    liveObject.Live();
+                    ILive alive = gameObject as ILive;
+
+                    if (alive != null)
+                    {
+                        alive.Live();
+                    }
                 }
 
                 CheckTowerLose();
@@ -151,9 +157,28 @@ namespace SaveYourTower.GameEngine
                 _collisionDetector.FindCollisions(GameField);
             }
 
-            if (Output != null)
+            if (OutputEventHandler != null)
             {
-                Output(this);
+                OutputEventHandler(this, new EventArgs());
+            }
+
+            if (GameStatus != Status.IsExit)
+            {
+                _gameTimer.Enabled = true;
+            }
+        }
+
+        private void RaiseDieEvent()
+        {
+            if (DieEventHandler != null)
+            {
+                GameField.GameObjects.ForEach(obj =>
+                {
+                    if ((!obj.IsAlive) && (obj is Enemy))
+                    {
+                        DieEventHandler(obj, null);
+                    }
+                });
             }
         }
 
@@ -208,7 +233,7 @@ namespace SaveYourTower.GameEngine
 
         #region TowerControllMethos
 
-        public void Fire(object view)
+        public void Fire()
         {
             Tower tower = (Tower)GameField.GameObjects.Find(obj => obj is Tower);
             tower.Fire();
@@ -231,7 +256,7 @@ namespace SaveYourTower.GameEngine
 
         public void SaleGameObject(GameObject gameObject)
         { 
-            if ((gameObject is Turret) || (gameObject is Mine))
+            if ((gameObject is Turret))
             {
                 GameField.GameScore.AddPoint(gameObject.Cost);
                 GameField.RemoveGameObject(gameObject);
@@ -277,10 +302,7 @@ namespace SaveYourTower.GameEngine
         {
             if (gameObject.Colliders != null)
             {
-                return (gameObject.GameField.GameObjects.Exists(obj =>
-                {
-                    return IsCollision(obj, gameObject);
-                }));
+                return (gameObject.GameField.GameObjects.Exists(obj => IsCollision(obj, gameObject)));
             }
             else
             {
@@ -309,14 +331,9 @@ namespace SaveYourTower.GameEngine
                 + Math.Pow((left.Y - right.Y), 2));
         }
 
-
-
         private bool IsObejectOnTheField(GameObject gameObject)
         {
-            return gameObject.GameField.GameObjects.Exists(obj =>
-            {
-                return ReferenceEquals(obj, gameObject);
-            });
+            return gameObject.GameField.GameObjects.Exists(obj => ReferenceEquals(obj, gameObject));
         }
 
         private void CheckTowerLose()
@@ -327,7 +344,6 @@ namespace SaveYourTower.GameEngine
                 GameStatus = Status.IsExit;
                 _exitEvent.Set();
                 _gameTimer.Stop();
-                Update(null, null);
             }
         }
 
@@ -362,10 +378,7 @@ namespace SaveYourTower.GameEngine
         private void PrepareFieldToNextLevel(Field gameField)
         {
             // Remove all except enemies and turrets.
-            gameField.GameObjects.RemoveAll(obj =>
-            {
-                return !((obj is Enemy) || (obj is Turret));
-            });
+            gameField.GameObjects.RemoveAll(obj => !((obj is Enemy) || (obj is Turret)));
 
             GameField.AddGameObject(new Tower(
                 GameField,
@@ -380,16 +393,16 @@ namespace SaveYourTower.GameEngine
 
         private void CheckLevelWin()
         {
-            bool enemiesNotExist = !this.GameField.GameObjects.Exists(obj => obj is Enemy);
-            bool towerLive = this.GameField.GameObjects.Exists(obj => obj is Tower);
+            bool enemiesNotExist = !GameField.GameObjects.Exists(obj => obj is Enemy);
+            bool towerLive = GameField.GameObjects.Exists(obj => obj is Tower);
 
             if (towerLive && enemiesNotExist && GameEmeniesGenerator.EnemiesAreEnded && GameStatus != Status.IsWinned)
             {
                 GameStatus = Status.IsWinnedLevel;
 
-                if (WinLevel != null)
+                if (WinLevelEventHandler != null)
                 {
-                    WinLevel();
+                    WinLevelEventHandler(this, new EventArgs());
                 }
             }
         }

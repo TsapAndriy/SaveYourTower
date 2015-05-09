@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
-using SaveYourTower.GameEngine.GameObjects.Interfaces;
-using SaveYourTower.GameEngine.Spells.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects
 {

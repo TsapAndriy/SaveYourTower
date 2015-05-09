@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using SaveYourTower.GameEngine.GameObjects;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
-using SaveYourTower.GameEngine.GameObjects.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameLogic
 {
-
+    
     public class CollisionDetector
     {
         #region Methods
@@ -17,11 +15,14 @@ namespace SaveYourTower.GameEngine.GameLogic
         {
             GameObject[] gameObjects = gameField.GameObjects.ToArray();
 
-            for (int i = 0; i < gameField.GameObjects.Count; i++)
+            for (int i = 0; i < gameObjects.Length; i++)
             {
-                for (int j = 0; j < gameField.GameObjects.Count; j++)
+                for (int j = 0; j < gameObjects.Length; j++)
                 {
-                    CheckColliders(gameObjects[i], gameObjects[j]);
+                    if (i != j)
+                    {
+                        CheckColliders(gameObjects[i], gameObjects[j]);
+                    }
                 }
             }
         }
@@ -34,8 +35,11 @@ namespace SaveYourTower.GameEngine.GameLogic
                 {
                     if (CheckOnConllisions(colliderLeft, colliderRight))
                     {
-                        colliderLeft.DoCollision(right, new CollisionEventArgs(colliderLeft, colliderRight));
-                        colliderRight.DoCollision(left, new CollisionEventArgs(colliderRight, colliderLeft));
+                        colliderLeft.RaiseCollisionEvent(right, 
+                            new CollisionEventArgs(colliderLeft, colliderRight));
+
+                        colliderRight.RaiseCollisionEvent(left, 
+                            new CollisionEventArgs(colliderRight, colliderLeft));
                     }
                 }
             }
@@ -43,7 +47,10 @@ namespace SaveYourTower.GameEngine.GameLogic
 
         bool CheckOnConllisions(Collider left, Collider right)
         {
-            return (Distance(left.Position, right.Position) - (left.Radius + left.Radius) <= 0);
+            double distance = Distance(left.Position, right.Position) 
+                - (left.Radius + left.Radius);
+
+            return (distance <= 0);
         }
 
         public double Distance(Point left, Point right)

@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
+
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameLogic;
-using SaveYourTower.GameEngine.GameObjects.Interfaces;
+using SaveYourTower.GameEngine.GameObjects.RealObjects.Interfaces;
 
-namespace SaveYourTower.GameEngine.GameObjects
+namespace SaveYourTower.GameEngine.GameObjects.RealObjects
 {
     public class Tower : GameObject, ITower
     {
         #region Fields
 
-        private bool _isFiring = false;
+        private bool _isFiring;
 
         #endregion
 
@@ -46,17 +45,18 @@ namespace SaveYourTower.GameEngine.GameObjects
             _isFiring = !_isFiring;
         }
 
-        public void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
+        public void OnCollision(object sender, CollisionEventArgs e)
         {
+            GameObject gameObject = sender as GameObject;
             if ((gameObject is Enemy) 
-                && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") 
-                && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+                && (e.OtherCollider.Tag == "BodyCollider") 
+                && (e.MyCollider.Tag == "BodyCollider"))
             {
-                this.ReceiveDamage(gameObject.Damage);
+                 ReceiveDamage(gameObject.Damage);
 
-                if (this.LifePoints <= 0)
+                if (LifePoints <= 0)
                 {
-                    this.IsAlive = false;
+                    IsAlive = false;
                 }
             }
         }

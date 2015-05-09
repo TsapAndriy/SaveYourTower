@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using SaveYourTower.GameEngine.GameObjects.Base;
+﻿using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameLogic;
-using SaveYourTower.GameEngine.GameObjects.Interfaces;
+using SaveYourTower.GameEngine.GameObjects.RealObjects.Interfaces;
 
-namespace SaveYourTower.GameEngine.GameObjects
+namespace SaveYourTower.GameEngine.GameObjects.RealObjects
 {
     public class Enemy : GameObject, IEnemy
     {
@@ -45,48 +43,33 @@ namespace SaveYourTower.GameEngine.GameObjects
 
         #region Methods
 
-        public void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
+        public void OnCollision(object sender, CollisionEventArgs e)
         {
+            GameObject gameObject = sender as GameObject;
+            
             if ((gameObject is CannonBall) 
-                && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") 
-                && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+                && (e.OtherCollider.Tag == "BodyCollider") 
+                && (e.MyCollider.Tag == "BodyCollider"))
             {
-                this.ReceiveDamage(gameObject.Damage);
+                ReceiveDamage(gameObject.Damage);
 
-                if ((this.IsAlive) && (LifePoints <= 0))
+                if ((IsAlive) && (LifePoints <= 0))
                 {
-                    this.IsAlive = false;
+                    IsAlive = false;
                     GameField.GameScore.AddPoint(1);
                 }
             }
             else if ((gameObject is Tower) 
-                && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") 
-                && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+                && (e.OtherCollider.Tag == "BodyCollider") 
+                && (e.MyCollider.Tag == "BodyCollider"))
             {
-                this.IsAlive = false;
+                IsAlive = false;
             }
             else if ((gameObject is Turret) 
-                && (collisionEventArgs.OtherCollider.Tag == "BodyCollider")
-                && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+                && (e.OtherCollider.Tag == "BodyCollider")
+                && (e.MyCollider.Tag == "BodyCollider"))
             {
-                this.IsAlive = false;
-            }
-            else if (gameObject is Mine)
-            {
-                if ((collisionEventArgs.OtherCollider.Tag == "BodyCollider") 
-                    && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
-                {
-                    this.IsAlive = false;
-                }
-                else 
-                    if ((collisionEventArgs.OtherCollider.Tag == "ExplosionCollider") 
-                    && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
-                {
-                    if ((gameObject as Mine).IsExplose)
-                    {
-                        this.IsAlive = false;
-                    }
-                }
+                 IsAlive = false;
             }
         }
 
@@ -94,7 +77,7 @@ namespace SaveYourTower.GameEngine.GameObjects
         {
             if (LifePoints <= 0)
             {
-                this.IsAlive = false;
+                 IsAlive = false;
             }
 
             LookAt(LookingTower.Position);

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveYourTower.GameEngine.DataContainers
 {
@@ -50,8 +46,19 @@ namespace SaveYourTower.GameEngine.DataContainers
         public override bool Equals(Object obj)
         {
             Point point = obj as Point;
+            if (point != null)
+            {
+                return (X.Equals(point.X) && Y.Equals(point.Y));
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-            return ((this.X == point.X) && (this.Y == point.Y));
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y.GetHashCode();
         } 
 
         #endregion

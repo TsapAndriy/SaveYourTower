@@ -1,41 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SaveYourTower.DesktopUI.GamePages
 {
     public partial class HelpPage : UserControl, ILoadable
     {
-        public event Action<Type> PageEventHandler;
+        public event EventHandler<PageEventArgs> PageEventHandler;
 
+        private Array _helpImages;
+        private int _helpIndex = 0;
         public HelpPage()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+            List<Image> imageList = new List<Image>();
 
+            imageList.Add(Properties.Resources.Help1);
+            imageList.Add(Properties.Resources.Help2);
+            imageList.Add(Properties.Resources.Help3);
+            imageList.Add(Properties.Resources.Help4);
+            imageList.Add(Properties.Resources.Help5);
+            imageList.Add(Properties.Resources.Help6);
+
+            _helpImages = imageList.ToArray();
+            pbHelpView.Image = (Image)_helpImages.GetValue(_helpIndex);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
-            PageEventHandler(typeof(MainPage));
+            PageEventHandler(this, new PageEventArgs(typeof(MainPage)));
             this.Dispose();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnNextHelpPage_Click(object sender, EventArgs e)
         {
-            PageEventHandler(typeof(MainPage));
-            this.Dispose();
+            if (_helpImages != null)
+            {
+                _helpIndex = _helpIndex < _helpImages.Length-1 ? _helpIndex + 1 : 0; 
+                pbHelpView.Image = (Image) _helpImages.GetValue(_helpIndex);
+            }
         }
 
-        private void pctEnemy_Click(object sender, EventArgs e)
+        private void btnPrevHelpPage_Click(object sender, EventArgs e)
         {
 
+            if (_helpImages != null)
+            {
+                _helpIndex = _helpIndex > 0 ? _helpIndex - 1 : _helpImages.Length - 1; 
+                pbHelpView.Image = (Image)_helpImages.GetValue(_helpIndex);
+            }
         }
     }
 }

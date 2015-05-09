@@ -12,24 +12,23 @@ namespace SaveYourTower.DesktopUI.GamePages
 {
     public partial class WinPage : UserControl, ILoadable
     {
-        public event Action<Type> PageEventHandler;
+        public event EventHandler<PageEventArgs> PageEventHandler;
 
         public WinPage()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PageEventHandler(typeof(MainPage));
+            PageEventHandler(this, new PageEventArgs(typeof(PlaingPage)));
             this.Dispose();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            PageEventHandler(typeof(MainPage));
+            PageEventHandler(this, new PageEventArgs(typeof(MainPage)));
             this.Dispose();
         }
     }

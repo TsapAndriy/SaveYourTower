@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
+
 using SaveYourTower.GameEngine;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects;
+using SaveYourTower.GameEngine.GameObjects.RealObjects;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.GameObjects.Spells;
-using SaveYourTower.GameEngine.Spells;
 
 namespace SaveYourTower.ConsoleUI
 {
@@ -19,8 +15,8 @@ namespace SaveYourTower.ConsoleUI
         static void Main(string[] args)
         {
             Game game = new Game(new Point(25, 50), 1);
-            game.Output += Output;
-            game.Input += Input;
+            game.OutputEventHandler += OutputEventHandler;
+            game.InputEventHandler += InputEventHandler;
             game.Run();
 
             if (game.GameStatus == Status.IsExit)
@@ -30,28 +26,29 @@ namespace SaveYourTower.ConsoleUI
             }
         }
 
-        public static void Input(Game game)
+        public static void InputEventHandler(object sender, EventArgs e)
         {
-            if (game.GameStatus == Status.IsReadyToStart)
-            {
-                StartInput(game);
-            }
-            else if (game.GameStatus == Status.IsStarted)
-            {
-                PlayingInput(game);
-            }
-            else if (game.GameStatus == Status.IsPaused)
-            {
-                PlayingInput(game);
-            }
-            else if (game.GameStatus == Status.IsWinnedLevel)
-            {
-                WinLevelInput(game);
-            }
-            else if (game.GameStatus == Status.IsWinned)
-            {
-                WinInput(game);
-            }
+
+            //if (game.GameStatus == Status.IsReadyToStart)
+            //{
+            //    StartInput(game);
+            //}
+            //else if (game.GameStatus == Status.IsStarted)
+            //{
+            //    PlayingInput(game);
+            //}
+            //else if (game.GameStatus == Status.IsPaused)
+            //{
+            //    PlayingInput(game);
+            //}
+            //else if (game.GameStatus == Status.IsWinnedLevel)
+            //{
+            //    WinLevelInput(game);
+            //}
+            //else if (game.GameStatus == Status.IsWinned)
+            //{
+            //    WinInput(game);
+            //}
         }
 
         public static void StartInput(Game game)
@@ -63,8 +60,14 @@ namespace SaveYourTower.ConsoleUI
             }
         }
 
-        public static void PlayingInput(Game game)
+        public static void PlayingInput(object sender, EventArgs e)
         {
+            Game game = sender as Game;
+            if (game == null)
+            {
+                throw new InvalidOperationException("No sender of output event");
+            }
+
             switch (ListenKey())
             {
                 case ConsoleKey.Escape:
@@ -91,9 +94,6 @@ namespace SaveYourTower.ConsoleUI
                     break;
                 case ConsoleKey.D1:
                     game.BuyGameObject(new Turret(game.GameField, AskPosition(game.GameField), 1, 5, 30, cost: 1));
-                    break;
-                case ConsoleKey.D2:
-                    game.BuyGameObject(new Mine(game.GameField, AskPosition(game.GameField), cost: 1));
                     break;
                 case ConsoleKey.D3:
                     AllHilSpell allHilSpell = new AllHilSpell(game.GameField, 100, 10);
@@ -143,8 +143,14 @@ namespace SaveYourTower.ConsoleUI
             }
         }
 
-        public static void Output(Game game)
+        public static void OutputEventHandler(object sender, EventArgs e)
         {
+            Game game = sender as Game;
+            if (game == null)
+            {
+                throw new InvalidOperationException("No sender of output event");
+            }
+
             if (game.GameStatus == Status.IsReadyToStart)
             {
                 StartOutput(game.GameField);
@@ -198,10 +204,6 @@ namespace SaveYourTower.ConsoleUI
                             else if (obj is Turret)
                             {
                                 output.Append('o');
-                            }
-                            else if (obj is Mine)
-                            {
-                                output.Append('+');
                             }
                             playerC++;
                             break;
@@ -318,7 +320,7 @@ namespace SaveYourTower.ConsoleUI
                     case ConsoleKey.Escape:
                         return null;
                 }
-                //Output(gameField);
+                //OutputEventHandler(gameField);
                 Console.SetCursorPosition((int)position.Y, (int)position.X + 1);
             }
         }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using SaveYourTower.GameEngine.GameObjects.Base;
+﻿using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
-using SaveYourTower.GameEngine.GameObjects.Interfaces;
+using SaveYourTower.GameEngine.GameObjects.RealObjects.Interfaces;
 
 using SaveYourTower.GameEngine.GameLogic;
 
-namespace SaveYourTower.GameEngine.GameObjects
+namespace SaveYourTower.GameEngine.GameObjects.RealObjects
 {
     public class CannonBall : GameObject, ICannonBall
     {
@@ -47,11 +44,13 @@ namespace SaveYourTower.GameEngine.GameObjects
 
         #region Methods
 
-        public void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
+        public void OnCollision(object sender, CollisionEventArgs e)
         {
-            if ((gameObject is Enemy) && (collisionEventArgs.OtherCollider.Tag == "BodyCollider") && (collisionEventArgs.MyCollider.Tag == "BodyCollider"))
+            GameObject gameObject = sender as GameObject;
+
+            if ((gameObject is Enemy) && (e.OtherCollider.Tag == "BodyCollider") && (e.MyCollider.Tag == "BodyCollider"))
             {
-                this.IsAlive = false;
+                IsAlive = false;
             }
         }
 
@@ -60,7 +59,7 @@ namespace SaveYourTower.GameEngine.GameObjects
             _timeToLive--;
             if (_timeToLive <= 0)
             {
-                this.IsAlive = false;
+                IsAlive = false;
             }
             MoveOnVelosity();
         } 

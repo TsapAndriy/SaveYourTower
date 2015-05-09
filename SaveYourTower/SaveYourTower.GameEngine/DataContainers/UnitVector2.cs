@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveYourTower.GameEngine.DataContainers
 {
@@ -13,8 +9,6 @@ namespace SaveYourTower.GameEngine.DataContainers
         public double X { get; private set; }
         public double Y { get; private set; } 
 
-		
-		// Angle is radian.
 		public double Angle
 		{
 			get
@@ -54,19 +48,32 @@ namespace SaveYourTower.GameEngine.DataContainers
             return new UnitVector2(X, Y);
         }
 
-        public override bool Equals(object obj)
-        {
-            return ((this.X == ((UnitVector2)obj).X)
-                && (this.Y == ((UnitVector2)obj).Y));
-        }
-
         // Convert random vector to unit vector.
         public void Normalize()
         {
             double magnitude = Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2));
-            magnitude = (magnitude == 0 ? (-1 * double.MinValue) : magnitude);
+            magnitude = (magnitude.Equals(0) ? (-1 * double.MinValue) : magnitude);
             X = X / magnitude;
             Y = Y / magnitude;
+        }
+
+        public override bool Equals(object obj)
+        {
+            UnitVector2 vector = obj as UnitVector2;
+            if (vector != null)
+            {
+                return (X.Equals(((UnitVector2)obj).X))
+                       && (Y.Equals(((UnitVector2)obj).Y));
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y.GetHashCode();
         } 
 
         #endregion

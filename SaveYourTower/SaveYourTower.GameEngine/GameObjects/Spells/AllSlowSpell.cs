@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 using System.Timers;
+
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.GameObjects.Interfaces;
-using SaveYourTower.GameEngine.Spells.Interfaces;
-
-using System.Windows;
+using SaveYourTower.GameEngine.GameObjects.Spells.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects.Spells
 {
@@ -37,7 +30,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
                 colliderRaius: 0,
                 cost: cost)
         {
-            this.ReloadingTime = reloadingTime;
+            ReloadingTime = reloadingTime;
         } 
 
         #endregion
@@ -47,12 +40,12 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
         public void Cast()
         {
             double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
-            GameObject.VelositiDivisor += divisor;
-            this.IsUsed = true;
+            VelositiDivisor += divisor;
+            IsUsed = true;
             int interval = int.Parse(ConfigurationManager.AppSettings["AllSlowSpellDuration"]);
-            System.Timers.Timer timer = new System.Timers.Timer(interval);
+            Timer timer = new Timer(interval);
             timer.AutoReset = false;
-            timer.Elapsed += new ElapsedEventHandler(FinishEffect);
+            timer.Elapsed += FinishEffect;
             timer.Enabled = true;
             timer.Start();
         }
@@ -60,8 +53,8 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
         public void FinishEffect(object source, ElapsedEventArgs e)
         {
             double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
-            GameObject.VelositiDivisor -= divisor;
-            this.IsAlive = false;
+            VelositiDivisor -= divisor;
+            IsAlive = false;
         }
 
         public void Live()

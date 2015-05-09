@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
+using GameUserElements;
+using SaveYourTower.DesktopUI.GamePages;
 
 namespace SaveYourTower.DesktopUI
 {
@@ -22,6 +25,8 @@ namespace SaveYourTower.DesktopUI
             base.Dispose(disposing);
         }
 
+
+
         #region Component Designer generated code
 
         /// <summary> 
@@ -30,178 +35,211 @@ namespace SaveYourTower.DesktopUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlaingPage));
+            this.tblMainGameView = new GameUserElements.DBLayoutPanel();
+            this.tblButtons = new GameUserElements.DBLayoutPanel();
+            this.btnTurret = new System.Windows.Forms.Button();
             this.btnHitAll = new System.Windows.Forms.Button();
             this.btnSlowAll = new System.Windows.Forms.Button();
             this.bntNextLevel = new System.Windows.Forms.Button();
-            this.btnTurret = new System.Windows.Forms.Button();
-            this.pFieldView = new System.Windows.Forms.PictureBox();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnLose = new System.Windows.Forms.Button();
-            this.btnWin = new System.Windows.Forms.Button();
-            this.btnWinLevel = new System.Windows.Forms.Button();
-            this.btnStart = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pFieldView)).BeginInit();
+            this.btnStartGame = new System.Windows.Forms.Button();
+            this.bntExit = new System.Windows.Forms.Button();
+            this.bntPause = new System.Windows.Forms.Button();
+            this.tblMainGameView.SuspendLayout();
+            this.tblButtons.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tblMainGameView
+            // 
+            this.tblMainGameView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tblMainGameView.BackColor = System.Drawing.Color.Transparent;
+            this.tblMainGameView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tblMainGameView.CausesValidation = false;
+            this.tblMainGameView.ColumnCount = 3;
+            this.tblMainGameView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.28894F));
+            this.tblMainGameView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.9534F));
+            this.tblMainGameView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.75766F));
+            this.tblMainGameView.Controls.Add(this.tblButtons, 1, 4);
+            this.tblMainGameView.Controls.Add(this.bntNextLevel, 1, 2);
+            this.tblMainGameView.Controls.Add(this.btnStartGame, 1, 1);
+            this.tblMainGameView.Controls.Add(this.bntExit, 1, 3);
+            this.tblMainGameView.Controls.Add(this.bntPause, 2, 0);
+            this.tblMainGameView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblMainGameView.ForeColor = System.Drawing.Color.White;
+            this.tblMainGameView.Location = new System.Drawing.Point(0, 0);
+            this.tblMainGameView.Name = "tblMainGameView";
+            this.tblMainGameView.RowCount = 5;
+            this.tblMainGameView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 63.75761F));
+            this.tblMainGameView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tblMainGameView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tblMainGameView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.24239F));
+            this.tblMainGameView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tblMainGameView.Size = new System.Drawing.Size(500, 500);
+            this.tblMainGameView.TabIndex = 13;
+            this.tblMainGameView.Paint += new System.Windows.Forms.PaintEventHandler(this.tblMainGameView_Paint);
+            this.tblMainGameView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseClick);
+            // 
+            // tblButtons
+            // 
+            this.tblButtons.BackColor = System.Drawing.Color.Transparent;
+            this.tblButtons.ColumnCount = 3;
+            this.tblButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblButtons.Controls.Add(this.btnTurret, 0, 0);
+            this.tblButtons.Controls.Add(this.btnHitAll, 1, 0);
+            this.tblButtons.Controls.Add(this.btnSlowAll, 2, 0);
+            this.tblButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblButtons.Location = new System.Drawing.Point(169, 442);
+            this.tblButtons.Name = "tblButtons";
+            this.tblButtons.RowCount = 1;
+            this.tblButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblButtons.Size = new System.Drawing.Size(168, 55);
+            this.tblButtons.TabIndex = 0;
+            // 
+            // btnTurret
+            // 
+            this.btnTurret.BackColor = System.Drawing.Color.Transparent;
+            this.btnTurret.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTurret.CausesValidation = false;
+            this.btnTurret.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTurret.FlatAppearance.BorderSize = 0;
+            this.btnTurret.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTurret.Font = new System.Drawing.Font("Agency FB", 35F, System.Drawing.FontStyle.Bold);
+            this.btnTurret.ForeColor = System.Drawing.Color.LightSteelBlue;
+            this.btnTurret.Image = ((System.Drawing.Image)(resources.GetObject("btnTurret.Image")));
+            this.btnTurret.Location = new System.Drawing.Point(3, 3);
+            this.btnTurret.Name = "btnTurret";
+            this.btnTurret.Size = new System.Drawing.Size(50, 49);
+            this.btnTurret.TabIndex = 8;
+            this.btnTurret.UseVisualStyleBackColor = false;
+            this.btnTurret.Click += new System.EventHandler(this.btnTurret_Click);
             // 
             // btnHitAll
             // 
-            this.btnHitAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHitAll.BackColor = System.Drawing.Color.Black;
+            this.btnHitAll.BackColor = System.Drawing.Color.Transparent;
             this.btnHitAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnHitAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnHitAll.FlatAppearance.BorderSize = 0;
             this.btnHitAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHitAll.Font = new System.Drawing.Font("Papyrus", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHitAll.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnHitAll.Location = new System.Drawing.Point(220, 449);
+            this.btnHitAll.Font = new System.Drawing.Font("Agency FB", 8F, System.Drawing.FontStyle.Bold);
+            this.btnHitAll.ForeColor = System.Drawing.Color.Blue;
+            this.btnHitAll.Image = global::SaveYourTower.DesktopUI.Properties.Resources.HitAll;
+            this.btnHitAll.Location = new System.Drawing.Point(59, 3);
             this.btnHitAll.Name = "btnHitAll";
-            this.btnHitAll.Size = new System.Drawing.Size(54, 51);
+            this.btnHitAll.Size = new System.Drawing.Size(50, 49);
             this.btnHitAll.TabIndex = 10;
-            this.btnHitAll.Text = "Hit All";
             this.btnHitAll.UseVisualStyleBackColor = false;
             this.btnHitAll.Click += new System.EventHandler(this.btnHitAll_Click);
             // 
             // btnSlowAll
             // 
-            this.btnSlowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSlowAll.BackColor = System.Drawing.Color.Black;
-            this.btnSlowAll.BackgroundImage = global::SaveYourTower.DesktopUI.Properties.Resources.outer_space_star_field;
-            this.btnSlowAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSlowAll.BackColor = System.Drawing.Color.Transparent;
+            this.btnSlowAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSlowAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSlowAll.FlatAppearance.BorderSize = 0;
             this.btnSlowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSlowAll.Font = new System.Drawing.Font("Papyrus", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.btnSlowAll.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnSlowAll.Location = new System.Drawing.Point(280, 449);
+            this.btnSlowAll.Font = new System.Drawing.Font("Agency FB", 8F, System.Drawing.FontStyle.Bold);
+            this.btnSlowAll.ForeColor = System.Drawing.Color.Blue;
+            this.btnSlowAll.Image = global::SaveYourTower.DesktopUI.Properties.Resources.SlowAll;
+            this.btnSlowAll.Location = new System.Drawing.Point(115, 3);
             this.btnSlowAll.Name = "btnSlowAll";
-            this.btnSlowAll.Size = new System.Drawing.Size(54, 51);
+            this.btnSlowAll.Size = new System.Drawing.Size(50, 49);
             this.btnSlowAll.TabIndex = 11;
-            this.btnSlowAll.Text = "Slow All";
             this.btnSlowAll.UseVisualStyleBackColor = false;
             this.btnSlowAll.Click += new System.EventHandler(this.btnSlowAll_Click);
             // 
             // bntNextLevel
             // 
-            this.bntNextLevel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bntNextLevel.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.bntNextLevel.Font = new System.Drawing.Font("Papyrus", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.bntNextLevel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.bntNextLevel.Image = global::SaveYourTower.DesktopUI.Properties.Resources.Star_field_5;
-            this.bntNextLevel.Location = new System.Drawing.Point(96, 369);
+            this.bntNextLevel.BackColor = System.Drawing.Color.Transparent;
+            this.bntNextLevel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bntNextLevel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntNextLevel.Font = new System.Drawing.Font("Agency FB", 25F, System.Drawing.FontStyle.Bold);
+            this.bntNextLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bntNextLevel.Location = new System.Drawing.Point(169, 300);
             this.bntNextLevel.Name = "bntNextLevel";
-            this.bntNextLevel.Size = new System.Drawing.Size(298, 69);
+            this.bntNextLevel.Size = new System.Drawing.Size(168, 59);
             this.bntNextLevel.TabIndex = 7;
-            this.bntNextLevel.Text = "NextLevel";
+            this.bntNextLevel.Text = "Next Level";
             this.bntNextLevel.UseVisualStyleBackColor = false;
             this.bntNextLevel.Visible = false;
             this.bntNextLevel.Click += new System.EventHandler(this.bntNextLevel_Click);
             // 
-            // btnTurret
+            // btnStartGame
             // 
-            this.btnTurret.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnTurret.BackColor = System.Drawing.Color.Black;
-            this.btnTurret.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnTurret.CausesValidation = false;
-            this.btnTurret.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTurret.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnTurret.Image = global::SaveYourTower.DesktopUI.Properties.Resources.Turret;
-            this.btnTurret.Location = new System.Drawing.Point(161, 449);
-            this.btnTurret.Name = "btnTurret";
-            this.btnTurret.Size = new System.Drawing.Size(53, 51);
-            this.btnTurret.TabIndex = 8;
-            this.btnTurret.UseVisualStyleBackColor = false;
-            this.btnTurret.Click += new System.EventHandler(this.btnTurret_Click);
+            this.btnStartGame.BackColor = System.Drawing.Color.Transparent;
+            this.btnStartGame.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStartGame.FlatAppearance.BorderSize = 0;
+            this.btnStartGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartGame.Font = new System.Drawing.Font("Agency FB", 25F, System.Drawing.FontStyle.Bold);
+            this.btnStartGame.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnStartGame.Location = new System.Drawing.Point(169, 140);
+            this.btnStartGame.Name = "btnStartGame";
+            this.btnStartGame.Size = new System.Drawing.Size(168, 154);
+            this.btnStartGame.TabIndex = 12;
+            this.btnStartGame.Text = "Start";
+            this.btnStartGame.UseVisualStyleBackColor = false;
+            this.btnStartGame.Click += new System.EventHandler(this.btnStartGame_Click);
             // 
-            // pFieldView
+            // bntExit
             // 
-            this.pFieldView.BackColor = System.Drawing.Color.Transparent;
-            this.pFieldView.BackgroundImage = global::SaveYourTower.DesktopUI.Properties.Resources.Space_field_by_blood_mind;
-            this.pFieldView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pFieldView.Location = new System.Drawing.Point(0, 0);
-            this.pFieldView.Name = "pFieldView";
-            this.pFieldView.Size = new System.Drawing.Size(500, 500);
-            this.pFieldView.TabIndex = 0;
-            this.pFieldView.TabStop = false;
-            this.pFieldView.Click += new System.EventHandler(this.pFieldView_Click_1);
-            this.pFieldView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pFieldView_PreviewKeyDown);
+            this.bntExit.BackColor = System.Drawing.Color.Transparent;
+            this.bntExit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bntExit.FlatAppearance.BorderSize = 0;
+            this.bntExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntExit.Font = new System.Drawing.Font("Agency FB", 40F, System.Drawing.FontStyle.Bold);
+            this.bntExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bntExit.Location = new System.Drawing.Point(169, 365);
+            this.bntExit.Name = "bntExit";
+            this.bntExit.Size = new System.Drawing.Size(168, 71);
+            this.bntExit.TabIndex = 14;
+            this.bntExit.Text = "Exit";
+            this.bntExit.UseVisualStyleBackColor = false;
+            this.bntExit.Visible = false;
+            this.bntExit.Click += new System.EventHandler(this.bntExit_Click);
             // 
-            // btnExit
+            // bntPause
             // 
-            this.btnExit.Location = new System.Drawing.Point(580, 663);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(37, 26);
-            this.btnExit.TabIndex = 1;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnLose
-            // 
-            this.btnLose.Location = new System.Drawing.Point(459, 444);
-            this.btnLose.Name = "btnLose";
-            this.btnLose.Size = new System.Drawing.Size(38, 26);
-            this.btnLose.TabIndex = 4;
-            this.btnLose.Text = "Lose";
-            this.btnLose.UseVisualStyleBackColor = true;
-            this.btnLose.Click += new System.EventHandler(this.btnLose_Click);
-            // 
-            // btnWin
-            // 
-            this.btnWin.Location = new System.Drawing.Point(459, 415);
-            this.btnWin.Name = "btnWin";
-            this.btnWin.Size = new System.Drawing.Size(38, 26);
-            this.btnWin.TabIndex = 5;
-            this.btnWin.Text = "Win";
-            this.btnWin.UseVisualStyleBackColor = true;
-            this.btnWin.Click += new System.EventHandler(this.btnWin_Click);
-            // 
-            // btnWinLevel
-            // 
-            this.btnWinLevel.Location = new System.Drawing.Point(458, 386);
-            this.btnWinLevel.Name = "btnWinLevel";
-            this.btnWinLevel.Size = new System.Drawing.Size(38, 26);
-            this.btnWinLevel.TabIndex = 6;
-            this.btnWinLevel.Text = "WinLevel";
-            this.btnWinLevel.UseVisualStyleBackColor = true;
-            this.btnWinLevel.Click += new System.EventHandler(this.btnWinLevel_Click);
-            // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(458, 357);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(38, 26);
-            this.btnStart.TabIndex = 2;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.bntPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bntPause.BackColor = System.Drawing.Color.Transparent;
+            this.bntPause.FlatAppearance.BorderSize = 0;
+            this.bntPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntPause.Font = new System.Drawing.Font("Agency FB", 18F, System.Drawing.FontStyle.Bold);
+            this.bntPause.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bntPause.Location = new System.Drawing.Point(426, 3);
+            this.bntPause.Name = "bntPause";
+            this.bntPause.Size = new System.Drawing.Size(71, 39);
+            this.bntPause.TabIndex = 13;
+            this.bntPause.Text = "Pause";
+            this.bntPause.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bntPause.UseVisualStyleBackColor = false;
+            this.bntPause.Visible = false;
+            this.bntPause.Click += new System.EventHandler(this.bntPause_Click);
             // 
             // PlaingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnSlowAll);
-            this.Controls.Add(this.btnHitAll);
-            this.Controls.Add(this.bntNextLevel);
-            this.Controls.Add(this.btnWinLevel);
-            this.Controls.Add(this.btnWin);
-            this.Controls.Add(this.btnLose);
-            this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.btnTurret);
-            this.Controls.Add(this.pFieldView);
+            this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.tblMainGameView);
             this.Name = "PlaingPage";
             this.Size = new System.Drawing.Size(500, 500);
-            ((System.ComponentModel.ISupportInitialize)(this.pFieldView)).EndInit();
+            this.tblMainGameView.ResumeLayout(false);
+            this.tblButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pFieldView;
         private Button bntNextLevel;
         private Button btnTurret;
         private Button btnHitAll;
         private Button btnSlowAll;
-        private Button btnExit;
-        private Button btnLose;
-        private Button btnWin;
-        private Button btnWinLevel;
-        private Button btnStart;
+        private Button btnStartGame;
+        private DBLayoutPanel tblMainGameView;
+        private DBLayoutPanel tblButtons;
+        private Button bntPause;
+        private Button bntExit;
     }
 }

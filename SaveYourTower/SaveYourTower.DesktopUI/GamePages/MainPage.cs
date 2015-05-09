@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using SaveYourTower.DesktopUI.GamePages;
 
 namespace SaveYourTower.DesktopUI
@@ -14,7 +8,7 @@ namespace SaveYourTower.DesktopUI
 
     public partial class MainPage : UserControl, ILoadable
     {
-        public event Action<Type> PageEventHandler;
+        public event EventHandler<PageEventArgs> PageEventHandler;
 
         public MainPage()
         {
@@ -24,13 +18,19 @@ namespace SaveYourTower.DesktopUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PageEventHandler(typeof(PlaingPage));
+            PageEventHandler(this, new PageEventArgs(typeof(PlaingPage)));
             this.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            PageEventHandler(typeof(HelpPage));
+            PageEventHandler(this, new PageEventArgs(typeof(HelpPage)));
+            this.Dispose();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            PageEventHandler(this, new PageEventArgs(typeof(SettingsPage)));
             this.Dispose();
         }
 

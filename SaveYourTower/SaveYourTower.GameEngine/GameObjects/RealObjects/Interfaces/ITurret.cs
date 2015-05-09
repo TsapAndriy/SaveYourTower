@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using SaveYourTower.GameEngine.GameObjects.Base;
+﻿using SaveYourTower.GameEngine.GameObjects.Interfaces;
 
-namespace SaveYourTower.GameEngine.GameObjects.Interfaces
+namespace SaveYourTower.GameEngine.GameObjects.RealObjects.Interfaces
 {
     interface ITurret : ICollisional, ILive
     {

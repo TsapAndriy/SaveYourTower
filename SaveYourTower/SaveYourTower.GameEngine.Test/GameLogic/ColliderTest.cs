@@ -5,6 +5,7 @@ using SaveYourTower.GameEngine;
 using SaveYourTower.GameEngine.GameLogic;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects;
+using SaveYourTower.GameEngine.GameObjects.RealObjects;
 
 
 namespace SaveYourTower.GameEngine.Test.GameLogic
@@ -29,9 +30,9 @@ namespace SaveYourTower.GameEngine.Test.GameLogic
         {
             CannonBall cannonBall = new CannonBall(null, null, null, 1, 1, 1, 10);
             Enemy enemy = new Enemy(null, null, 1, 1, 1, 1);
-            CollisionEventArgs collisionEventArgs = new CollisionEventArgs(cannonBall.Colliders.ToArray()[0], enemy.Colliders.ToArray()[0]);
+            CollisionEventArgs e = new CollisionEventArgs(cannonBall.Colliders.ToArray()[0], enemy.Colliders.ToArray()[0]);
 
-            cannonBall.Colliders.ForEach( obj => obj.DoCollision(enemy, collisionEventArgs));
+            cannonBall.Colliders.ForEach( obj => obj.RaiseCollisionEvent(enemy, e));
 
             Assert.IsFalse(cannonBall.IsAlive);
         }

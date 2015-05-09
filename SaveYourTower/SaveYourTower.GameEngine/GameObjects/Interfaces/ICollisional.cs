@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-using SaveYourTower.GameEngine.DataContainers;
-using SaveYourTower.GameEngine.GameObjects.Base;
+﻿using SaveYourTower.GameEngine.DataContainers;
 
 namespace SaveYourTower.GameEngine.GameObjects.Interfaces
 {
     interface ICollisional
     {
-        void OnCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs);
+        void OnCollision(object sender, CollisionEventArgs e);
     }
 }

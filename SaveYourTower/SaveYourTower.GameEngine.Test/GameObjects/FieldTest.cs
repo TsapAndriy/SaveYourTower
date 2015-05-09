@@ -28,27 +28,17 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         {
             Field field = new Field(new Point(10, 15), 1);
 
-            Mine mine = new Mine(field, new Point(1, 1));
-
-            field.AddGameObject(mine);
 
             Assert.AreEqual(1, field.GameObjects.Count);
-            Assert.AreSame(field.GameObjects.Find(obj => { return (obj is Mine); }), mine);
         }
 
         [TestMethod]
         public void TestRemoveGameObject()
         {
             Field field = new Field(new Point(10, 15), 1);
-            Mine mine = new Mine(field, new Point(1, 1));
 
-            field.AddGameObject(mine);
-            
             Assert.AreEqual(1, field.GameObjects.Count);
-            Assert.AreSame(field.GameObjects.Find(obj => { return (obj is Mine); }), mine);
             
-            field.RemoveGameObject(mine);
-
             Assert.AreEqual(0, field.GameObjects.Count);
         }
 
@@ -56,9 +46,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         public void TestClean()
         {
             Field field = new Field(new Point(10, 15), 1);
-            Mine mine = new Mine(field, new Point(1, 1));
 
-            field.AddGameObject(mine);
             field.Clean();
 
             Assert.AreEqual(0, field.GameObjects.Count);

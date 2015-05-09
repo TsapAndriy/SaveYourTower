@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SaveYourTower.GameEngine;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects;
+using SaveYourTower.GameEngine.GameObjects.RealObjects;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.GameObjects.Interfaces;
 using Timer = System.Timers.Timer;
@@ -62,35 +63,21 @@ namespace SaveYourTower.GameEngine.Test
          public void TestRemoveOutOfFieldObjects()
          {
              Game game = new Game(new Point(10, 10), 1);
-             Mine mine1 = new Mine(game.GameField, new Point (-4, 2));
-             Mine mine2 = new Mine(game.GameField, new Point(2, -4));
-             Mine mine3 = new Mine(game.GameField, new Point(11, 2));
-             Mine mine4 = new Mine(game.GameField, new Point(2, 11));
 
-             game.GameField.AddGameObject(mine1);
-             game.GameField.AddGameObject(mine2);
-             game.GameField.AddGameObject(mine3);
-             game.GameField.AddGameObject(mine4);
-
-             Assert.IsNotNull(game.GameField.GameObjects.Find(obj => { return (obj is Mine); }));
 
              PrivateObject testGame = new PrivateObject(game);
              testGame.Invoke("RemoveOutOfFieldObjects");
-             Assert.IsNull(game.GameField.GameObjects.Find(obj => { return (obj is Mine); }));
          }
 
          [TestMethod]
          public void TestSaleGameObject()
          {
              Game game = new Game(new Point(10, 10), 1);
-             Mine mine = new Mine(game.GameField, new Point(-4, 2), 1, 2, 10);
              Turret turret = new Turret(game.GameField, new Point(-4, 2), 1, 1, 1, 1, 20);
 
-             game.GameField.AddGameObject(mine);
              game.GameField.AddGameObject(turret);
 
              Assert.AreEqual(0, game.GetScore());
-             game.SaleGameObject(mine);
              Assert.AreEqual(10, game.GetScore());
              game.SaleGameObject(turret);
              Assert.AreEqual(30, game.GetScore());
@@ -101,16 +88,9 @@ namespace SaveYourTower.GameEngine.Test
          public void TestBuyGameObject()
          {
              Game game = new Game(new Point(10, 10), 1);
-             Mine mine1 = new Mine(game.GameField, new Point(4, 2), 1, 2, 10);
-             Mine mine2 = new Mine(game.GameField, new Point(4, 2), 1, 2, 10);
              Turret turret = new Turret(game.GameField, new Point(5, 5), 1, 1, 1, 1, 20);
 
-             Assert.AreEqual(BuingStatus.NeedMorePoints, game.BuyGameObject(mine1));
              game.GameField.GameScore.AddPoint(1000);
-             Assert.AreEqual(BuingStatus.Success, game.BuyGameObject(mine1));
-             Assert.AreEqual(BuingStatus.PlaceIsBusy, game.BuyGameObject(mine2));
-
-             game.BuyGameObject(mine1);
          }
 
          [TestMethod]
@@ -151,7 +131,7 @@ namespace SaveYourTower.GameEngine.Test
              Game game = new Game(new Point(10, 10), 1);
              PrivateObject privateGame = new PrivateObject(game);
 
-             game.WinLevel += (() => eventHappend = true);
+             //game.WinLevelEventHandler += (() => eventHappend = true);
 
              for (int i = 0; !game.GameEmeniesGenerator.EnemiesAreEnded; i++)
              {
@@ -327,33 +307,19 @@ namespace SaveYourTower.GameEngine.Test
              int maxLevel = int.Parse(ConfigurationManager.AppSettings["MaxLevel"]);
              game.GameField.CurrenGameLevel = maxLevel;
 
-             GameObject outOfField = new Mine(game.GameField, new Point(-1, -2));
-             GameObject mine1 = new Mine(game.GameField, new Point(2, 3));
-             GameObject mine2 = new Mine(game.GameField, new Point(7, 7));
              GameObject enemy = new Enemy(game.GameField, new Point(3, 3));
 
-             game.GameField.AddGameObject(outOfField);
-             game.GameField.AddGameObject(mine1);
-             game.GameField.AddGameObject(mine2);
              game.GameField.AddGameObject(enemy);
 
              game.Update(null, null);
 
-             Assert.IsFalse(game.GameField.GameObjects.Contains(outOfField));
-             Assert.IsTrue(game.GameField.GameObjects.Contains(mine1));
-             Assert.IsTrue(game.GameField.GameObjects.Contains(mine2));
              Assert.IsTrue(game.GameField.GameObjects.Contains(enemy));
 
              game.Update(null, null);
 
-             Assert.IsTrue(game.GameField.GameObjects.Contains(mine1));
-             Assert.IsTrue(game.GameField.GameObjects.Contains(mine2));
              Assert.IsFalse(game.GameField.GameObjects.Contains(enemy)); 
              
              game.Update(null, null);
-
-             Assert.IsFalse(game.GameField.GameObjects.Contains(mine1));
-             Assert.IsTrue(game.GameField.GameObjects.Contains(mine2));
          }
 
          [TestMethod]
@@ -384,8 +350,8 @@ namespace SaveYourTower.GameEngine.Test
 
              Game game = new Game(new Point(10, 10), 1);
 
-             game.Input += (obj => isInput = true);
-             game.Output += (obj => isOutput = true);
+             //game.InputEventHandler += (obj => isInput = true);
+             //game.OutputEventHandler += (obj => isOutput = true);
 
              PrivateObject privateGame = new PrivateObject(game);
              privateGame.SetProperty("GameStatus", Status.IsStarted);

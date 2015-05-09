@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,7 +58,6 @@
     <Compile Include="GameLogic\ColliderTest.cs" />
     <Compile Include="GameLogic\CollisionDetectorTest.cs" />
     <Compile Include="GameLogic\EnemiesGeneratorTest.cs" />
-    <Compile Include="GameObjects\RealObjects\MineTest.cs" />
     <Compile Include="GameObjects\ScoreTest.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
@@ -70,6 +70,7 @@
     <Compile Include="GameObjects\Spells\AllSlowSpellTest.cs" />
     <Compile Include="GameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest2.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SaveYourTower.GameEngine\SaveYourTower.GameEngine.csproj">

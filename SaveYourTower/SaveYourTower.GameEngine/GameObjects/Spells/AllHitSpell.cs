@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
+
 using SaveYourTower.GameEngine.DataContainers;
-using SaveYourTower.GameEngine.GameLogic;
-using SaveYourTower.GameEngine.GameObjects;
+using SaveYourTower.GameEngine.GameObjects.RealObjects;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.GameObjects.Interfaces;
-using SaveYourTower.GameEngine.Spells.Interfaces;
+using SaveYourTower.GameEngine.GameObjects.Spells.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects.Spells
 {
@@ -34,8 +29,8 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
                 colliderRaius: 0,
                 cost: cost)
         {
-            this.IsUsed = false;
-            this.ReloadingTime = reloadingTime;
+            IsUsed = false;
+            ReloadingTime = reloadingTime;
         } 
 
         #endregion
@@ -53,12 +48,12 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
                 }
             });
 
-            this.IsUsed = true;
+            IsUsed = true;
         }
 
         public void Live()
         {
-            if ((this.IsAlive) && (this.IsUsed))
+            if ((IsAlive) && (IsUsed))
             {
                 if (ReloadingTime > 0)
                 {
@@ -66,7 +61,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
                 }
                 else
                 {
-                    this.IsAlive = false;
+                    IsAlive = false;
                 }
             }
         } 

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Security.Policy;
+
 using SaveYourTower.GameEngine.GameObjects;
-using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
-using SaveYourTower.GameEngine.GameObjects.Interfaces;
+using SaveYourTower.GameEngine.GameObjects.RealObjects;
 
 namespace SaveYourTower.GameEngine.GameLogic
 {
@@ -31,6 +29,7 @@ namespace SaveYourTower.GameEngine.GameLogic
 
         public EnemiesGenerator()
         {
+            //_enemyGenerationLatency = latency;
             _enemyGenerationLatency = int.Parse(ConfigurationManager.AppSettings["EnemyGenerationLanency"]);
         }
 
@@ -86,7 +85,7 @@ namespace SaveYourTower.GameEngine.GameLogic
                     8,
                     GetDoubleFromConfig("Level3EnemyVelocity"),
                     GetIntFromConfig("Level3EnemyDamage"),
-                    GetIntFromConfig("Level3EnemyLife") * (int)_power
+                    GetIntFromConfig("Level3EnemyLife")
                     ));
 
                 _enemiesCounter++;
@@ -126,7 +125,6 @@ namespace SaveYourTower.GameEngine.GameLogic
             return double.Parse(ConfigurationManager.AppSettings[key]);
         }
 
-        // Set enemie spawn point at the field side.
         private Point StickToTheSide(Field gameField)
         {
             Point sidePosition = null; 
@@ -162,12 +160,14 @@ namespace SaveYourTower.GameEngine.GameLogic
 
         private Point DownSide(Field gameField)
         {
-            return new Point((gameField.Size.X - 1), _rand.Next(1, (int)(gameField.Size.Y)));
+            return new Point((gameField.Size.X - 1),
+                _rand.Next(1, (int)(gameField.Size.Y)));
         }
 
         private Point LeftSide(Field gameField)
         {
-            return new Point(_rand.Next(1, (int)(gameField.Size.X)), (gameField.Size.Y - 1));
+            return new Point(_rand.Next(1, (int)(gameField.Size.X)),
+                (gameField.Size.Y - 1));
         }
 
         #endregion

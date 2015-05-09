@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
 
@@ -9,7 +9,7 @@ namespace SaveYourTower.GameEngine.GameLogic
     {
         #region Events
 
-        public event Action<GameObject, CollisionEventArgs> CollisionEventHandler;
+        public event EventHandler<CollisionEventArgs> CollisionEventHandler;
 
         #endregion
 
@@ -30,9 +30,12 @@ namespace SaveYourTower.GameEngine.GameLogic
             Tag = tag;
         }
 
-        public void DoCollision(GameObject gameObject, CollisionEventArgs collisionEventArgs)
+        public void RaiseCollisionEvent(GameObject gameObject, CollisionEventArgs e)
         {
-            CollisionEventHandler(gameObject, collisionEventArgs);
+            if (CollisionEventHandler != null)
+            {
+                CollisionEventHandler(gameObject, e);
+            }
         } 
 
         #endregion

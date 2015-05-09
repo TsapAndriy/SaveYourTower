@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects;
+using SaveYourTower.GameEngine.GameObjects.RealObjects;
 using SaveYourTower.GameEngine.GameObjects.Spells;
-using SaveYourTower.GameEngine.Spells;
 
 namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
 {

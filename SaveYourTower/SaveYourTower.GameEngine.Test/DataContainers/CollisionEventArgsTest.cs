@@ -14,10 +14,10 @@ namespace SaveYourTower.GameEngine.Test.DataContainers
         { 
             Collider collider1 = new Collider(new Point(1,1), 1, "Body");
             Collider collider2 = new Collider(new Point(3,3), 2, "Finding");
-            CollisionEventArgs collisionEventArgs = new CollisionEventArgs(collider1, collider2);
+            CollisionEventArgs e = new CollisionEventArgs(collider1, collider2);
 
-            Assert.AreSame(collisionEventArgs.MyCollider, collider1);
-            Assert.AreSame(collisionEventArgs.OtherCollider, collider2);
+            Assert.AreSame(e.MyCollider, collider1);
+            Assert.AreSame(e.OtherCollider, collider2);
         }
     }
 }
