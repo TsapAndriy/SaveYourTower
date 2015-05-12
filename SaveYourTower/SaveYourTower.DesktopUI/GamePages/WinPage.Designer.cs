@@ -88,7 +88,7 @@ namespace SaveYourTower.DesktopUI.GamePages
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Restart";
             this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.button1_Click);
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // label1
             // 

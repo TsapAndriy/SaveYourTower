@@ -30,6 +30,7 @@ namespace SaveYourTower.DesktopUI
         private static object _sync = new object();
         private Cursor defaultCursor;
         private CursorStatus _cursorStatus = CursorStatus.Fire;
+        private Level[] _levels;
 
         public event EventHandler<PageEventArgs> PageEventHandler;
         
@@ -44,11 +45,12 @@ namespace SaveYourTower.DesktopUI
             btnHitAll.Enabled = false;
             btnSlowAll.Enabled = false; 
             this.Cursor = new Cursor((Properties.Resources.Mark).GetHicon());
+            _levels = LoadLevels();
         }
 
         private  void RunGame()
         {
-            _game = new Game(new GamePoint(this.Width, this.Height), 1);
+            _game = new Game(new GamePoint(this.Width, this.Height), _levels);
             _game.OutputEventHandler += OnOutputEventHandler;
             _game.InputEventHandler += OnInputEventHandler;
             _game.DieEventHandler += DieEffects;
@@ -111,30 +113,36 @@ namespace SaveYourTower.DesktopUI
             {
                 lock (_sync)
                 {
-                    this.Invoke((Action<Field>)DrawGameObjects, _game.GameField);
+                    Invoke((Action<Field>)DrawGameObjects, _game.GameField);
                 }
             }
             else if (game.GameStatus == Status.IsWinnedLevel)
             {
                 lock (_sync)
                 {
-                    this.Invoke((Action<Field>)WinLevelOutput, _game.GameField);
+                    Invoke((Action<Field>)WinLevelOutput, _game.GameField);
                 }
             }
             else if (game.GameStatus == Status.IsWinned)
             {
                 lock (_sync)
                 {
-                    this.BeginInvoke(PageEventHandler,this, new PageEventArgs(typeof(WinPage)));
-                    this.BeginInvoke((MethodInvoker)delegate { this.Dispose(); });
+                    BeginInvoke(PageEventHandler,
+                        this, 
+                        new PageEventArgs(typeof(WinPage)));
+
+                    BeginInvoke((MethodInvoker)delegate { this.Dispose(); });
                 }
             }
             else if (game.GameStatus == Status.IsExit)
             {
                 lock (_sync)
                 {
-                    this.BeginInvoke(PageEventHandler, this, new PageEventArgs(typeof(LosePage)));
-                    this.BeginInvoke((MethodInvoker)delegate { this.Dispose(); });
+                    BeginInvoke(PageEventHandler, 
+                        this, 
+                        new PageEventArgs(typeof(LosePage)));
+
+                    BeginInvoke((MethodInvoker)delegate { this.Dispose(); });
                 }
             } 
         }
@@ -144,7 +152,8 @@ namespace SaveYourTower.DesktopUI
         {
             bntNextLevel.Visible = true;
 
-            Bitmap result = new Bitmap(tblMainGameView.Size.Width, tblMainGameView.Size.Height);
+            Bitmap result = new Bitmap(tblMainGameView.Size.Width,
+                tblMainGameView.Size.Height);
 
             DrawText(_game.GetScore().ToString(), result, new Point(100, 0));
 
@@ -153,7 +162,9 @@ namespace SaveYourTower.DesktopUI
 
         private void DrawGameObjects(Field gameField)
         {
-            Bitmap result = new Bitmap(tblMainGameView.Size.Width, tblMainGameView.Size.Height);
+            Bitmap result = new Bitmap(tblMainGameView.Size.Width, 
+                tblMainGameView.Size.Height);
+
             foreach (var obj in gameField.GameObjects)
             {
                 if (obj is Tower)
@@ -166,20 +177,30 @@ namespace SaveYourTower.DesktopUI
 
                     ((Tower)obj).LookAt(lookPoint);
 
-                    Image image = RotateImage(Properties.Resources.Tower, RadianToDegree((float)obj.Direction.Angle) + 90);
+                    Image image = RotateImage(Properties.Resources.Tower, 
+                        RadianToDegree((float)obj.Direction.Angle) + 90);
                     
-                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2, ((int)obj.Position.Y) - image.Height / 2);
+                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2, 
+                        ((int)obj.Position.Y) - image.Height / 2);
 
-                    DrawText("Health : ", result, new System.Drawing.Point(this.Size.Width / 2 - 70, 0));
-                    DrawText(((Tower)obj).LifePoints.ToString(), result, new Point(this.Size.Width / 2 + 70, 0));
+                    DrawText("Health : ", result, 
+                        new System.Drawing.Point(this.Size.Width / 2 - 70, 0));
+
+                    DrawText(((Tower)obj).LifePoints.ToString(), 
+                        result, new Point(this.Size.Width / 2 + 70, 0));
+
                     g.Dispose();
                 }
                 else if (obj is Enemy)
                 {
                     Graphics g = Graphics.FromImage(result);
 
-                    Image image = RotateImage(Properties.Resources.Enemy, RadianToDegree((float)obj.Direction.Angle) + 90);
-                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2, ((int)obj.Position.Y) - image.Height / 2);
+                    Image image = RotateImage(Properties.Resources.Enemy, 
+                        RadianToDegree((float)obj.Direction.Angle) + 90);
+
+                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
+                        ((int)obj.Position.Y) - image.Height / 2);
+
                     g.Dispose();
                 }
                 else if (obj is CannonBall)
@@ -197,16 +218,20 @@ namespace SaveYourTower.DesktopUI
                             RadianToDegree((float)obj.Direction.Angle) + 90);
                     }
                       
-                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2, ((int)obj.Position.Y) - image.Height / 2);
+                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
+                        ((int)obj.Position.Y) - image.Height / 2);
                     g.Dispose();
                 }
                 else if (obj is Turret)
                 {
                     Graphics g = Graphics.FromImage(result);
 
-                    Image image = RotateImage(Properties.Resources.Turret, RadianToDegree((float)obj.Direction.Angle) + 90);
+                    Image image = RotateImage(Properties.Resources.Turret, 
+                        RadianToDegree((float)obj.Direction.Angle) + 90);
 
-                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2, ((int)obj.Position.Y) - image.Height / 2);
+                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
+                        ((int)obj.Position.Y) - image.Height / 2);
+
                     g.Dispose();
                 }
             }
@@ -229,7 +254,9 @@ namespace SaveYourTower.DesktopUI
                     Image image = RotateImage(Properties.Resources.Boom,
                         RadianToDegree((float) boom.Angle));
 
-                    g.DrawImage(image, ((int)boom.Position.X) - image.Width / 2, ((int)boom.Position.Y) - image.Height / 2);
+                    g.DrawImage(image, ((int)boom.Position.X) - image.Width / 2,
+                        ((int)boom.Position.Y) - image.Height / 2);
+
                     g.Dispose();
                 }
             });
@@ -284,11 +311,11 @@ namespace SaveYourTower.DesktopUI
                 _effects.Clear();
                 _game.NextLevel();
 
-                if (_game.GameField.CurrenGameLevel == 2)
+                if (_game.GameField.CurrenGameLevel.Number == 2)
                 {
                     btnTurret.Enabled = true;
                 }
-                if (_game.GameField.CurrenGameLevel == 3)
+                if (_game.GameField.CurrenGameLevel.Number == 3)
                 {
                     btnHitAll.Enabled = true;
                     btnSlowAll.Enabled = true;
@@ -332,13 +359,15 @@ namespace SaveYourTower.DesktopUI
             bntPause.Enabled = true;
         }
 
-        private void tableLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
+        private void tblMainGameView_MouseClick(object sender, MouseEventArgs e)
         {
             if (_game != null && _game.GameStatus == Status.IsStarted)
             {
                 if (_cursorStatus == CursorStatus.Fire)
                 {
-                    Tower tower = (Tower) _game.GameField.GameObjects.Find(obj => obj is Tower);
+                    Tower tower = (Tower)_game.GameField.GameObjects.Find(obj =>
+                        obj is Tower);
+
                     GamePoint lookPoint = new GamePoint(0, 0);
                     lookPoint.X = tblMainGameView.PointToClient(MousePosition).X;
                     lookPoint.Y = tblMainGameView.PointToClient(MousePosition).Y;
@@ -352,7 +381,15 @@ namespace SaveYourTower.DesktopUI
                     turretPosision.X = tblMainGameView.PointToClient(MousePosition).X;
                     turretPosision.Y = tblMainGameView.PointToClient(MousePosition).Y;
 
-                    Turret turret = new Turret(_game.GameField, turretPosision, 17, 500, 30, 10, cost: 1);
+                    Turret turret = new Turret(
+                        _game.GameField, 
+                        turretPosision, 
+                        _game.GameField.CurrenGameLevel.TurretColliderRadius, 
+                        500, 
+                        30, 
+                        10, 
+                        cost: 10);
+
                     _game.BuyGameObject(turret);
                     this.Cursor = new Cursor((Properties.Resources.Mark).GetHicon());
 
@@ -398,9 +435,86 @@ namespace SaveYourTower.DesktopUI
             player.Play();
         }
 
-        private void tblMainGameView_Paint(object sender, PaintEventArgs e)
+        private Level[] LoadLevels()
         {
+            Level[] levels = new Level[LevelsSettings.Default.MaxLevel];
 
+            levels[0] = new Level(
+                    1,
+                    LevelsSettings.Default.IterationLatency,
+                    LevelsSettings.Default.EnemyGenerationLanency,
+                    LevelsSettings.Default.MaxLevel,
+                    LevelsSettings.Default.Level1EnemyCount,
+                    LevelsSettings.Default.Level1EnemyDamage,
+                    LevelsSettings.Default.Level1EnemyVelocity,
+                    LevelsSettings.Default.Level1EnemyLife,
+                    LevelsSettings.Default.Level1EnemyPowerRising,
+                    LevelsSettings.Default.TowerLife,
+                    LevelsSettings.Default.TowerCannonBallLifeTime,
+                    LevelsSettings.Default.TurretCannonBallLifeTime,
+                    LevelsSettings.Default.TowerCannonDamage,
+                    LevelsSettings.Default.TurretCannonDamage,
+                    LevelsSettings.Default.AllHitSpellDamage,
+                    LevelsSettings.Default.AllSlowSpellRatio,
+                    LevelsSettings.Default.AllSlowSpellDuration,
+                    LevelsSettings.Default.EnemyCollierRadius,
+                    LevelsSettings.Default.TowerColliderRadius,
+                    LevelsSettings.Default.TurretColliderRadius,
+                    LevelsSettings.Default.CannonBallColliderRadius,
+                    LevelsSettings.Default.TowerCannonBallVelosity,
+                    LevelsSettings.Default.TurretCannonBallVelosity);
+
+            levels[1] = new Level(
+                    2,
+                    LevelsSettings.Default.IterationLatency,
+                    LevelsSettings.Default.EnemyGenerationLanency,
+                    LevelsSettings.Default.MaxLevel,
+                    LevelsSettings.Default.Level2EnemyCount,
+                    LevelsSettings.Default.Level2EnemyDamage,
+                    LevelsSettings.Default.Level2EnemyVelocity,
+                    LevelsSettings.Default.Level2EnemyLife,
+                    LevelsSettings.Default.Level2EnemyPowerRising,
+                    LevelsSettings.Default.TowerLife,
+                    LevelsSettings.Default.TowerCannonBallLifeTime,
+                    LevelsSettings.Default.TurretCannonBallLifeTime,
+                    LevelsSettings.Default.TowerCannonDamage,
+                    LevelsSettings.Default.TurretCannonDamage,
+                    LevelsSettings.Default.AllHitSpellDamage,
+                    LevelsSettings.Default.AllSlowSpellRatio,
+                    LevelsSettings.Default.AllSlowSpellDuration,
+                    LevelsSettings.Default.EnemyCollierRadius,
+                    LevelsSettings.Default.TowerColliderRadius,
+                    LevelsSettings.Default.TurretColliderRadius,
+                    LevelsSettings.Default.CannonBallColliderRadius,
+                    LevelsSettings.Default.TowerCannonBallVelosity,
+                    LevelsSettings.Default.TurretCannonBallVelosity);
+
+            levels[2] = new Level(
+                    3,
+                    LevelsSettings.Default.IterationLatency,
+                    LevelsSettings.Default.EnemyGenerationLanency,
+                    LevelsSettings.Default.MaxLevel,
+                    LevelsSettings.Default.Level3EnemyCount,
+                    LevelsSettings.Default.Level3EnemyDamage,
+                    LevelsSettings.Default.Level3EnemyVelocity,
+                    LevelsSettings.Default.Level3EnemyLife,
+                    LevelsSettings.Default.Level3EnemyPowerRising,
+                    LevelsSettings.Default.TowerLife,
+                    LevelsSettings.Default.TowerCannonBallLifeTime,
+                    LevelsSettings.Default.TurretCannonBallLifeTime,
+                    LevelsSettings.Default.TowerCannonDamage,
+                    LevelsSettings.Default.TurretCannonDamage,
+                    LevelsSettings.Default.AllHitSpellDamage,
+                    LevelsSettings.Default.AllSlowSpellRatio,
+                    LevelsSettings.Default.AllSlowSpellDuration,
+                    LevelsSettings.Default.EnemyCollierRadius,
+                    LevelsSettings.Default.TowerColliderRadius,
+                    LevelsSettings.Default.TurretColliderRadius,
+                    LevelsSettings.Default.CannonBallColliderRadius,
+                    LevelsSettings.Default.TowerCannonBallVelosity,
+                    LevelsSettings.Default.TurretCannonBallVelosity);
+
+            return levels;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace GameUserElements
 {
@@ -8,7 +7,7 @@ namespace GameUserElements
     /// </summary>
     public partial class DBLayoutPanel : TableLayoutPanel
     {
-        public DBLayoutPanel() : base()
+        public DBLayoutPanel()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint |
               ControlStyles.OptimizedDoubleBuffer |

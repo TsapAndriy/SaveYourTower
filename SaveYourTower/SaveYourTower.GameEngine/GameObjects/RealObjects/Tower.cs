@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-
-using SaveYourTower.GameEngine.GameObjects.Base;
+﻿using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameLogic;
 using SaveYourTower.GameEngine.GameObjects.RealObjects.Interfaces;
@@ -31,7 +29,9 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                 0,
                 lifePoints: lifePoints)
         {
-            Collider bodyCollider = new Collider(position, colliderRaius, "BodyCollider");
+            Collider bodyCollider = 
+                new Collider(position, colliderRaius, "BodyCollider");
+
             bodyCollider.CollisionEventHandler += OnCollision;
             Colliders.Add(bodyCollider);
         } 
@@ -69,10 +69,10 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                     GameField,
                     (Point) Position.Clone(),
                     new UnitVector2(Direction.Angle),
-                    3,
-                    10,
-                    int.Parse(ConfigurationManager.AppSettings["TowerCannonDamage"]),
-                    int.Parse(ConfigurationManager.AppSettings["TowerCannonBallLifeTime"])
+                    GameField.CurrenGameLevel.CannonBallColliderRadius,
+                    GameField.CurrenGameLevel.TowerCannonBallVelosity,
+                    GameField.CurrenGameLevel.TowerCannonDamage,
+                    GameField.CurrenGameLevel.TowerCannonBallLifeTime
                     ));
             }
             _isFiring = false;

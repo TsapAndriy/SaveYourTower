@@ -76,8 +76,7 @@ namespace SaveYourTower.DesktopUI
             this.tblMainGameView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tblMainGameView.Size = new System.Drawing.Size(500, 500);
             this.tblMainGameView.TabIndex = 13;
-            this.tblMainGameView.Paint += new System.Windows.Forms.PaintEventHandler(this.tblMainGameView_Paint);
-            this.tblMainGameView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseClick);
+            this.tblMainGameView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tblMainGameView_MouseClick);
             // 
             // tblButtons
             // 
@@ -155,7 +154,7 @@ namespace SaveYourTower.DesktopUI
             this.bntNextLevel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bntNextLevel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntNextLevel.Font = new System.Drawing.Font("Agency FB", 25F, System.Drawing.FontStyle.Bold);
-            this.bntNextLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bntNextLevel.ForeColor = System.Drawing.Color.Lime;
             this.bntNextLevel.Location = new System.Drawing.Point(169, 300);
             this.bntNextLevel.Name = "bntNextLevel";
             this.bntNextLevel.Size = new System.Drawing.Size(168, 59);
@@ -172,7 +171,7 @@ namespace SaveYourTower.DesktopUI
             this.btnStartGame.FlatAppearance.BorderSize = 0;
             this.btnStartGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartGame.Font = new System.Drawing.Font("Agency FB", 25F, System.Drawing.FontStyle.Bold);
-            this.btnStartGame.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnStartGame.ForeColor = System.Drawing.Color.Lime;
             this.btnStartGame.Location = new System.Drawing.Point(169, 140);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(168, 154);
@@ -188,7 +187,7 @@ namespace SaveYourTower.DesktopUI
             this.bntExit.FlatAppearance.BorderSize = 0;
             this.bntExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntExit.Font = new System.Drawing.Font("Agency FB", 40F, System.Drawing.FontStyle.Bold);
-            this.bntExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bntExit.ForeColor = System.Drawing.Color.Lime;
             this.bntExit.Location = new System.Drawing.Point(169, 365);
             this.bntExit.Name = "bntExit";
             this.bntExit.Size = new System.Drawing.Size(168, 71);
@@ -205,7 +204,7 @@ namespace SaveYourTower.DesktopUI
             this.bntPause.FlatAppearance.BorderSize = 0;
             this.bntPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntPause.Font = new System.Drawing.Font("Agency FB", 18F, System.Drawing.FontStyle.Bold);
-            this.bntPause.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bntPause.ForeColor = System.Drawing.Color.Lime;
             this.bntPause.Location = new System.Drawing.Point(426, 3);
             this.bntPause.Name = "bntPause";
             this.bntPause.Size = new System.Drawing.Size(71, 39);

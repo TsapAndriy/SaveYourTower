@@ -43,7 +43,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
             {
                 if (gameObject is Enemy)
                 {
-                    int damage = int.Parse(ConfigurationManager.AppSettings["AllHitSpellDamage"]);
+                    int damage = GameField.CurrenGameLevel.AllHitSpellDamage;
                     gameObject.ReceiveDamage(damage);
                 }
             });

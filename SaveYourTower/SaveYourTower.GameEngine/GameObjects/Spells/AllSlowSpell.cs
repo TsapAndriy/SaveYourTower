@@ -8,7 +8,7 @@ using SaveYourTower.GameEngine.GameObjects.Spells.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects.Spells
 {
-    public class AllSlowSpell : GameObject, ISpell, ILive
+    public class AllSlowSpell : GameObject, ISpell
     {
 
         #region Properties
@@ -39,10 +39,11 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
 
         public void Cast()
         {
-            double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
+
+            double divisor = GameField.CurrenGameLevel.AllSlowSpellRatio;
             VelositiDivisor += divisor;
             IsUsed = true;
-            int interval = int.Parse(ConfigurationManager.AppSettings["AllSlowSpellDuration"]);
+            int interval = GameField.CurrenGameLevel.AllSlowSpellDuration;
             Timer timer = new Timer(interval);
             timer.AutoReset = false;
             timer.Elapsed += FinishEffect;
@@ -52,27 +53,10 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
 
         public void FinishEffect(object source, ElapsedEventArgs e)
         {
-            double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
+            double divisor = GameField.CurrenGameLevel.AllSlowSpellRatio;
             VelositiDivisor -= divisor;
             IsAlive = false;
         }
-
-        public void Live()
-        {
-            //if ((this.IsAlive) && (this.IsUsed))
-            //{
-            //    if (ReloadingTime > 0)
-            //    {
-            //        //ReloadingTime--;
-            //    }
-            //    else
-            //    {
-            //        //double divisor = double.Parse(ConfigurationManager.AppSettings["AllSlowSpellRatio"]);
-            //        //GameObject.VelositiDivisor -= divisor;
-            //        //this.IsAlive = false;
-            //    }
-            //}
-        } 
 
         #endregion
     }

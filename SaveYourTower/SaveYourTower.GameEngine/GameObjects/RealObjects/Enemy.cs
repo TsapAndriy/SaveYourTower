@@ -30,12 +30,15 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                 velosity: velosity,
                 lifePoints: lifePoints)
         {
-            Collider bodyCollider = new Collider(position, colliderRaius, "BodyCollider");
+            Collider bodyCollider = 
+                new Collider(position, colliderRaius, "BodyCollider");
+
             bodyCollider.CollisionEventHandler += OnCollision;
             Colliders.Add(bodyCollider);
             if (gameField != null)
             {
-                LookingTower = (Tower)GameField.GameObjects.Find(obj => obj is Tower);
+                LookingTower = 
+                    (Tower)GameField.GameObjects.Find(obj => obj is Tower);
             }
         } 
 

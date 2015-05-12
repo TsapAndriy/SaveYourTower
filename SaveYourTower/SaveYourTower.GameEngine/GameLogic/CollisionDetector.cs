@@ -27,7 +27,7 @@ namespace SaveYourTower.GameEngine.GameLogic
             }
         }
 
-        void CheckColliders(GameObject left, GameObject right)
+        private void CheckColliders(GameObject left, GameObject right)
         {
             foreach (Collider colliderLeft in left.Colliders)
             {
@@ -45,7 +45,7 @@ namespace SaveYourTower.GameEngine.GameLogic
             }
         }
 
-        bool CheckOnConllisions(Collider left, Collider right)
+        private bool CheckOnConllisions(Collider left, Collider right)
         {
             double distance = Distance(left.Position, right.Position) 
                 - (left.Radius + left.Radius);

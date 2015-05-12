@@ -50,6 +50,7 @@
     <Compile Include="DataContainers\UnitVector2.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObjects\Base\GameObject.cs" />
+    <Compile Include="GameObjects\Level.cs" />
     <Compile Include="GameObjects\RealObjects\CannonBall.cs" />
     <Compile Include="GameObjects\RealObjects\Enemy.cs" />
     <Compile Include="GameObjects\Interfaces\ICollisional.cs" />

@@ -12,13 +12,13 @@ namespace SaveYourTower.GameEngine.GameObjects
         public Point Size { get; private set; }
         public Score GameScore { get; private set; }
         public List<GameObject> GameObjects { get; private set; }
-        public int CurrenGameLevel { get; set; }
+        public Level CurrenGameLevel { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public Field(Point size, int gameLevel)
+        public Field(Point size, Level gameLevel)
         {
             Size = size;
             GameScore = new Score();

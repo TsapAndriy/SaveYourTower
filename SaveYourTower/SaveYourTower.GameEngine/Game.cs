@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Timers;
 
@@ -53,37 +54,39 @@ namespace SaveYourTower.GameEngine
 
         #region Properties
 
+        public Level[] Levels { get; private set; }
         public Status GameStatus { get; private set; }
         public EnemiesGenerator GameEmeniesGenerator { get; private set; }
-        public Field GameField { get; set; }
+        public Field GameField { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        public Game(Point filedSize, int gameLevel)
+        public Game(Point filedSize, Level[] levels)
         {
+            Levels = levels; 
             GameStatus = Status.IsReadyToRun;
-            GameField = new Field(filedSize, gameLevel);
+            GameField = new Field(filedSize, Levels[0]);
             
             _exitEvent = new System.Threading.ManualResetEvent(false);
             _collisionDetector = new CollisionDetector();
-            _maxLevel = int.Parse(ConfigurationManager.AppSettings["MaxLevel"]);
 
-            int gameIteraionLatency = int.Parse(ConfigurationManager.AppSettings["IterationLatency"]);
-            _gameTimer = new Timer(gameIteraionLatency);
+            _maxLevel = levels[0].MaxLevel;
+
+            _gameTimer = new Timer(levels[0].IterationLatency);
 
             _gameTimer.Elapsed += Update;
 
-            GameEmeniesGenerator = new EnemiesGenerator();
+            GameEmeniesGenerator = new EnemiesGenerator(GameField.CurrenGameLevel);
 
             GameField.AddGameObject(
                 new Tower(GameField, 
                     new Point((GameField.Size.X / 2), 
                     (GameField.Size.Y / 2)), 
                     new UnitVector2(0, 0), 
-                    10,
-                    int.Parse(ConfigurationManager.AppSettings["TowerLife"])));
+                    GameField.CurrenGameLevel.TowerColliderRadius,
+                    levels[0].TowerLife));
         }
 
         #endregion
@@ -362,33 +365,32 @@ namespace SaveYourTower.GameEngine
 
             #endregion
 
-            if (GameField.CurrenGameLevel == _maxLevel)
+            if (GameField.CurrenGameLevel.Number == _maxLevel)
             {
                 GameStatus = Status.IsWinned;
                 return;
             }
 
             GameStatus = Status.IsReadyToStart;
-            PrepareFieldToNextLevel(GameField);
-            GameEmeniesGenerator = new EnemiesGenerator();
+            PrepareFieldToNextLevel();
+            GameEmeniesGenerator = new EnemiesGenerator(GameField.CurrenGameLevel);
 
             Start();
         }
 
-        private void PrepareFieldToNextLevel(Field gameField)
+        private void PrepareFieldToNextLevel()
         {
             // Remove all except enemies and turrets.
-            gameField.GameObjects.RemoveAll(obj => !((obj is Enemy) || (obj is Turret)));
+            GameField.GameObjects.RemoveAll(obj => !((obj is Enemy) || (obj is Turret)));
 
             GameField.AddGameObject(new Tower(
                 GameField,
                 new Point((GameField.Size.X / 2), (GameField.Size.Y / 2)),
                 new UnitVector2(0, 0),
-                1,
-                int.Parse(ConfigurationManager.AppSettings["TowerLife"]))
-                );
+                GameField.CurrenGameLevel.TowerColliderRadius,
+                GameField.CurrenGameLevel.TowerLife));
 
-            GameField.CurrenGameLevel++;
+            GameField.CurrenGameLevel = Levels[GameField.CurrenGameLevel.Number];
         }
 
         private void CheckLevelWin()
@@ -396,7 +398,10 @@ namespace SaveYourTower.GameEngine
             bool enemiesNotExist = !GameField.GameObjects.Exists(obj => obj is Enemy);
             bool towerLive = GameField.GameObjects.Exists(obj => obj is Tower);
 
-            if (towerLive && enemiesNotExist && GameEmeniesGenerator.EnemiesAreEnded && GameStatus != Status.IsWinned)
+            if (towerLive 
+                && enemiesNotExist 
+                && GameEmeniesGenerator.EnemiesAreEnded 
+                && GameStatus != Status.IsWinned)
             {
                 GameStatus = Status.IsWinnedLevel;
 

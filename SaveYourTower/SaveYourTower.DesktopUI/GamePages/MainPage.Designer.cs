@@ -74,7 +74,7 @@ namespace SaveYourTower.DesktopUI
             this.btnHelp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHelp.Font = new System.Drawing.Font("Agency FB", 27.75F, System.Drawing.FontStyle.Bold);
-            this.btnHelp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnHelp.ForeColor = System.Drawing.Color.Lime;
             this.btnHelp.Location = new System.Drawing.Point(127, 249);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(244, 64);
@@ -89,7 +89,7 @@ namespace SaveYourTower.DesktopUI
             this.btnExit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Agency FB", 28F, System.Drawing.FontStyle.Bold);
-            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnExit.ForeColor = System.Drawing.Color.Lime;
             this.btnExit.Location = new System.Drawing.Point(127, 379);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(244, 59);
@@ -104,7 +104,7 @@ namespace SaveYourTower.DesktopUI
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Agency FB", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnStart.ForeColor = System.Drawing.Color.Lime;
             this.btnStart.Location = new System.Drawing.Point(127, 179);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(244, 64);
@@ -119,7 +119,7 @@ namespace SaveYourTower.DesktopUI
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Agency FB", 35F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label1.ForeColor = System.Drawing.Color.Lime;
             this.label1.Location = new System.Drawing.Point(127, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(244, 148);
@@ -133,7 +133,7 @@ namespace SaveYourTower.DesktopUI
             this.btnSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Font = new System.Drawing.Font("Agency FB", 27.75F, System.Drawing.FontStyle.Bold);
-            this.btnSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnSettings.ForeColor = System.Drawing.Color.Lime;
             this.btnSettings.Location = new System.Drawing.Point(127, 319);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(244, 54);

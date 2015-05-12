@@ -44,11 +44,15 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                 lifePoints: lifePoints,
                 cost: cost)
         {
-            Collider findingCollider = new Collider(position, findingColliderRadius, "FindingCollider");
+            Collider findingCollider = 
+                new Collider(position, findingColliderRadius, "FindingCollider");
+
             findingCollider.CollisionEventHandler += OnCollision;
             Colliders.Add(findingCollider);
 
-            Collider bodyCollider = new Collider(position, bodyColliderRaius, "BodyCollider");
+            Collider bodyCollider = 
+                new Collider(position, bodyColliderRaius, "BodyCollider");
+
             bodyCollider.CollisionEventHandler += OnCollision;
             Colliders.Add(bodyCollider);
 
@@ -71,10 +75,11 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                     GameField.AddGameObject(new CannonBall(
                         GameField,
                         (Point) Position.Clone(),
-                        new UnitVector2(Direction.Angle), 1,
-                        5,
-                        int.Parse(ConfigurationManager.AppSettings["TTurretCannonDamage"]),
-                        int.Parse(ConfigurationManager.AppSettings["TTurretCannonBallLifeTime"])
+                        new UnitVector2(Direction.Angle),
+                        GameField.CurrenGameLevel.CannonBallColliderRadius,
+                        GameField.CurrenGameLevel.TurretCannonBallVelosity,
+                        GameField.CurrenGameLevel.TurretCannonDamage,
+                        GameField.CurrenGameLevel.TurretCannonBallLifeTime
                         ));
                 }
             }
@@ -83,7 +88,8 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                 _hasTarget = false;
             }
 
-            _fireCounter = (_fireCounter < FireSpeedDivisor) ? (_fireCounter + 1) : 0;
+            _fireCounter = 
+                (_fireCounter < FireSpeedDivisor) ? (_fireCounter + 1) : 0;
         }
         
         public void OnCollision(object sender, CollisionEventArgs e)
@@ -130,7 +136,8 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
 
         public void RemoveOutOfRangeTargets()
         {
-            _targets.RemoveAll(obj => FindingColliderRadius < (int)Distance(Position, obj.Position));
+            _targets.RemoveAll(obj => 
+                FindingColliderRadius < (int)Distance(Position, obj.Position));
         }
 
         public void RandomTarget()

@@ -38,7 +38,11 @@ namespace SaveYourTower.DesktopUI.GamePages
         {
             if (_helpImages != null)
             {
-                _helpIndex = _helpIndex < _helpImages.Length-1 ? _helpIndex + 1 : 0; 
+                _helpIndex = 
+                    _helpIndex < _helpImages.Length-1 
+                    ? _helpIndex + 1 
+                    : 0; 
+
                 pbHelpView.Image = (Image) _helpImages.GetValue(_helpIndex);
             }
         }
@@ -48,7 +52,11 @@ namespace SaveYourTower.DesktopUI.GamePages
 
             if (_helpImages != null)
             {
-                _helpIndex = _helpIndex > 0 ? _helpIndex - 1 : _helpImages.Length - 1; 
+                _helpIndex = 
+                     _helpIndex > 0 
+                    ? _helpIndex - 1 
+                    : _helpImages.Length - 1; 
+
                 pbHelpView.Image = (Image)_helpImages.GetValue(_helpIndex);
             }
         }

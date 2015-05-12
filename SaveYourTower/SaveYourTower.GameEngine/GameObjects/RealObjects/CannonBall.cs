@@ -35,7 +35,9 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
         {
             _timeToLive = timeToLive;
 
-            Collider bodyCollider = new Collider(position, colliderRaius, "BodyCollider");
+            Collider bodyCollider = 
+                new Collider(position, colliderRaius, "BodyCollider");
+
             bodyCollider.CollisionEventHandler += OnCollision;
             Colliders.Add(bodyCollider);
         } 
@@ -48,7 +50,9 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
         {
             GameObject gameObject = sender as GameObject;
 
-            if ((gameObject is Enemy) && (e.OtherCollider.Tag == "BodyCollider") && (e.MyCollider.Tag == "BodyCollider"))
+            if ((gameObject is Enemy) 
+                && (e.OtherCollider.Tag == "BodyCollider") 
+                && (e.MyCollider.Tag == "BodyCollider"))
             {
                 IsAlive = false;
             }
