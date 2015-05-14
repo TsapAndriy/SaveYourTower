@@ -36,7 +36,7 @@ namespace SaveYourTower.GameEngine.Test.DataContainers
             magnitude = Math.Round(magnitude, 3);
 
             Assert.IsTrue(magnitude == 1);
-            Assert.IsTrue(Math.Round((vector.X / vector.Y), 3) == Math.Round((5d / 10d), 3));         
+            Assert.IsTrue(Math.Round((vector.X / vector.Y), 3) == Math.Round((5d / 10d), 3));
         }
 
         [TestMethod]
@@ -62,5 +62,36 @@ namespace SaveYourTower.GameEngine.Test.DataContainers
             Assert.AreNotSame(vector1, vector2);
             Assert.IsTrue(vector1.Equals(vector2));
         }
+
+        [TestMethod]
+        public void TestEquals()
+        {
+            UnitVector2 vector1 = new UnitVector2(1);
+            UnitVector2 vector2 = new UnitVector2(1);
+
+            Assert.IsTrue(vector1.Equals(vector2));
+
+            vector1 = new UnitVector2(1);
+            vector2 = new UnitVector2(2);
+
+            Assert.IsFalse(vector1.Equals(vector2));
+        }
+
+        [TestMethod]
+        public void TestGetHashCode()
+        {
+            UnitVector2 vector1 = new UnitVector2(1);
+            UnitVector2 vector2 = new UnitVector2(1);
+
+            Assert.IsTrue(vector1.GetHashCode() == vector2.GetHashCode());
+
+            vector1 = new UnitVector2(1);
+            vector2 = new UnitVector2(2);
+
+            Assert.IsFalse(vector1.GetHashCode() == vector2.GetHashCode());
+
+        }
+
+
     }
 }

@@ -6,46 +6,46 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="EnemyGenerationLanency" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="MaxLevel" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="Level1EnemyCount" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">25</Value>
     </Setting>
     <Setting Name="Level2EnemyCount" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="Level3EnemyCount" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5000</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="Level1EnemyDamage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="Level2EnemyDamage" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="Level3EnemyDamage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">99</Value>
     </Setting>
     <Setting Name="Level1EnemyVelocity" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="Level2EnemyVelocity" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">2</Value>
+      <Value Profile="(Default)">7</Value>
     </Setting>
     <Setting Name="Level3EnemyVelocity" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="Level1EnemyLife" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="Level2EnemyLife" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="Level3EnemyLife" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="Level1EnemyPowerRising" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
@@ -66,10 +66,10 @@
       <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="TowerCannonDamage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="TurretCannonDamage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">9</Value>
     </Setting>
     <Setting Name="AllHitSpellDamage" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
@@ -93,10 +93,10 @@
       <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="TowerCannonBallVelosity" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="TurretCannonBallVelosity" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">25</Value>
     </Setting>
   </Settings>
 </SettingsFile>

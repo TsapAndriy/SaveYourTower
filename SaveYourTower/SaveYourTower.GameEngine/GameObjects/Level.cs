@@ -8,20 +8,17 @@ namespace SaveYourTower.GameEngine.GameObjects
 {
     public class Level
     {
+        #region Properties
+
         public int Number { get; private set; }
         public int IterationLatency { get; private set; }
         public int EnemyGenerationLanency { get; private set; }
-
         public int MaxLevel { get; private set; }
 
         public int EnemyCount { get; private set; }
-
         public int EnemyDamage { get; private set; }
-
         public double EnemyVelocity { get; private set; }
-
         public int EnemyLife { get; private set; }
-
         public double EnemyPowerRising { get; private set; }
 
         public int TowerLife { get; private set; }
@@ -41,36 +38,40 @@ namespace SaveYourTower.GameEngine.GameObjects
         public int TurretColliderRadius { get; private set; }
         public int CannonBallColliderRadius { get; private set; }
         public double TowerCannonBallVelosity { get; private set; }
-        public double TurretCannonBallVelosity { get; private set; }
+        public double TurretCannonBallVelosity { get; private set; } 
+
+        #endregion
+
+        #region Constructors
 
         public Level(
-                int number,
-                int iterationLatency,
-                int enemyGenerationLanency,
-                int maxLevel,
-                int enemyCount,
-                int enemyDamage,
-                double enemyVelocity,
-                int enemyLife,
-                double enemyPowerRising,
-                int towerLife,
-                int towerCannonBallLifeTime,
-                int turretCannonBallLifeTime,
-                int towerCannonDamage,
-                int turretCannonDamage,
-                int allHitSpellDamage,
-                int allSlowSpellRatio,
-                int allSlowSpellDuration,
-                int enemyColliderRadius,
-                int towerColliderRadius,
-                int turretColliderRadius,
-                int cannonBallColliderRadius,
-                double towerCannonBallVelosity,
-                double turretCannonBallVelosity)
+        int number = 1,
+        int iterationLatency = 20,
+        int enemyGenerationLanency = 0,
+        int maxLevel = 1,
+        int enemyCount = 1,
+        int enemyDamage = 1,
+        double enemyVelocity = 1,
+        int enemyLife = 1,
+        double enemyPowerRising = 0,
+        int towerLife = 1,
+        int towerCannonBallLifeTime = 1,
+        int turretCannonBallLifeTime = 1,
+        int towerCannonDamage = 1,
+        int turretCannonDamage = 1,
+        int allHitSpellDamage = 1,
+        int allSlowSpellRatio = 1,
+        int allSlowSpellDuration = 1,
+        int enemyColliderRadius = 1,
+        int towerColliderRadius = 1,
+        int turretColliderRadius = 1,
+        int cannonBallColliderRadius = 1,
+        double towerCannonBallVelosity = 10,
+        double turretCannonBallVelosity = 10)
         {
             Number = number;
             IterationLatency = iterationLatency;
-            EnemyGenerationLanency = enemyGenerationLanency;  
+            EnemyGenerationLanency = enemyGenerationLanency;
             MaxLevel = maxLevel;
             EnemyCount = enemyCount;
             EnemyDamage = enemyDamage;
@@ -91,22 +92,8 @@ namespace SaveYourTower.GameEngine.GameObjects
             CannonBallColliderRadius = cannonBallColliderRadius;
             TowerCannonBallVelosity = towerCannonBallVelosity;
             TurretCannonBallVelosity = turretCannonBallVelosity;
-        }
+        } 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #endregion
     }
 }

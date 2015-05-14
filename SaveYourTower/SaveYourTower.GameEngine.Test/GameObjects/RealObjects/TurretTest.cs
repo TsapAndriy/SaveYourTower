@@ -17,7 +17,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestConstructor()
         {
-            Field field = new Field(new Point(10, 10), 1);
+            Field field = new Field(new Point(10, 10), new Level());
             Point position = new Point(1, 1);
             GameObject turret = new Turret(field, position, 1, 5, 1, 2);
 
@@ -25,8 +25,8 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             Assert.AreSame(field, turret.GameField);
             Assert.AreSame(position, turret.Position);
 
-            Assert.IsNotNull(turret.Colliders.Find( obj => { return (obj.Radius == 1); }));
-            Assert.IsNotNull(turret.Colliders.Find( obj => { return (obj.Radius == 5); }));
+            Assert.IsNotNull(turret.Colliders.Find(obj => { return (obj.Radius == 1); }));
+            Assert.IsNotNull(turret.Colliders.Find(obj => { return (obj.Radius == 5); }));
             Assert.AreEqual(2, turret.Colliders.Count);
             Assert.AreEqual(1, turret.LifePoints);
         }
@@ -34,8 +34,8 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestOnCollision()
         {
-            Field field = new Field(new Point(10, 10), 1);
-            Turret turret = new Turret(field, new Point(1, 5), 1, 5, 1, 2);
+            Field field = new Field(new Point(10, 10), new Level());
+            Turret turret = new Turret(field, new Point(1, 5), 1, 10, lifePoints:2);
             Enemy enemy = new Enemy(field, new Point(1, 2), 1, 1, 1, 1);
 
             field.AddGameObject(turret);
@@ -58,7 +58,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestFire()
         {
-            Field field = new Field(new Point(10, 10), 1);
+            Field field = new Field(new Point(10, 10), new Level());
             Turret turret = new Turret(field, new Point(1, 5), 1, 5, 1, 0);
             Enemy enemy = new Enemy(field, new Point(1, 2), 1, 1, 1, 1);
 
@@ -82,7 +82,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestLive()
         {
-            Field field = new Field(new Point(10, 10), 1);
+            Field field = new Field(new Point(10, 10), new Level());
             Turret turret = new Turret(field, new Point(1, 5), 1, 5, 1, 0);
             Enemy enemy = new Enemy(field, new Point(1, 2), 1, 1, 1, 1);
 

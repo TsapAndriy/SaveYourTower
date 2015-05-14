@@ -36,12 +36,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(484, 481);
             this.DoubleBuffered = true;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 520);
             this.Name = "SaveYourTowerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SaveYourTower";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaveYourTowerForm_KeyDown);
             this.ResumeLayout(false);
 
         }

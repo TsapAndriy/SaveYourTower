@@ -53,7 +53,7 @@ namespace SaveYourTower.GameEngine.GameLogic
             return (distance <= 0);
         }
 
-        public double Distance(Point left, Point right)
+        private double Distance(Point left, Point right)
         {
             return Math.Sqrt(Math.Pow((left.X - right.X), 2)
                 + Math.Pow((left.Y - right.Y), 2));

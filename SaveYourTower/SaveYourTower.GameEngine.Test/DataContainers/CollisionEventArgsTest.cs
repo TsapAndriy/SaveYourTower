@@ -7,13 +7,13 @@ using SaveYourTower.GameEngine.GameLogic;
 namespace SaveYourTower.GameEngine.Test.DataContainers
 {
     [TestClass]
-    public  class CollisionEventArgsTest
+    public class CollisionEventArgsTest
     {
         [TestMethod]
         public void TestConstructor()
-        { 
-            Collider collider1 = new Collider(new Point(1,1), 1, "Body");
-            Collider collider2 = new Collider(new Point(3,3), 2, "Finding");
+        {
+            Collider collider1 = new Collider(new Point(1, 1), 1, "Body");
+            Collider collider2 = new Collider(new Point(3, 3), 2, "Finding");
             CollisionEventArgs e = new CollisionEventArgs(collider1, collider2);
 
             Assert.AreSame(e.MyCollider, collider1);

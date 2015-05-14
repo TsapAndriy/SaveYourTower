@@ -50,6 +50,7 @@
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseEnter += new System.EventHandler(this.btnExit_MouseEnter);
             // 
             // label1
             // 
@@ -104,6 +105,7 @@
             this.btnStart.Text = "Try again";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.button1_Click);
+            this.btnStart.MouseEnter += new System.EventHandler(this.btnStart_MouseEnter);
             // 
             // LosePage
             // 

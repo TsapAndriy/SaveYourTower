@@ -8,7 +8,6 @@ namespace SaveYourTower.DesktopUI
 {
     public partial class SaveYourTowerForm : Form
     {
-
         public SaveYourTowerForm()
         {
             InitializeComponent();
@@ -39,6 +38,11 @@ namespace SaveYourTower.DesktopUI
                 control.Parent = this;
                 this.Controls.Add(control);
             }
+        }
+
+        private void SaveYourTowerForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            
         }
     }
 }

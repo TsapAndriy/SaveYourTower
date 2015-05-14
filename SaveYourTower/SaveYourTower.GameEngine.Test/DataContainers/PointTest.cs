@@ -67,6 +67,21 @@ namespace SaveYourTower.GameEngine.Test.DataContainers
 
             Assert.IsFalse(point1.Equals(point2));
         }
+
+        [TestMethod]
+        public void TestGetHashCode()
+        {
+            Point point1 = new Point(10, 13);
+            Point point2 = new Point(10, 13);
+
+            Assert.IsTrue(point1.GetHashCode() == point2.GetHashCode());
+
+            point1 = new Point(0, 0);
+            point2 = new Point(10, 13);
+
+            Assert.IsFalse(point1.GetHashCode() == point2.GetHashCode());
+
+        }
     }
 }
 

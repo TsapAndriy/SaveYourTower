@@ -15,8 +15,8 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestConstructor()
         {
-            
-            Field field = new Field(new Point(10, 10), 1);
+
+            Field field = new Field(new Point(10, 10), null);
             Point position = new Point(1, 1);
             UnitVector2 direction = new UnitVector2(0);
             Tower tower = new Tower(field, position, direction, 2, 10);
@@ -31,7 +31,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestFire()
         {
-            Field field = new Field(new Point(10, 10), 1);
+            Field field = new Field(new Point(10, 10), new Level());
             Point position = new Point(1, 1);
             UnitVector2 direction = new UnitVector2(0);
             Tower tower = new Tower(field, position, direction, 2, 10);
@@ -51,26 +51,25 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestOnCollision()
         {
-            Field field = new Field(new Point(10, 10), 1);
+            Field field = new Field(new Point(10, 10), new Level());
             GameObject tower = new Tower(field, new Point(1, 1), null, 2, 10);
-            GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
+            GameObject enemy = new Enemy(field, new Point(1, 2));
 
             field.AddGameObject(tower);
             field.AddGameObject(enemy);
 
             CollisionDetector collisionDetector = new CollisionDetector();
-
             collisionDetector.FindCollisions(field);
 
-            Assert.AreEqual(9, tower.LifePoints);
+            Assert.AreEqual(8, tower.LifePoints);
         }
 
         [TestMethod]
         public void TestOnCollisionDeath()
         {
-            Field field = new Field(new Point(10, 10), 1);
-            GameObject tower = new Tower(field, new Point(1, 1), null, 2, 1);
-            GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
+            Field field = new Field(new Point(10, 10), new Level());
+            GameObject tower = new Tower(field, new Point(1, 1), null, 2, 2);
+            GameObject enemy = new Enemy(field, new Point(1, 2));
 
             field.AddGameObject(tower);
             field.AddGameObject(enemy);
@@ -81,16 +80,24 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             Assert.IsFalse(tower.IsAlive);
             Assert.AreEqual(0, tower.LifePoints);
         }
+
         [TestMethod]
         public void TestLive()
         {
-            Tower tower = new Tower(null, null, null, 0, 0);
-            //tower.Live();
-            Assert.IsNull(tower.GameField);
-            Assert.IsNull(tower.Position);
-            Assert.AreEqual(0, tower.Colliders.ToArray()[0].Radius);
-            Assert.AreEqual(0, tower.Velosity);
-            Assert.IsTrue(tower.IsAlive);
+            Field field = new Field(new Point(10, 10), new Level());
+            Point position = new Point(1, 1);
+            UnitVector2 direction = new UnitVector2(0);
+            Tower tower = new Tower(field, position, direction, 2, 10);
+
+            tower.Live();
+
+            Assert.IsNull(tower.GameField.GameObjects.Find(obj => { return (obj is CannonBall); }));
+
+            tower.Fire();
+            tower.Live();
+
+            Assert.IsNotNull(tower.GameField.GameObjects.Find(obj => { return (obj is CannonBall); }));
+            Assert.AreEqual(1, field.GameObjects.Count);
         }
     }
 }

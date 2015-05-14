@@ -188,19 +188,11 @@ namespace SaveYourTower.ConsoleUI
                     }
                     break;
                 case ConsoleKey.D4:
-                    AllSlowSpell allSlowSpell = new AllSlowSpell(game.GameField, 100, 10);
+                    AllSlowSpell allSlowSpell = new AllSlowSpell(game.GameField, 10);
                     if (game.BuyGameObject(allSlowSpell) == BuingStatus.Success)
                     {
                         allSlowSpell.Cast();
                     }
-                    break;
-                case ConsoleKey.D:
-                    Point objectPosition = AskPosition(game.GameField);
-                    GameObject gameObject = game.GameField.GameObjects.Find(obj =>
-                    {
-                        return (obj.Position.Equals(objectPosition));
-                    });
-                    game.SaleGameObject(gameObject);
                     break;
             }
         }

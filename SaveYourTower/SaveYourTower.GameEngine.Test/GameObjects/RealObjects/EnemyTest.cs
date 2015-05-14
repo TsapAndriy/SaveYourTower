@@ -16,9 +16,9 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestConstructor()
         {
-            Field field = new Field(new Point(10, 10), 1);
+            Field field = new Field(new Point(10, 10), null);
 
-            Point position = new Point(1,1);
+            Point position = new Point(1, 1);
 
             Enemy enemy = new Enemy(field, position, 1, 2, 3, 4);
 
@@ -34,7 +34,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         public void TestOnCollisionWithCannonBall()
         {
 
-            Field field = new Field(new Point(10, 10), 1);
+            Field field = new Field(new Point(10, 10), null);
             CannonBall cannonBall = new CannonBall(field, new Point(1, 1), new UnitVector2(90), 2, 1, 1, 10);
 
             GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
@@ -53,7 +53,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         public void TestOnCollisionWithTower()
         {
 
-            Field field = new Field(new Point(10, 10), 1);
+            Field field = new Field(new Point(10, 10), null);
             Tower tower = new Tower(field, new Point(1, 1), null, 2, 10);
             GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
 
@@ -70,42 +70,33 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         public void TestOnCollisionWithTurret()
         {
 
-            Field field = new Field(new Point(10, 10), 1);
-            Turret turret = new Turret(field, new Point(1, 1), 1, 5, 10);
-            GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
+            Field field = new Field(new Point(10, 10), null);
 
+            Tower tower = new Tower(field, new Point(9, 9), null, 1, 5);
+            field.AddGameObject(tower);
+
+            Turret turret = new Turret(field, new Point(1, 1), 1, 5, 10);
             field.AddGameObject(turret);
+
+            Enemy enemy = new Enemy(field, new Point(1, 2), damage: 1000);
             field.AddGameObject(enemy);
 
-            CollisionDetector collisionDetector = new CollisionDetector();
-            collisionDetector.FindCollisions(field);
-
-            Assert.IsFalse(enemy.IsAlive);
-        }
-
-        [TestMethod]
-        public void TestOnCollisionWithMine()
-        {
-            Field field = new Field(new Point(10, 10), 1);
-
-            GameObject enemyBodyKilled = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
-            GameObject enemyExplosionKilled = new Enemy(field, new Point(9, 9), 2, 1, 1, 1);
-
-            field.AddGameObject(enemyBodyKilled);
-            field.AddGameObject(enemyExplosionKilled);
 
             CollisionDetector collisionDetector = new CollisionDetector();
             collisionDetector.FindCollisions(field);
 
-            Assert.IsFalse(enemyBodyKilled.IsAlive);
-            Assert.IsFalse(enemyExplosionKilled.IsAlive);
+            turret.Live();
+            enemy.Live();
+
+            Assert.IsFalse(turret.IsAlive);
+            Assert.IsTrue(enemy.IsAlive);
         }
 
         [TestMethod]
         public void TestLookAtPoint()
         {
-            Field field = new Field(new Point(10, 10), 1);
-            GameObject enemy = new Enemy(field, new Point(1, 1), 1, 1, 1, 1);
+            Field field = new Field(new Point(10, 10), null);
+            Enemy enemy = new Enemy(field, new Point(1, 1), 1, 1, 1, 1);
 
             enemy.LookAt(new Point(1, 2));
             Assert.AreEqual(Math.Round((90d * Math.PI / 180), 3), Math.Round(enemy.Direction.Angle, 3));
@@ -117,9 +108,11 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestLive()
         {
-            Game game = new Game(new Point(10, 10), 1);
+            Level[] level = {new Level()};
+            Game game = new Game(new Point(10, 10), level);
+
             Point position = new Point(1, 1);
-            Enemy enemy = new Enemy(game.GameField, position, 1, 1, 1, 1 );
+            Enemy enemy = new Enemy(game.GameField, position, 1, 1, 1, 1);
             Point oldPosition = (Point)enemy.Position.Clone();
             UnitVector2 oldDirection = (UnitVector2)enemy.Direction.Clone();
 
@@ -130,6 +123,18 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
 
             Assert.IsFalse(position.Equals(oldPosition));
             Assert.IsFalse(enemy.Direction.Equals(oldDirection));
+        }
+
+        [TestMethod]
+        public void TestLiveDIe()
+        {
+            Field gameField = new Field(new Point(10, 10), new Level());
+            Enemy enemy = new Enemy(gameField, new Point(1, 1));
+
+            enemy.ReceiveDamage(100000);
+            enemy.Live();
+
+            Assert.IsFalse(enemy.IsAlive);
         }
     }
 }

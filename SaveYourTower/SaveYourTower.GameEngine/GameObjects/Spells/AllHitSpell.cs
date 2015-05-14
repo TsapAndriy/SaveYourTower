@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-
-using SaveYourTower.GameEngine.DataContainers;
+﻿using SaveYourTower.GameEngine.DataContainers;
 using SaveYourTower.GameEngine.GameObjects.RealObjects;
 using SaveYourTower.GameEngine.GameObjects.Base;
 using SaveYourTower.GameEngine.GameObjects.Interfaces;

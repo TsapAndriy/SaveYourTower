@@ -98,6 +98,7 @@
             this.btnPrevHelpPage.Text = "<";
             this.btnPrevHelpPage.UseVisualStyleBackColor = true;
             this.btnPrevHelpPage.Click += new System.EventHandler(this.btnPrevHelpPage_Click);
+            this.btnPrevHelpPage.MouseEnter += new System.EventHandler(this.btnPrevHelpPage_MouseEnter);
             // 
             // dbLayoutPanel3
             // 
@@ -127,6 +128,7 @@
             this.btnNextHelpPage.Text = ">";
             this.btnNextHelpPage.UseVisualStyleBackColor = true;
             this.btnNextHelpPage.Click += new System.EventHandler(this.btnNextHelpPage_Click);
+            this.btnNextHelpPage.MouseEnter += new System.EventHandler(this.btnNextHelpPage_MouseEnter);
             // 
             // dbLayoutPanel4
             // 
@@ -157,6 +159,7 @@
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnBack.MouseEnter += new System.EventHandler(this.btnBack_MouseEnter);
             // 
             // dbLayoutPanel5
             // 

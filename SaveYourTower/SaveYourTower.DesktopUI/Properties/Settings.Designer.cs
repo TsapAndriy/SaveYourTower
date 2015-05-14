@@ -25,7 +25,7 @@ namespace SaveYourTower.DesktopUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FullScreen {
             get {
                 return ((bool)(this["FullScreen"]));

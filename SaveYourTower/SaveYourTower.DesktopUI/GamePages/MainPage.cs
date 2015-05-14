@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Windows.Forms;
 
 using SaveYourTower.DesktopUI.GamePages;
@@ -37,6 +38,30 @@ namespace SaveYourTower.DesktopUI
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnStart_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnHelp_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnSettings_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnExit_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
         }
     }
 }

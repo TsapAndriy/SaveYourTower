@@ -60,15 +60,14 @@ namespace SaveYourTower.GameEngine.DataContainers
         public override bool Equals(object obj)
         {
             UnitVector2 vector = obj as UnitVector2;
+            bool equals = false;
+
             if (vector != null)
             {
-                return (X.Equals(((UnitVector2)obj).X))
-                       && (Y.Equals(((UnitVector2)obj).Y));
+                equals = X.Equals(vector.X) && Y.Equals(vector.Y);
             }
-            else
-            {
-                return false;
-            }
+
+            return equals;
         }
 
         public override int GetHashCode()

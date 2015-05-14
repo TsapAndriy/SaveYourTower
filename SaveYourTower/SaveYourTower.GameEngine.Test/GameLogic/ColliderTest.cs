@@ -32,7 +32,7 @@ namespace SaveYourTower.GameEngine.Test.GameLogic
             Enemy enemy = new Enemy(null, null, 1, 1, 1, 1);
             CollisionEventArgs e = new CollisionEventArgs(cannonBall.Colliders.ToArray()[0], enemy.Colliders.ToArray()[0]);
 
-            cannonBall.Colliders.ForEach( obj => obj.RaiseCollisionEvent(enemy, e));
+            cannonBall.Colliders.ForEach(obj => obj.RaiseCollisionEvent(enemy, e));
 
             Assert.IsFalse(cannonBall.IsAlive);
         }

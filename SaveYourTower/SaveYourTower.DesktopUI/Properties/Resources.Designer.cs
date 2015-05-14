@@ -63,9 +63,9 @@ namespace SaveYourTower.DesktopUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Beem {
+        internal static System.IO.UnmanagedMemoryStream BeemSound {
             get {
-                return ResourceManager.GetStream("Beem", resourceCulture);
+                return ResourceManager.GetStream("BeemSound", resourceCulture);
             }
         }
         
@@ -102,6 +102,16 @@ namespace SaveYourTower.DesktopUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CannonBallBoom {
+            get {
+                object obj = ResourceManager.GetObject("CannonBallBoom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Enemy {
             get {
                 object obj = ResourceManager.GetObject("Enemy", resourceCulture);
@@ -110,11 +120,31 @@ namespace SaveYourTower.DesktopUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnemyBoom {
+            get {
+                object obj = ResourceManager.GetObject("EnemyBoom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnemyBoss {
+            get {
+                object obj = ResourceManager.GetObject("EnemyBoss", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Explosion {
+        internal static System.IO.UnmanagedMemoryStream EnemyExplosionSound {
             get {
-                return ResourceManager.GetStream("Explosion", resourceCulture);
+                return ResourceManager.GetStream("EnemyExplosionSound", resourceCulture);
             }
         }
         
@@ -189,6 +219,35 @@ namespace SaveYourTower.DesktopUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream HitAllSound {
+            get {
+                return ResourceManager.GetStream("HitAllSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Icon {
+            get {
+                object obj = ResourceManager.GetObject("Icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MainIcon {
+            get {
+                object obj = ResourceManager.GetObject("MainIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Mark {
@@ -199,12 +258,30 @@ namespace SaveYourTower.DesktopUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream SelectSound {
+            get {
+                return ResourceManager.GetStream("SelectSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap SlowAll {
             get {
                 object obj = ResourceManager.GetObject("SlowAll", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream SlowAllSound {
+            get {
+                return ResourceManager.GetStream("SlowAllSound", resourceCulture);
             }
         }
         
@@ -225,6 +302,15 @@ namespace SaveYourTower.DesktopUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("Turret", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream TurretExplosionSound {
+            get {
+                return ResourceManager.GetStream("TurretExplosionSound", resourceCulture);
             }
         }
     }

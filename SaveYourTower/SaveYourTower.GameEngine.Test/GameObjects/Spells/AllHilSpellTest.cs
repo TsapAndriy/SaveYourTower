@@ -18,7 +18,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
         [TestMethod]
         public void TestConsturtor()
         {
-            Field gameField = new Field(new Point(10, 10), 1);
+            Field gameField = new Field(new Point(10, 10), null);
             AllHilSpell spell = new AllHilSpell(gameField, 5, 1);
 
             Assert.IsNotNull(spell);
@@ -29,23 +29,17 @@ namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
         [TestMethod]
         public void TestCast()
         {
-            Field gameField = new Field(new Point(10, 10), 1);
+            Level level = new Level();
+            Field gameField = new Field(new Point(10, 10), level);
             AllHilSpell spell = new AllHilSpell(gameField, 5, 1);
 
-            gameField.GameObjects.Add(new Enemy(
-                null,
-                null,
-                0,
-                0,
-                0,
-                int.Parse(ConfigurationManager.AppSettings["Level1EnemyLife"])
-                ));
+            gameField.GameObjects.Add(new Enemy(null, null));
 
             spell.Cast();
 
             Enemy enemy = (Enemy)gameField.GameObjects.Find(obj => obj is Enemy);
-            int damageResult = int.Parse(ConfigurationManager.AppSettings["Level1EnemyLife"])
-                - int.Parse(ConfigurationManager.AppSettings["AllHitSpellDamage"]);
+            int damageResult = 1 - level.AllHitSpellDamage;
+
 
             Assert.IsTrue(spell.IsUsed);
             Assert.AreEqual(damageResult, enemy.LifePoints);
@@ -54,7 +48,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
         [TestMethod]
         public void Live()
         {
-            Field gameField = new Field(new Point(10, 10), 1);
+            Field gameField = new Field(new Point(10, 10), new Level());
             AllHilSpell spell = new AllHilSpell(gameField, 1, 1);
 
             spell.Cast();
@@ -62,7 +56,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
             spell.Live();
             Assert.IsTrue(spell.IsAlive);
             Assert.AreEqual(0, spell.ReloadingTime);
-            
+
             spell.Live();
             Assert.IsFalse(spell.IsAlive);
             Assert.AreEqual(0, spell.ReloadingTime);

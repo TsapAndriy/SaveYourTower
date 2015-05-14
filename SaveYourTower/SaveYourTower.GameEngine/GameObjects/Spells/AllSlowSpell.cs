@@ -22,7 +22,6 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
 
         public AllSlowSpell(
            Field gameField,
-           int reloadingTime,
            int cost = int.MaxValue)
             : base(
                 gameField,
@@ -30,7 +29,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
                 colliderRaius: 0,
                 cost: cost)
         {
-            ReloadingTime = reloadingTime;
+            ReloadingTime = GameField.CurrenGameLevel.AllSlowSpellDuration; ;
         } 
 
         #endregion
@@ -39,19 +38,17 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
 
         public void Cast()
         {
-
             double divisor = GameField.CurrenGameLevel.AllSlowSpellRatio;
             VelositiDivisor += divisor;
             IsUsed = true;
-            int interval = GameField.CurrenGameLevel.AllSlowSpellDuration;
-            Timer timer = new Timer(interval);
+            Timer timer = new Timer(ReloadingTime);
             timer.AutoReset = false;
             timer.Elapsed += FinishEffect;
             timer.Enabled = true;
             timer.Start();
         }
 
-        public void FinishEffect(object source, ElapsedEventArgs e)
+        private void FinishEffect(object source, ElapsedEventArgs e)
         {
             double divisor = GameField.CurrenGameLevel.AllSlowSpellRatio;
             VelositiDivisor -= divisor;

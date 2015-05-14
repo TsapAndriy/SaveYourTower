@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Windows.Forms;
 
 
@@ -65,6 +66,30 @@ namespace SaveYourTower.DesktopUI.GamePages
                 : 10;
 
             lblDifficulty.Text = Properties.Settings.Default.Difficulty.ToString();
+        }
+
+        private void btnExit_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void lblFullScreen_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void lblNextDifficulty_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void lblPrevDifficulty_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
         }
     }
 }

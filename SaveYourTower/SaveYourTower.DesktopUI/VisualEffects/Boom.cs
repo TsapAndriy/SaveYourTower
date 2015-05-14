@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Drawing;
 using System.Timers;
-
-using SaveYourTower.GameEngine.DataContainers;
+using Point = SaveYourTower.GameEngine.DataContainers.Point;
 
 namespace SaveYourTower.DesktopUI.VisualEffects
 {
@@ -11,12 +11,12 @@ namespace SaveYourTower.DesktopUI.VisualEffects
 
         private double _angle = 0.01;
         private Random _rand = new Random();
-
+        
         #endregion
 
 
         #region Properties
-
+        public Image Look { get; private set; }
         public bool IsAlive { get; private set; }
         public Point Position { get; private set; }
         public double Angle
@@ -32,12 +32,13 @@ namespace SaveYourTower.DesktopUI.VisualEffects
 
         #region Constructors
 
-        public Boom(Point position)
+        public Boom(Point position, Image look, int lifeTime)
         {
             IsAlive = true;
             Position = (Point)position.Clone();
+            Look = look;
 
-            Timer lifeTimer = new Timer(200);
+            Timer lifeTimer = new Timer(lifeTime);
             lifeTimer.Elapsed += Die;
             lifeTimer.AutoReset = false;
             lifeTimer.Start();

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using GameUserElements;
 using SaveYourTower.DesktopUI.GamePages;
+using SaveYourTower.DesktopUI.GamePages.Buttons;
 
 namespace SaveYourTower.DesktopUI
 {
@@ -38,13 +39,13 @@ namespace SaveYourTower.DesktopUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlaingPage));
             this.tblMainGameView = new GameUserElements.DBLayoutPanel();
             this.tblButtons = new GameUserElements.DBLayoutPanel();
-            this.btnTurret = new System.Windows.Forms.Button();
-            this.btnHitAll = new System.Windows.Forms.Button();
-            this.btnSlowAll = new System.Windows.Forms.Button();
-            this.bntNextLevel = new System.Windows.Forms.Button();
-            this.btnStartGame = new System.Windows.Forms.Button();
-            this.bntExit = new System.Windows.Forms.Button();
-            this.bntPause = new System.Windows.Forms.Button();
+            this.btnTurret = new SaveYourTower.DesktopUI.GamePages.Buttons.UnfocusableButton();
+            this.btnHitAll = new SaveYourTower.DesktopUI.GamePages.Buttons.UnfocusableButton();
+            this.btnSlowAll = new SaveYourTower.DesktopUI.GamePages.Buttons.UnfocusableButton();
+            this.bntNextLevel = new SaveYourTower.DesktopUI.GamePages.Buttons.UnfocusableButton();
+            this.btnStartGame = new SaveYourTower.DesktopUI.GamePages.Buttons.UnfocusableButton();
+            this.bntExit = new SaveYourTower.DesktopUI.GamePages.Buttons.UnfocusableButton();
+            this.bntPause = new SaveYourTower.DesktopUI.GamePages.Buttons.UnfocusableButton();
             this.tblMainGameView.SuspendLayout();
             this.tblButtons.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +53,7 @@ namespace SaveYourTower.DesktopUI
             // tblMainGameView
             // 
             this.tblMainGameView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tblMainGameView.BackColor = System.Drawing.Color.Transparent;
+            this.tblMainGameView.BackColor = System.Drawing.Color.Black;
             this.tblMainGameView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tblMainGameView.CausesValidation = false;
             this.tblMainGameView.ColumnCount = 3;
@@ -89,6 +90,7 @@ namespace SaveYourTower.DesktopUI
             this.tblButtons.Controls.Add(this.btnHitAll, 1, 0);
             this.tblButtons.Controls.Add(this.btnSlowAll, 2, 0);
             this.tblButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblButtons.ForeColor = System.Drawing.Color.Red;
             this.tblButtons.Location = new System.Drawing.Point(169, 442);
             this.tblButtons.Name = "tblButtons";
             this.tblButtons.RowCount = 1;
@@ -113,6 +115,7 @@ namespace SaveYourTower.DesktopUI
             this.btnTurret.TabIndex = 8;
             this.btnTurret.UseVisualStyleBackColor = false;
             this.btnTurret.Click += new System.EventHandler(this.btnTurret_Click);
+            this.btnTurret.MouseEnter += new System.EventHandler(this.btnTurret_MouseEnter);
             // 
             // btnHitAll
             // 
@@ -123,13 +126,14 @@ namespace SaveYourTower.DesktopUI
             this.btnHitAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHitAll.Font = new System.Drawing.Font("Agency FB", 8F, System.Drawing.FontStyle.Bold);
             this.btnHitAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnHitAll.Image = global::SaveYourTower.DesktopUI.Properties.Resources.HitAll;
+            this.btnHitAll.Image = ((System.Drawing.Image)(resources.GetObject("btnHitAll.Image")));
             this.btnHitAll.Location = new System.Drawing.Point(59, 3);
             this.btnHitAll.Name = "btnHitAll";
             this.btnHitAll.Size = new System.Drawing.Size(50, 49);
             this.btnHitAll.TabIndex = 10;
             this.btnHitAll.UseVisualStyleBackColor = false;
             this.btnHitAll.Click += new System.EventHandler(this.btnHitAll_Click);
+            this.btnHitAll.MouseEnter += new System.EventHandler(this.btnHitAll_MouseEnter);
             // 
             // btnSlowAll
             // 
@@ -140,13 +144,14 @@ namespace SaveYourTower.DesktopUI
             this.btnSlowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSlowAll.Font = new System.Drawing.Font("Agency FB", 8F, System.Drawing.FontStyle.Bold);
             this.btnSlowAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnSlowAll.Image = global::SaveYourTower.DesktopUI.Properties.Resources.SlowAll;
+            this.btnSlowAll.Image = ((System.Drawing.Image)(resources.GetObject("btnSlowAll.Image")));
             this.btnSlowAll.Location = new System.Drawing.Point(115, 3);
             this.btnSlowAll.Name = "btnSlowAll";
             this.btnSlowAll.Size = new System.Drawing.Size(50, 49);
             this.btnSlowAll.TabIndex = 11;
             this.btnSlowAll.UseVisualStyleBackColor = false;
             this.btnSlowAll.Click += new System.EventHandler(this.btnSlowAll_Click);
+            this.btnSlowAll.MouseEnter += new System.EventHandler(this.btnSlowAll_MouseEnter);
             // 
             // bntNextLevel
             // 
@@ -163,6 +168,7 @@ namespace SaveYourTower.DesktopUI
             this.bntNextLevel.UseVisualStyleBackColor = false;
             this.bntNextLevel.Visible = false;
             this.bntNextLevel.Click += new System.EventHandler(this.bntNextLevel_Click);
+            this.bntNextLevel.MouseEnter += new System.EventHandler(this.bntNextLevel_MouseEnter);
             // 
             // btnStartGame
             // 
@@ -179,6 +185,7 @@ namespace SaveYourTower.DesktopUI
             this.btnStartGame.Text = "Start";
             this.btnStartGame.UseVisualStyleBackColor = false;
             this.btnStartGame.Click += new System.EventHandler(this.btnStartGame_Click);
+            this.btnStartGame.MouseEnter += new System.EventHandler(this.btnStartGame_MouseEnter);
             // 
             // bntExit
             // 
@@ -196,6 +203,7 @@ namespace SaveYourTower.DesktopUI
             this.bntExit.UseVisualStyleBackColor = false;
             this.bntExit.Visible = false;
             this.bntExit.Click += new System.EventHandler(this.bntExit_Click);
+            this.bntExit.MouseEnter += new System.EventHandler(this.bntExit_MouseEnter);
             // 
             // bntPause
             // 
@@ -214,6 +222,7 @@ namespace SaveYourTower.DesktopUI
             this.bntPause.UseVisualStyleBackColor = false;
             this.bntPause.Visible = false;
             this.bntPause.Click += new System.EventHandler(this.bntPause_Click);
+            this.bntPause.MouseEnter += new System.EventHandler(this.bntPause_MouseEnter);
             // 
             // PlaingPage
             // 
@@ -223,6 +232,7 @@ namespace SaveYourTower.DesktopUI
             this.Controls.Add(this.tblMainGameView);
             this.Name = "PlaingPage";
             this.Size = new System.Drawing.Size(500, 500);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PlaingPage_KeyDown);
             this.tblMainGameView.ResumeLayout(false);
             this.tblButtons.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -231,14 +241,14 @@ namespace SaveYourTower.DesktopUI
 
         #endregion
 
-        private Button bntNextLevel;
-        private Button btnTurret;
-        private Button btnHitAll;
-        private Button btnSlowAll;
-        private Button btnStartGame;
         private DBLayoutPanel tblMainGameView;
         private DBLayoutPanel tblButtons;
-        private Button bntPause;
-        private Button bntExit;
+        private UnfocusableButton bntNextLevel;
+        private UnfocusableButton btnTurret;
+        private UnfocusableButton btnHitAll;
+        private UnfocusableButton btnSlowAll;
+        private UnfocusableButton btnStartGame;
+        private UnfocusableButton bntPause;
+        private UnfocusableButton bntExit;
     }
 }

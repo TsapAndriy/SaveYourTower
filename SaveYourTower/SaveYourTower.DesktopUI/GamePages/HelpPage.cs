@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace SaveYourTower.DesktopUI.GamePages
@@ -59,6 +60,24 @@ namespace SaveYourTower.DesktopUI.GamePages
 
                 pbHelpView.Image = (Image)_helpImages.GetValue(_helpIndex);
             }
+        }
+
+        private void btnBack_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnPrevHelpPage_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnNextHelpPage_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Timers;
 
 using SaveYourTower.GameEngine.DataContainers;
@@ -101,7 +99,8 @@ namespace SaveYourTower.GameEngine
 
             if (GameStatus != Status.IsReadyToRun)
             {
-                throw new InvalidOperationException("Only game with status 'IsReadyToRu' can be started");
+                throw new InvalidOperationException(
+                    "Only game with status 'IsReadyToRu' can be started");
             }
 
             #endregion
@@ -177,7 +176,7 @@ namespace SaveYourTower.GameEngine
             {
                 GameField.GameObjects.ForEach(obj =>
                 {
-                    if ((!obj.IsAlive) && (obj is Enemy))
+                    if (!obj.IsAlive)
                     {
                         DieEventHandler(obj, null);
                     }
@@ -205,7 +204,8 @@ namespace SaveYourTower.GameEngine
 
             if (GameStatus != Status.IsPaused)
             {
-                throw new InvalidOperationException("Only game with status 'IsPaused' can be restored");
+                throw new InvalidOperationException(
+                    "Only game with status 'IsPaused' can be restored");
             }
 
             #endregion
@@ -222,7 +222,8 @@ namespace SaveYourTower.GameEngine
                 && (GameStatus != Status.IsWinned)
                 && (GameStatus != Status.IsWinnedLevel))
             {
-                throw new InvalidOperationException("Only game with status 'IsRuning' or 'IsPaused' can be stoped");
+                throw new InvalidOperationException(
+                    "Only game with status 'IsRuning' or 'IsPaused' can be stoped");
             }
 
             #endregion
@@ -257,28 +258,19 @@ namespace SaveYourTower.GameEngine
             return GameField.GameScore.Value;
         }
 
-        public void SaleGameObject(GameObject gameObject)
-        { 
-            if ((gameObject is Turret))
-            {
-                GameField.GameScore.AddPoint(gameObject.Cost);
-                GameField.RemoveGameObject(gameObject);
-            }
-        }
-
         public BuingStatus BuyGameObject(GameObject gameObject)
         {
             if (IsObejectOnTheField(gameObject))
             {
-                throw new InvalidOperationException("Object already exist.");// "Object already exist";
+                throw new InvalidOperationException("Object already exist.");
             }
             else if (IsPlaceBusy(gameObject) && !(gameObject is ISpell))
             {
-                return BuingStatus.PlaceIsBusy;// "Can`t place object, the place is busy.";
+                return BuingStatus.PlaceIsBusy;
             }
             else if (gameObject.Cost > GameField.GameScore.Value)
             {
-                return BuingStatus.NeedMorePoints;// "You need more points.";
+                return BuingStatus.NeedMorePoints;
             }
             else
             {
@@ -303,21 +295,24 @@ namespace SaveYourTower.GameEngine
 
         private bool IsPlaceBusy(GameObject gameObject)
         {
+            bool busy = true;
             if (gameObject.Colliders != null)
             {
-                return (gameObject.GameField.GameObjects.Exists(obj => IsCollision(obj, gameObject)));
+                busy = (gameObject.GameField.GameObjects.Exists(obj => 
+                    IsCollision(obj, gameObject)));
             }
-            else
-            {
-                return false;
-            }
+
+            return busy;
         }
 
         private bool IsCollision(GameObject leftGameObject, GameObject rightGameObject)
         {
             bool collision = false;
-            Collider leftCollider = leftGameObject.Colliders.Find(col => col.Tag == "BodyCollider");
-            Collider rightCollider = rightGameObject.Colliders.Find(col => col.Tag == "BodyCollider");
+            Collider leftCollider = leftGameObject.Colliders.Find(col => 
+                col.Tag == "BodyCollider");
+
+            Collider rightCollider = rightGameObject.Colliders.Find(col => 
+                col.Tag == "BodyCollider");
 
             if ((leftCollider != null) && (rightCollider != null))
             {
@@ -336,7 +331,8 @@ namespace SaveYourTower.GameEngine
 
         private bool IsObejectOnTheField(GameObject gameObject)
         {
-            return gameObject.GameField.GameObjects.Exists(obj => ReferenceEquals(obj, gameObject));
+            return gameObject.GameField.GameObjects.Exists(obj => 
+                ReferenceEquals(obj, gameObject));
         }
 
         private void CheckTowerLose()
@@ -360,7 +356,8 @@ namespace SaveYourTower.GameEngine
 
             if (GameStatus != Status.IsWinnedLevel)
             {
-                throw new InvalidOperationException("Only game with status 'IsWinned' can load next level");
+                throw new InvalidOperationException(
+                    "Only game with status 'IsWinned' can load next level");
             }
 
             #endregion
@@ -381,7 +378,8 @@ namespace SaveYourTower.GameEngine
         private void PrepareFieldToNextLevel()
         {
             // Remove all except enemies and turrets.
-            GameField.GameObjects.RemoveAll(obj => !((obj is Enemy) || (obj is Turret)));
+            GameField.GameObjects.RemoveAll(obj => 
+                !((obj is Enemy) || (obj is Turret)));
 
             GameField.AddGameObject(new Tower(
                 GameField,

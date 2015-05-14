@@ -118,26 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="EnemyBoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EnemyBoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Turret" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Turret3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Help6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help6.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Help5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Enemy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Enemy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Help3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Explosion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Explosion.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Help4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Help1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Help2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Help2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,17 +133,23 @@
   <data name="Mark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Mark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Beem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Beem.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="HitAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\myPixelArt2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CannonBAll1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CannonBAll1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SlowAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Slow3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CannonBAll3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CannonBAll3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Help3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Help1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EnemyBoss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EnemyBoss.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SelectSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Select2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EnemyExplosionSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Explosion5.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Tower" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tower4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,10 +157,43 @@
   <data name="Boom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\boom-bang-pow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HitAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\myPixelArt2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HitAllSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HitALl.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SlowAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Slow3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CannonBallBoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CannonBallBoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Help4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Enemy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Enemy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SlowAllSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Slow2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CannonBAll3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CannonBAll3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Help6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help6.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Help5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CannonBAll1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CannonBAll1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BeemSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beem2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TurretExplosionSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Explosion3.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

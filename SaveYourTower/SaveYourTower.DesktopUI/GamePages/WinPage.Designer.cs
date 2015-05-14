@@ -74,6 +74,7 @@ namespace SaveYourTower.DesktopUI.GamePages
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseEnter += new System.EventHandler(this.btnExit_MouseEnter);
             // 
             // btnStart
             // 
@@ -89,6 +90,7 @@ namespace SaveYourTower.DesktopUI.GamePages
             this.btnStart.Text = "Restart";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStart.MouseEnter += new System.EventHandler(this.btnStart_MouseEnter);
             // 
             // label1
             // 

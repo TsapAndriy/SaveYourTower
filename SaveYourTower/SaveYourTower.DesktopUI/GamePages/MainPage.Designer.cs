@@ -82,6 +82,7 @@ namespace SaveYourTower.DesktopUI
             this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = false;
             this.btnHelp.Click += new System.EventHandler(this.button2_Click);
+            this.btnHelp.MouseEnter += new System.EventHandler(this.btnHelp_MouseEnter);
             // 
             // btnExit
             // 
@@ -97,6 +98,7 @@ namespace SaveYourTower.DesktopUI
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseEnter += new System.EventHandler(this.btnExit_MouseEnter);
             // 
             // btnStart
             // 
@@ -112,6 +114,7 @@ namespace SaveYourTower.DesktopUI
             this.btnStart.Text = "New game";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.button1_Click);
+            this.btnStart.MouseEnter += new System.EventHandler(this.btnStart_MouseEnter);
             // 
             // label1
             // 
@@ -141,6 +144,7 @@ namespace SaveYourTower.DesktopUI
             this.btnSettings.Text = "Settings";
             this.btnSettings.UseVisualStyleBackColor = false;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            this.btnSettings.MouseEnter += new System.EventHandler(this.btnSettings_MouseEnter);
             // 
             // MainPage
             // 

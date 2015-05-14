@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Windows.Forms;
 
 namespace SaveYourTower.DesktopUI.GamePages
@@ -23,6 +24,18 @@ namespace SaveYourTower.DesktopUI.GamePages
         {
             PageEventHandler(this, new PageEventArgs(typeof(MainPage)));
             this.Dispose();
+        }
+
+        private void btnStart_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnExit_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
         }
     }
 }

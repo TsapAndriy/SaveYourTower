@@ -86,6 +86,7 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Difficulty :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Visible = false;
             // 
             // label1
             // 
@@ -113,6 +114,7 @@
             this.lblFullScreen.Text = "false";
             this.lblFullScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFullScreen.Click += new System.EventHandler(this.lblFullScreen_Click);
+            this.lblFullScreen.MouseEnter += new System.EventHandler(this.lblFullScreen_MouseEnter);
             // 
             // dbLayoutPanel2
             // 
@@ -132,6 +134,7 @@
             // 
             // btnExit
             // 
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Agency FB", 25F, System.Drawing.FontStyle.Bold);
@@ -142,8 +145,9 @@
             this.btnExit.Size = new System.Drawing.Size(200, 52);
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Back";
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseEnter += new System.EventHandler(this.btnExit_MouseEnter);
             // 
             // dbLayoutPanel3
             // 
@@ -174,6 +178,7 @@
             this.lblDifficulty.TabIndex = 5;
             this.lblDifficulty.Text = "0";
             this.lblDifficulty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDifficulty.Visible = false;
             // 
             // lblPrevDifficulty
             // 
@@ -187,7 +192,9 @@
             this.lblPrevDifficulty.TabIndex = 4;
             this.lblPrevDifficulty.Text = "<";
             this.lblPrevDifficulty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPrevDifficulty.Visible = false;
             this.lblPrevDifficulty.Click += new System.EventHandler(this.lblPrevDifficulty_Click);
+            this.lblPrevDifficulty.MouseEnter += new System.EventHandler(this.lblPrevDifficulty_MouseEnter);
             // 
             // lblNextDifficulty
             // 
@@ -201,13 +208,15 @@
             this.lblNextDifficulty.TabIndex = 3;
             this.lblNextDifficulty.Text = ">";
             this.lblNextDifficulty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNextDifficulty.Visible = false;
             this.lblNextDifficulty.Click += new System.EventHandler(this.lblNextDifficulty_Click);
+            this.lblNextDifficulty.MouseEnter += new System.EventHandler(this.lblNextDifficulty_MouseEnter);
             // 
             // SettingsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.Maroon;
             this.Controls.Add(this.dbLayoutPanel1);
             this.Name = "SettingsPage";
             this.Size = new System.Drawing.Size(500, 500);

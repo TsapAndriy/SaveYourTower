@@ -46,14 +46,14 @@ namespace SaveYourTower.GameEngine.DataContainers
         public override bool Equals(Object obj)
         {
             Point point = obj as Point;
+            bool equals = false;
+
             if (point != null)
             {
-                return (X.Equals(point.X) && Y.Equals(point.Y));
+                equals = X.Equals(point.X) && Y.Equals(point.Y);
             }
-            else
-            {
-                return false;
-            }
+
+            return equals;
         }
 
         public override int GetHashCode()

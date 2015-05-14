@@ -68,12 +68,6 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
             {
                 IsAlive = false;
             }
-            else if ((gameObject is Turret) 
-                && (e.OtherCollider.Tag == "BodyCollider")
-                && (e.MyCollider.Tag == "BodyCollider"))
-            {
-                 IsAlive = false;
-            }
         }
 
         public void Live()
@@ -83,7 +77,10 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                  IsAlive = false;
             }
 
-            LookAt(LookingTower.Position);
+            if (LookingTower != null)
+            {
+                LookAt(LookingTower.Position);
+            }
 
             MoveOnVelosity();
         }
