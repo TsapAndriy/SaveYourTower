@@ -1,10 +1,11 @@
 **/bin/
 **/obj/
 **/Express/
+*/Release/
+*/Debug/
 *.suo
 *.user
 *.dbmdl
 *.ncrunchproject
 *_NCrunch*
 *.ncrunchsolution
-*/Release
