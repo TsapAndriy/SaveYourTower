@@ -42,7 +42,6 @@ namespace SaveYourTower.DesktopUI.GamePages
             {
                 ((SaveYourTowerForm)this.Parent).FormBorderStyle = 
                     System.Windows.Forms.FormBorderStyle.FixedDialog;
-
                 ((SaveYourTowerForm) this.Parent).WindowState = 
                     FormWindowState.Normal;
             }

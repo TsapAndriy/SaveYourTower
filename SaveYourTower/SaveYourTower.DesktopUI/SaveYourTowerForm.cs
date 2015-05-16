@@ -39,10 +39,5 @@ namespace SaveYourTower.DesktopUI
                 this.Controls.Add(control);
             }
         }
-
-        private void SaveYourTowerForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
     }
 }

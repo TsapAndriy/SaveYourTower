@@ -21,13 +21,13 @@
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="Level1EnemyDamage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="Level2EnemyDamage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">20</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="Level3EnemyDamage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">99</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="Level1EnemyVelocity" Type="System.Double" Scope="User">
       <Value Profile="(Default)">5</Value>

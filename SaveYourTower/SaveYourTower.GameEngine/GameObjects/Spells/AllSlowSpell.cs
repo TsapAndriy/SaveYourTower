@@ -39,7 +39,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
         public void Cast()
         {
             double divisor = GameField.CurrenGameLevel.AllSlowSpellRatio;
-            VelositiDivisor += divisor;
+            GameField.VelositiDivisor += divisor;
             IsUsed = true;
             Timer timer = new Timer(ReloadingTime);
             timer.AutoReset = false;
@@ -51,7 +51,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
         private void FinishEffect(object source, ElapsedEventArgs e)
         {
             double divisor = GameField.CurrenGameLevel.AllSlowSpellRatio;
-            VelositiDivisor -= divisor;
+            GameField.VelositiDivisor -= divisor;
             IsAlive = false;
         }
 

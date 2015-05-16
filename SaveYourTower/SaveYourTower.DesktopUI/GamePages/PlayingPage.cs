@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Media;
+using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,43 +14,76 @@ using SaveYourTower.GameEngine.GameObjects.RealObjects;
 using SaveYourTower.GameEngine.GameObjects.Spells;
 using GamePoint = SaveYourTower.GameEngine.DataContainers.Point;
 using SaveYourTower.DesktopUI.VisualEffects;
+using SaveYourTower.GameEngine.GameObjects.Base;
 
 namespace SaveYourTower.DesktopUI
 {
     public partial class PlaingPage : UserControl, ILoadable
     {
+
+        #region Constants
+
+        private const int BackgroundStartCount = 200;
+        private const int EnemyBossLookLife = 100;
+        private const int StrongCannonballLookDamage = 10;
+        private const int SpellCost = 10;
+        private const int TimeOfSpellCostViewing = 2000;
+        private const int SpellDuration = 100;
+        private const int TurretFIndingCollider = 150;
+        private const int TurretLifePoints = 30;
+        private const int TurretFireRateDivisor = 10; 
+
+        #endregion
+
+        #region Enums
+
         private enum CursorStatus
         {
             Fire,
             Turret,
             Mine
         }
-
-        private List<object> _effects = new List<object>();
-        private static Game _game;
-        private static object _sync = new object();
-        private Cursor defaultCursor;
-        private CursorStatus _cursorStatus = CursorStatus.Fire;
-        private Level[] _levels;
-        private List<Rectangle> _stars = new List<Rectangle>(); 
-
-        public event EventHandler<PageEventArgs> PageEventHandler;
         
+        #endregion
+
+        #region Events
+
+        public event EventHandler<PageEventArgs> PageEventHandler; 
+
+        #endregion
+
+        #region Fields
+
+        private static object _sync = new object();
+        private List<object> _effects = new List<object>();
+        private Cursor _defaultCursor;
+        private CursorStatus _cursorStatus = CursorStatus.Fire;
+        private Game _game;
+        private Level[] _levels;
+        private List<Rectangle> _stars = new List<Rectangle>();
+        private bool _showSpellCost = false;
+
+        #endregion
+
+        #region Constructors
+
         public PlaingPage()
         {
             InitializeComponent();
-            defaultCursor = this.Cursor;
+            _defaultCursor = this.Cursor;
 
             this.Dock = DockStyle.Fill;
             btnTurret.Enabled = false;
             btnHitAll.Enabled = false;
-            btnSlowAll.Enabled = false; 
+            btnSlowAll.Enabled = false;
             this.Cursor = new Cursor((Properties.Resources.Mark).GetHicon());
             _levels = LoadLevels();
+        } 
 
-        }
+        #endregion
 
-        private  void RunGame()
+        #region Methods
+        private void RunGame()
         {
             _game = new Game(new GamePoint(this.Width, this.Height), _levels);
             _game.OutputEventHandler += OnOutputEventHandler;
@@ -59,180 +93,95 @@ namespace SaveYourTower.DesktopUI
             task.Start();
         }
 
-        private void DieEffects(object sender, EventArgs e)
-        {
-            Enemy enemy = sender as Enemy;
-            if (sender is Enemy)
-            {
-                _effects.Add(new Boom(((Enemy)sender).Position, Properties.Resources.Boom, 200));
-                playSound(Properties.Resources.TurretExplosionSound);
-            }
-            else if (sender is CannonBall)
-            {
-                _effects.Add(new Boom(((CannonBall)sender).Position, Properties.Resources.CannonBallBoom, 100));
-            }
-            else if (sender is Turret)
-            {
-                _effects.Add(new Boom(((Turret)sender).Position, Properties.Resources.Boom, 2000));
-                playSound(Properties.Resources.EnemyExplosionSound);
-            }
-        }
-        
-        #region MyRegion
+        #region Game input/output functions
+
         public void OnInputEventHandler(object sender, EventArgs e)
         {
             Game game = sender as Game;
-            lock (_sync)
+            if (game != null)
             {
-                if (_game.GameStatus == Status.IsReadyToStart)
+                lock (_sync)
                 {
-                    game.Start();
+                    if (_game.GameStatus == Status.IsReadyToStart)
+                    {
+                        game.Start();
+                    }
                 }
             }
         }
 
         public void OnOutputEventHandler(object sender, EventArgs e)
         {
-            Game game = sender as Game;
-            
-            if (game.GameStatus == Status.IsStarted)
+            if (PageEventHandler != null)
             {
-                lock (_sync)
+                if (_game.GameStatus == Status.IsStarted)
                 {
-                    Invoke((Action<Field>)DrawGameObjects, _game.GameField);
+                    lock (_sync)
+                    {
+                        Invoke((Action<Field>)Draw, _game.GameField);
+                    }
+                }
+                else if (_game.GameStatus == Status.IsWinnedLevel)
+                {
+                    lock (_sync)
+                    {
+                        Invoke((Action<Field>)LevelWinOutput, _game.GameField);
+                    }
+                }
+                else if (_game.GameStatus == Status.IsWinned)
+                {
+                    lock (_sync)
+                    {
+                        _game.Stop();
+                        BeginInvoke(PageEventHandler,
+                            this,
+                            new PageEventArgs(typeof(WinPage)));
+
+                        Invoke((MethodInvoker)delegate { this.Dispose(); });
+                    }
+                }
+                else if (_game.GameStatus == Status.IsExit)
+                {
+                    lock (_sync)
+                    {
+                        BeginInvoke(PageEventHandler,
+                            this,
+                            new PageEventArgs(typeof(LosePage)));
+
+                        Invoke((MethodInvoker)delegate { this.Dispose(); });
+                    }
                 }
             }
-            else if (game.GameStatus == Status.IsWinnedLevel)
-            {
-                lock (_sync)
-                {
-                    Invoke((Action<Field>)WinLevelOutput, _game.GameField);
-                }
-            }
-            else if (game.GameStatus == Status.IsWinned)
-            {
-                lock (_sync)
-                {
-
-                    BeginInvoke(PageEventHandler,
-                    this,
-                    new PageEventArgs(typeof(WinPage)));
-
-                    Invoke((MethodInvoker)delegate { this.Dispose(); });
-                }
-            }
-            else if (game.GameStatus == Status.IsExit)
-            {
-                lock (_sync)
-                {
-                    BeginInvoke(PageEventHandler, 
-                        this, 
-                        new PageEventArgs(typeof(LosePage)));
-
-                    Invoke((MethodInvoker)delegate { this.Dispose(); });
-                }
-            } 
         }
+
         #endregion
 
-        private void WinLevelOutput(Field gameField)
-        {
-            bntNextLevel.Visible = true;
+        #region GameObjectsDrawing
 
-            Bitmap result = new Bitmap(tblMainGameView.Size.Width,
-                tblMainGameView.Size.Height);
-
-            DrawText(_game.GetScore().ToString(), result, new Point(100, 0));
-
-            tblMainGameView.BackgroundImage = result;
-        }
-        private void DrawGameObjects(Field gameField)
+        private void Draw(Field gameField)
         {
             Bitmap result = new Bitmap(tblMainGameView.Size.Width,
                 tblMainGameView.Size.Height);
 
-            using (Graphics g = Graphics.FromImage(result))
-            {
-                Pen blackPen = new Pen(Color.Aqua, 2);
-                _stars.ForEach(obj => g.DrawEllipse(blackPen, obj));
-            }
+            DrawStars(result);
 
             foreach (var obj in gameField.GameObjects)
             {
                 if (obj is Tower)
                 {
-                    Graphics g = Graphics.FromImage(result);
-
-                    GamePoint lookPoint = new GamePoint(0, 0);
-                    lookPoint.X = tblMainGameView.PointToClient(MousePosition).X;
-                    lookPoint.Y = tblMainGameView.PointToClient(MousePosition).Y;
-
-                    ((Tower)obj).LookAt(lookPoint);
-
-                    Image image = RotateImage(Properties.Resources.Tower,
-                        RadianToDegree((float)obj.Direction.Angle) + 90);
-
-                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
-                        ((int)obj.Position.Y) - image.Height / 2);
-
-                    DrawText("Health : ", result,
-                        new System.Drawing.Point(this.Size.Width / 2 - 70, 0));
-
-                    DrawText(((Tower)obj).LifePoints.ToString(),
-                        result, new Point(this.Size.Width / 2 + 70, 0));
-
-                    g.Dispose();
+                    DrawTower(result, obj);
                 }
                 else if (obj is Enemy)
                 {
-                    Graphics g = Graphics.FromImage(result);
-                    Image image;
-                    if (obj.LifePoints > 100)
-                    {
-                        image = RotateImage(Properties.Resources.EnemyBoss,
-                            RadianToDegree((float) obj.Direction.Angle) + 90);
-                    }
-                    else
-                    {
-                        image = RotateImage(Properties.Resources.Enemy,
-                          RadianToDegree((float)obj.Direction.Angle) + 90);
-                    }
-
-                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
-                        ((int)obj.Position.Y) - image.Height / 2);
-
-                    g.Dispose();
+                    DrawEnemies(result, obj);
                 }
                 else if (obj is CannonBall)
                 {
-                    Graphics g = Graphics.FromImage(result);
-                    Image image;
-                    if (obj.Damage >= 10)
-                    {
-                        image = RotateImage(Properties.Resources.CannonBAll1,
-                            RadianToDegree((float)obj.Direction.Angle) + 90);
-                    }
-                    else
-                    {
-                        image = RotateImage(Properties.Resources.CannonBAll3,
-                            RadianToDegree((float)obj.Direction.Angle) + 90);
-                    }
-
-                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
-                        ((int)obj.Position.Y) - image.Height / 2);
-                    g.Dispose();
+                    DrawCannonBalls(result, obj);
                 }
                 else if (obj is Turret)
                 {
-                    Graphics g = Graphics.FromImage(result);
-
-                    Image image = RotateImage(Properties.Resources.Turret,
-                        RadianToDegree((float)obj.Direction.Angle) + 90);
-
-                    g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
-                        ((int)obj.Position.Y) - image.Height / 2);
-
-                    g.Dispose();
+                    DrawTurrets(result, obj);
                 }
             }
 
@@ -241,39 +190,135 @@ namespace SaveYourTower.DesktopUI
             DrawEffects(result);
 
             tblMainGameView.BackgroundImage = result;
+        }
 
+        private void DrawTower(Bitmap result, GameObject obj)
+        {
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                GamePoint lookPoint = new GamePoint(0, 0);
+                lookPoint.X = tblMainGameView.PointToClient(MousePosition).X;
+                lookPoint.Y = tblMainGameView.PointToClient(MousePosition).Y;
 
+                ((Tower)obj).LookAt(lookPoint);
+
+                Image image = RotateImage(Properties.Resources.Tower,
+                    RadianToDegree((float)obj.Direction.Angle) + 90);
+
+                g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
+                    ((int)obj.Position.Y) - image.Height / 2);
+
+                DrawText("Health : ", result,
+                    new System.Drawing.Point(this.Size.Width / 2 - 70, 0));
+
+                DrawText(((Tower)obj).LifePoints.ToString(),
+                    result, new Point(this.Size.Width / 2 + 70, 0));
+
+                if (_showSpellCost)
+                {
+                    DrawText("Need " + SpellCost.ToString() + " points.",
+                        result, new Point(this.Size.Width / 2 - 100, this.Size.Height - 100));
+                }
+            }
+        }
+
+        private void DrawEnemies(Bitmap result, GameObject obj)
+        {
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                Image image;
+                if (obj.LifePoints > EnemyBossLookLife)
+                {
+                    image = RotateImage(Properties.Resources.EnemyBoss,
+                        RadianToDegree((float)obj.Direction.Angle) + 90);
+                }
+                else
+                {
+                    image = RotateImage(Properties.Resources.Enemy,
+                      RadianToDegree((float)obj.Direction.Angle) + 90);
+                }
+
+                g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
+                    ((int)obj.Position.Y) - image.Height / 2);
+            }
+        }
+
+        private void DrawCannonBalls(Bitmap result, GameObject obj)
+        {
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                Image image;
+                if (obj.Damage >= StrongCannonballLookDamage)
+                {
+                    image = RotateImage(Properties.Resources.CannonBAll1,
+                        RadianToDegree((float)obj.Direction.Angle) + 90);
+                }
+                else
+                {
+                    image = RotateImage(Properties.Resources.CannonBAll3,
+                        RadianToDegree((float)obj.Direction.Angle) + 90);
+                }
+
+                g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
+                    ((int)obj.Position.Y) - image.Height / 2);
+            }
+        }
+
+        private void DrawTurrets(Bitmap result, GameObject obj)
+        {
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                Image image = RotateImage(Properties.Resources.Turret,
+                    RadianToDegree((float)obj.Direction.Angle) + 90);
+
+                g.DrawImage(image, ((int)obj.Position.X) - image.Width / 2,
+                    ((int)obj.Position.Y) - image.Height / 2);
+            }
+        }
+
+        #endregion
+
+        #region AnotherDrawing
+
+        private void DieEffects(object sender, EventArgs e)
+        {
+            if (sender is Enemy)
+            {
+                _effects.Add(new Boom(((GameObject)sender).Position, Properties.Resources.Boom, 200));
+                playSound(Properties.Resources.TurretExplosionSound);
+            }
+            else if (sender is CannonBall)
+            {
+                _effects.Add(new Boom(((GameObject)sender).Position, Properties.Resources.CannonBallBoom, 100));
+            }
+            else if (sender is Turret)
+            {
+                _effects.Add(new Boom(((GameObject)sender).Position, Properties.Resources.Boom, 2000));
+                playSound(Properties.Resources.EnemyExplosionSound);
+            }
         }
 
         private void CreateStars()
         {
             Random rand = new Random();
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < BackgroundStartCount; i++)
             {
                 int size = rand.Next(0, 7);
-                Rectangle rect = new Rectangle(rand.Next(0, tblMainGameView.Width), rand.Next(0, tblMainGameView.Height), size, size);
+                Rectangle rect = new Rectangle(
+                    rand.Next(0, tblMainGameView.Width),
+                    rand.Next(0, tblMainGameView.Height),
+                    size,
+                    size);
+
                 _stars.Add(rect);
             }
         }
-
-
 
         private void DrawEffects(Bitmap result)
         {
             _effects.ForEach(obj =>
             {
-                Boom boom = obj as Boom;
-                if (boom != null)
-                {
-                    Graphics g = Graphics.FromImage(result);
-                    Image image = RotateImage(boom.Look,
-                        RadianToDegree((float) boom.Angle));
-
-                    g.DrawImage(image, ((int)boom.Position.X) - image.Width / 2,
-                        ((int)boom.Position.Y) - image.Height / 2);
-
-                    g.Dispose();
-                }
+                DrawBooms(result, obj);
             });
 
             _effects.RemoveAll(obj =>
@@ -283,27 +328,55 @@ namespace SaveYourTower.DesktopUI
                 {
                     return !boom.IsAlive;
                 }
+
                 return false;
             });
         }
 
-        private void DrawText(string drawString, Image result, Point drawPoint)
+        private void DrawBooms(Bitmap result, object obj)
         {
-            Graphics grafiGraphics = Graphics.FromImage(result);
+            Boom boom = obj as Boom;
+            if (boom != null)
+            {
+                using (Graphics g = Graphics.FromImage(result))
+                {
+                    Image image = RotateImage(boom.Look,
+                                   RadianToDegree((float)boom.Angle));
 
-            // Create font and brush.
-            Font drawFont = new Font("MV Boli", 25);
-            SolidBrush drawBrush = new SolidBrush(Color.Chartreuse);
-
-            // Draw string to screen.
-            grafiGraphics.DrawString(drawString, drawFont, drawBrush, drawPoint);
-
-            grafiGraphics.Dispose();
+                    g.DrawImage(image, ((int)boom.Position.X) - image.Width / 2,
+                        ((int)boom.Position.Y) - image.Height / 2);
+                }
+            }
         }
 
-        private float RadianToDegree(float angle)
+        private void DrawStars(Bitmap result)
         {
-            return angle * (180.0F / (float)Math.PI);
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                Pen blackPen = new Pen(Color.Aqua, 2);
+                _stars.ForEach(obj => g.DrawEllipse(blackPen, obj));
+            }
+        }
+
+        private void ShowSpellCost()
+        {
+            _showSpellCost = true;
+
+            System.Timers.Timer timer = new System.Timers.Timer(TimeOfSpellCostViewing);
+            timer.AutoReset = false;
+            timer.Elapsed += (sender, e) => _showSpellCost = false;
+            timer.Start();
+        }
+
+        private void DrawText(string drawString, Image result, Point drawPoint)
+        {
+            using (Graphics grafiGraphics = Graphics.FromImage(result))
+            {
+                Font drawFont = new Font("MV Boli", 25);
+                SolidBrush drawBrush = new SolidBrush(Color.Chartreuse);
+
+                grafiGraphics.DrawString(drawString, drawFont, drawBrush, drawPoint);
+            }
         }
 
         private Image RotateImage(Image image, float angle)
@@ -317,6 +390,66 @@ namespace SaveYourTower.DesktopUI
                 graphics.DrawImage(image, 0, 0);
             }
             return result;
+        }
+
+        private void LevelWinOutput(Field gameField)
+        {
+            bntNextLevel.Visible = true;
+
+            Bitmap result = new Bitmap(tblMainGameView.Size.Width,
+                tblMainGameView.Size.Height);
+
+            DrawText(_game.GetScore().ToString(), result, new Point(100, 0));
+
+            tblMainGameView.BackgroundImage = result;
+        }
+
+        #endregion
+
+        #region User click functions
+
+        private void tblMainGameView_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (_game != null && _game.GameStatus == Status.IsStarted)
+            {
+                if (_cursorStatus == CursorStatus.Fire)
+                {
+                    Tower tower = (Tower)_game.GameField.GameObjects.Find(obj =>
+                        obj is Tower);
+
+                    GamePoint lookPoint = new GamePoint(0, 0);
+                    lookPoint.X = tblMainGameView.PointToClient(MousePosition).X;
+                    lookPoint.Y = tblMainGameView.PointToClient(MousePosition).Y;
+                    tower.LookAt(lookPoint);
+                    _game.Fire();
+                    playSound(Properties.Resources.BeemSound);
+                }
+                else if (_cursorStatus == CursorStatus.Turret)
+                {
+                    GamePoint turretPosision = new GamePoint(0, 0);
+                    turretPosision.X = tblMainGameView.PointToClient(MousePosition).X;
+                    turretPosision.Y = tblMainGameView.PointToClient(MousePosition).Y;
+
+                    Turret turret = new Turret(
+                        _game.GameField,
+                        turretPosision,
+                        _game.GameField.CurrenGameLevel.TurretColliderRadius,
+                        TurretFIndingCollider,
+                        TurretLifePoints,
+                        TurretFireRateDivisor,
+                        SpellCost);
+
+
+                    if (_game.BuyGameObject(turret) == BuingStatus.NeedMorePoints)
+                    {
+                        ShowSpellCost();
+                    }
+
+                    this.Cursor = new Cursor((Properties.Resources.Mark).GetHicon());
+
+                    _cursorStatus = CursorStatus.Fire;
+                }
+            }
         }
 
         private void bntNextLevel_Click(object sender, EventArgs e)
@@ -346,33 +479,9 @@ namespace SaveYourTower.DesktopUI
             HitAll();
         }
 
-        private static void HitAll()
-        {
-            AllHilSpell allHilSpell = new AllHilSpell(_game.GameField, 100, 10);
-            if (_game.BuyGameObject(allHilSpell) == BuingStatus.Success)
-            {
-                SoundPlayer sound = new SoundPlayer(Properties.Resources.HitAllSound);
-                sound.Play();
-
-                allHilSpell.Cast();
-            }
-        }
-
         private void btnSlowAll_Click(object sender, EventArgs e)
         {
             SlowAll();
-        }
-
-        private static void SlowAll()
-        {
-            AllSlowSpell allSlowSpell = new AllSlowSpell(_game.GameField, 10);
-            if (_game.BuyGameObject(allSlowSpell) == BuingStatus.Success)
-            {
-                SoundPlayer sound = new SoundPlayer(Properties.Resources.SlowAllSound);
-                sound.Play();
-
-                allSlowSpell.Cast();
-            }
         }
 
         private void btnTurret_Click(object sender, EventArgs e)
@@ -380,62 +489,15 @@ namespace SaveYourTower.DesktopUI
             BuyTurret();
         }
 
-        private void BuyTurret()
-        {
-            _cursorStatus = CursorStatus.Turret;
-
-            this.Cursor = new Cursor((Properties.Resources.Turret).GetHicon());
-        }
-
         private void btnStartGame_Click(object sender, System.EventArgs e)
         {
             RunGame();
             btnStartGame.Visible = false;
-            btnStartGame.Enabled= false;
+            btnStartGame.Enabled = false;
             bntPause.Visible = true;
             bntPause.Enabled = true;
 
             CreateStars();
-        }
-
-        private void tblMainGameView_MouseClick(object sender, MouseEventArgs e)
-        {
-
-
-            if (_game != null && _game.GameStatus == Status.IsStarted)
-            {
-                if (_cursorStatus == CursorStatus.Fire)
-                {
-                    Tower tower = (Tower)_game.GameField.GameObjects.Find(obj =>
-                        obj is Tower);
-
-                    GamePoint lookPoint = new GamePoint(0, 0);
-                    lookPoint.X = tblMainGameView.PointToClient(MousePosition).X;
-                    lookPoint.Y = tblMainGameView.PointToClient(MousePosition).Y;
-                    tower.LookAt(lookPoint);
-                    _game.Fire();
-                    playSound(Properties.Resources.BeemSound);
-                }
-                else if (_cursorStatus == CursorStatus.Turret)
-                {
-                    GamePoint turretPosision = new GamePoint(0, 0);
-                    turretPosision.X = tblMainGameView.PointToClient(MousePosition).X;
-                    turretPosision.Y = tblMainGameView.PointToClient(MousePosition).Y;
-
-                    Turret turret = new Turret(
-                        _game.GameField, 
-                        turretPosision, 
-                        _game.GameField.CurrenGameLevel.TurretColliderRadius, 
-                        150, 
-                        30, 
-                        10, 
-                        cost: 10);
-                    _game.BuyGameObject(turret);
-                    this.Cursor = new Cursor((Properties.Resources.Mark).GetHicon());
-
-                    _cursorStatus = CursorStatus.Fire;
-                }
-            }
         }
 
         private void bntPause_Click(object sender, System.EventArgs e)
@@ -443,7 +505,7 @@ namespace SaveYourTower.DesktopUI
             if (_game != null)
             {
                 if (_game.GameStatus == Status.IsPaused)
-                { 
+                {
                     _game.Restore();
                     bntExit.Visible = false;
                     bntExit.Enabled = false;
@@ -463,6 +525,120 @@ namespace SaveYourTower.DesktopUI
             PageEventHandler(this, new PageEventArgs(typeof(MainPage)));
             Dispose();
         }
+
+        private void PlaingPage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                bntPause_Click(this, new EventArgs());
+            }
+            else if (e.KeyCode == Keys.D1 && btnTurret.Enabled)
+            {
+                BuyTurret();
+            }
+            else if (e.KeyCode == Keys.D2 && btnHitAll.Enabled)
+            {
+                HitAll();
+            }
+            else if (e.KeyCode == Keys.D3 && btnSlowAll.Enabled)
+            {
+                SlowAll();
+            }
+        }
+
+        #endregion
+
+        private float RadianToDegree(float angle)
+        {
+            return angle * (180.0F / (float)Math.PI);
+        }
+
+        #region Active spells fuctions
+
+        private void BuyTurret()
+        {
+            _cursorStatus = CursorStatus.Turret;
+
+            this.Cursor = new Cursor((Properties.Resources.Turret).GetHicon());
+        }
+
+        private void HitAll()
+        {
+            AllHilSpell allHilSpell = new AllHilSpell(_game.GameField, SpellDuration, SpellCost);
+            if (_game.BuyGameObject(allHilSpell) == BuingStatus.Success)
+            {
+                SoundPlayer sound = new SoundPlayer(Properties.Resources.HitAllSound);
+                sound.Play();
+
+                allHilSpell.Cast();
+            }
+            else
+            {
+                ShowSpellCost();
+            }
+        }
+
+        private void SlowAll()
+        {
+            AllSlowSpell allSlowSpell = new AllSlowSpell(_game.GameField, SpellCost);
+            if (_game.BuyGameObject(allSlowSpell) == BuingStatus.Success)
+            {
+                SoundPlayer sound = new SoundPlayer(Properties.Resources.SlowAllSound);
+                sound.Play();
+
+                allSlowSpell.Cast();
+            }
+            else
+            {
+                ShowSpellCost();
+            }
+        }
+
+        #endregion
+
+        #region Button select sounds.
+        private void btnStartGame_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void bntNextLevel_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void bntExit_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void bntPause_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnTurret_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnHitAll_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+
+        private void btnSlowAll_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
+            sound.Play();
+        }
+        #endregion
 
         private void playSound(Stream sound)
         {
@@ -550,72 +726,7 @@ namespace SaveYourTower.DesktopUI
                     LevelsSettings.Default.TurretCannonBallVelosity);
 
             return levels;
-        }
-
-        private void PlaingPage_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                bntPause_Click(this, new EventArgs());
-            }
-            else if (e.KeyCode == Keys.D1 && btnTurret.Enabled)
-            {
-                BuyTurret();
-            }
-            else if (e.KeyCode == Keys.D2 && btnHitAll.Enabled)
-            {
-                HitAll();
-            }
-            else if (e.KeyCode == Keys.D3 && btnSlowAll.Enabled)
-            {
-                SlowAll();
-            }
-        }
-
-        #region select button sound
-        private void btnStartGame_MouseEnter(object sender, EventArgs e)
-        {
-            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
-            sound.Play();
-        }
-
-        private void bntNextLevel_MouseEnter(object sender, EventArgs e)
-        {
-            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
-            sound.Play();
-        }
-
-        private void bntExit_MouseEnter(object sender, EventArgs e)
-        {
-            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
-            sound.Play();
-        }
-
-        private void bntPause_MouseEnter(object sender, EventArgs e)
-        {
-            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
-            sound.Play();
-        }
-
-        private void btnTurret_MouseEnter(object sender, EventArgs e)
-        {
-            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
-            sound.Play();
-        }
-
-        private void btnHitAll_MouseEnter(object sender, EventArgs e)
-        {
-            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
-            sound.Play();
-        }
-
-        private void btnSlowAll_MouseEnter(object sender, EventArgs e)
-        {
-            SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
-            sound.Play();
         } 
         #endregion
-
-
     }
 }

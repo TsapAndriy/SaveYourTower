@@ -97,7 +97,7 @@ namespace SaveYourTower.DesktopUI {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int Level1EnemyDamage {
             get {
                 return ((int)(this["Level1EnemyDamage"]));
@@ -109,7 +109,7 @@ namespace SaveYourTower.DesktopUI {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int Level2EnemyDamage {
             get {
                 return ((int)(this["Level2EnemyDamage"]));
@@ -121,7 +121,7 @@ namespace SaveYourTower.DesktopUI {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("99")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int Level3EnemyDamage {
             get {
                 return ((int)(this["Level3EnemyDamage"]));

@@ -46,7 +46,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SaveYourTower";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaveYourTowerForm_KeyDown);
             this.ResumeLayout(false);
 
         }

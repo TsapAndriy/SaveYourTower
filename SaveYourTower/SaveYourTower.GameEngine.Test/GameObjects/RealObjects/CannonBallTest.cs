@@ -52,7 +52,8 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         [TestMethod]
         public void TestLive()
         {
-            CannonBall cannonBall = new CannonBall(null, null, null, 0, 0, 0, 1);
+            Field field = new Field(new Point(10, 10), null);
+            CannonBall cannonBall = new CannonBall(field, new Point(1, 1), new UnitVector2(90), 0, 0, 0, 1);
             cannonBall.Live();
             Assert.IsFalse(cannonBall.IsAlive);
         }

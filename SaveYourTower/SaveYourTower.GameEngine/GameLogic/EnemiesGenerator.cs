@@ -14,7 +14,6 @@ namespace SaveYourTower.GameEngine.GameLogic
         private int _iterationCounter;
         private int _enemiesCounter;
         Random _rand = new Random();
-        private double _power;
 
         #endregion
 

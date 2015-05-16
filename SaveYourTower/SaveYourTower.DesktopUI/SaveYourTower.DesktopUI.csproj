@@ -46,6 +46,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>73682AF8571D4AD0B5845FC0A9E899EDA6217BC7</ManifestCertificateThumbprint>
@@ -90,14 +93,14 @@
     <Compile Include="GamePages\Buttons\UnfocusableButton.Designer.cs">
       <DependentUpon>UnfocusableButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="GamePages\PageEventArgs.cs" />
+    <Compile Include="GamePages\EventArgs\PageEventArgs.cs" />
     <Compile Include="GamePages\SettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GamePages\SettingsPage.Designer.cs">
       <DependentUpon>SettingsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameUserElements\DBLayoutPanel.cs">
+    <Compile Include="GamePages\UserElements\DBLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -190,7 +193,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>LevelsSettings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SaveYourTower.DesktopUI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SaveYourTower.GameEngine\SaveYourTower.GameEngine.csproj">
@@ -292,6 +294,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\myPixelArt2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

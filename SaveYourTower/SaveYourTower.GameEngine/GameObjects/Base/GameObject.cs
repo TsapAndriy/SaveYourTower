@@ -15,7 +15,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
 
         #region StaticProperties
 
-        public static double VelositiDivisor { get; set; }
+        //public static double VelositiDivisor { get; set; };
 
         #endregion
 
@@ -33,7 +33,8 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
 
         public double Velosity
         {
-            get { return (_velosity / VelositiDivisor); }
+            //get { return (_velosity / VelositiDivisor); }
+            get { return (_velosity / GameField.VelositiDivisor); }
             set { _velosity = value; }
         }
 
@@ -41,10 +42,10 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
 
         #region Constructors
 
-        static GameObject()
-        {
-            VelositiDivisor = 1;
-        }
+        //static GameObject()
+        //{
+        //    VelositiDivisor = 1;
+        //}
 
         protected GameObject(
             Field gameField, 

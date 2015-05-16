@@ -54,7 +54,7 @@ namespace SaveYourTower.DesktopUI.GamePages
             if (_helpImages != null)
             {
                 _helpIndex = 
-                     _helpIndex > 0 
+                    _helpIndex > 0 
                     ? _helpIndex - 1 
                     : _helpImages.Length - 1; 
 
