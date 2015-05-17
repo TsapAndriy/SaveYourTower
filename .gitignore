@@ -1,8 +1,8 @@
 **/bin/
 **/obj/
 **/Express/
-*/Release/
-*/Debug/
+**/Release/
+**/Debug/
 *.suo
 *.user
 *.dbmdl

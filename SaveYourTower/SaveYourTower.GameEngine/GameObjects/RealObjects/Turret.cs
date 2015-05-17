@@ -133,13 +133,13 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
             _targets.RemoveAll(obj => !obj.IsAlive);
         }
 
-        public void RemoveOutOfRangeTargets()
+        private void RemoveOutOfRangeTargets()
         {
             _targets.RemoveAll(obj => 
                 FindingColliderRadius < (int)Distance(Position, obj.Position));
         }
 
-        public void RandomTarget()
+        private void RandomTarget()
         {
             int targetId = 0;
 
@@ -150,7 +150,7 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
             Target = _targets.ToArray()[targetId];
         }
 
-        public double Distance(Point left, Point right)
+        private double Distance(Point left, Point right)
         {
             return Math.Sqrt(Math.Pow((left.X - right.X), 2)
                 + Math.Pow((left.Y - right.Y), 2));

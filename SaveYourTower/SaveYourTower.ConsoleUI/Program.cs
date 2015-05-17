@@ -24,90 +24,9 @@ namespace SaveYourTower.ConsoleUI
             if (game.GameStatus == Status.IsExit)
             {
                 Console.Clear();
-                Console.WriteLine("Thanks for playing. \n\n\n \t \t Your score: {0}", game.GetScore());
+                Console.WriteLine("Thanks for playing. \n\n\n \t \t Your score: {0}",
+                    game.GetScore());
             }
-        }
-
-        static private Level[] LoadLevels()
-        {
-            Level[] levels = new Level[LevelsSettings.Default.MaxLevel];
-
-            levels[0] = new Level(
-                    1,
-                    LevelsSettings.Default.IterationLatency,
-                    LevelsSettings.Default.EnemyGenerationLanency,
-                    LevelsSettings.Default.MaxLevel,
-                    LevelsSettings.Default.Level1EnemyCount,
-                    LevelsSettings.Default.Level1EnemyDamage,
-                    LevelsSettings.Default.Level1EnemyVelocity,
-                    LevelsSettings.Default.Level1EnemyLife,
-                    LevelsSettings.Default.Level1EnemyPowerRising,
-                    LevelsSettings.Default.TowerLife,
-                    LevelsSettings.Default.TowerCannonBallLifeTime,
-                    LevelsSettings.Default.TurretCannonBallLifeTime,
-                    LevelsSettings.Default.TowerCannonDamage,
-                    LevelsSettings.Default.TurretCannonDamage,
-                    LevelsSettings.Default.AllHitSpellDamage,
-                    LevelsSettings.Default.AllSlowSpellRatio,
-                    LevelsSettings.Default.AllSlowSpellDuration,
-                    LevelsSettings.Default.EnemyCollierRadius,
-                    LevelsSettings.Default.TowerColliderRadius,
-                    LevelsSettings.Default.TurretColliderRadius,
-                    LevelsSettings.Default.CannonBallColliderRadius,
-                    LevelsSettings.Default.TowerCannonBallVelosity,
-                    LevelsSettings.Default.TurretCannonBallVelosity);
-
-            levels[1] = new Level(
-                    2,
-                    LevelsSettings.Default.IterationLatency,
-                    LevelsSettings.Default.EnemyGenerationLanency,
-                    LevelsSettings.Default.MaxLevel,
-                    LevelsSettings.Default.Level2EnemyCount,
-                    LevelsSettings.Default.Level2EnemyDamage,
-                    LevelsSettings.Default.Level2EnemyVelocity,
-                    LevelsSettings.Default.Level2EnemyLife,
-                    LevelsSettings.Default.Level2EnemyPowerRising,
-                    LevelsSettings.Default.TowerLife,
-                    LevelsSettings.Default.TowerCannonBallLifeTime,
-                    LevelsSettings.Default.TurretCannonBallLifeTime,
-                    LevelsSettings.Default.TowerCannonDamage,
-                    LevelsSettings.Default.TurretCannonDamage,
-                    LevelsSettings.Default.AllHitSpellDamage,
-                    LevelsSettings.Default.AllSlowSpellRatio,
-                    LevelsSettings.Default.AllSlowSpellDuration,
-                    LevelsSettings.Default.EnemyCollierRadius,
-                    LevelsSettings.Default.TowerColliderRadius,
-                    LevelsSettings.Default.TurretColliderRadius,
-                    LevelsSettings.Default.CannonBallColliderRadius,
-                    LevelsSettings.Default.TowerCannonBallVelosity,
-                    LevelsSettings.Default.TurretCannonBallVelosity);
-
-            levels[2] = new Level(
-                    3,
-                    LevelsSettings.Default.IterationLatency,
-                    LevelsSettings.Default.EnemyGenerationLanency,
-                    LevelsSettings.Default.MaxLevel,
-                    LevelsSettings.Default.Level3EnemyCount,
-                    LevelsSettings.Default.Level3EnemyDamage,
-                    LevelsSettings.Default.Level3EnemyVelocity,
-                    LevelsSettings.Default.Level3EnemyLife,
-                    LevelsSettings.Default.Level3EnemyPowerRising,
-                    LevelsSettings.Default.TowerLife,
-                    LevelsSettings.Default.TowerCannonBallLifeTime,
-                    LevelsSettings.Default.TurretCannonBallLifeTime,
-                    LevelsSettings.Default.TowerCannonDamage,
-                    LevelsSettings.Default.TurretCannonDamage,
-                    LevelsSettings.Default.AllHitSpellDamage,
-                    LevelsSettings.Default.AllSlowSpellRatio,
-                    LevelsSettings.Default.AllSlowSpellDuration,
-                    LevelsSettings.Default.EnemyCollierRadius,
-                    LevelsSettings.Default.TowerColliderRadius,
-                    LevelsSettings.Default.TurretColliderRadius,
-                    LevelsSettings.Default.CannonBallColliderRadius,
-                    LevelsSettings.Default.TowerCannonBallVelosity,
-                    LevelsSettings.Default.TurretCannonBallVelosity);
-
-            return levels;
         }
 
         public static void InputEventHandler(object sender, EventArgs e)
@@ -180,14 +99,14 @@ namespace SaveYourTower.ConsoleUI
                 case ConsoleKey.D1:
                     game.BuyGameObject(new Turret(game.GameField, AskPosition(game.GameField), 1, 5, 30, cost: 1));
                     break;
-                case ConsoleKey.D3:
+                case ConsoleKey.D2:
                     AllHilSpell allHilSpell = new AllHilSpell(game.GameField, 100, 10);
                     if (game.BuyGameObject(allHilSpell) == BuingStatus.Success)
                     {
                         allHilSpell.Cast();
                     }
                     break;
-                case ConsoleKey.D4:
+                case ConsoleKey.D3:
                     AllSlowSpell allSlowSpell = new AllSlowSpell(game.GameField, 10);
                     if (game.BuyGameObject(allSlowSpell) == BuingStatus.Success)
                     {
@@ -249,7 +168,13 @@ namespace SaveYourTower.ConsoleUI
         public static void StartOutput(Field gameField)
         {
             Console.Clear();
-            Console.WriteLine("Save Your Tower\n\n\n\n\tPress any key to start");
+            Console.WriteLine("\t\t\t\tSave Your Tower\n");
+
+            Console.WriteLine("You should control the tower firing direction. Use keybourd arrows for it.");
+            Console.WriteLine("The main cannon is firing when spacebar is pressed.");
+            Console.WriteLine("Also. You can use turrets and some spells to detain enemies.");
+            Console.WriteLine("Do it. Destroy cruel enemies and get victory.");
+
         }
 
         public static void PlayingOutput(Field gameField)
@@ -336,13 +261,11 @@ namespace SaveYourTower.ConsoleUI
 
             str.Append("\tleft/right arrows : rotate\n");
             str.Append("\tspacebar : fire\n");
-            str.Append("\tD : sell object\n");
 
             str.Append("\nPosibilities :\n");
             str.Append("\t1 : turret\n");
-            str.Append("\t2 : mine\n");
-            str.Append("\t3 : hitting spell\n");
-            str.Append("\t4 : slowing spell\n");
+            str.Append("\t2 : hitting spell\n");
+            str.Append("\t3 : slowing spell\n");
 
 
             str.Append("\nGeneral control :\n");
@@ -400,6 +323,88 @@ namespace SaveYourTower.ConsoleUI
                 //OutputEventHandler(gameField);
                 Console.SetCursorPosition((int)position.Y, (int)position.X + 1);
             }
+        }
+
+        static private Level[] LoadLevels()
+        {
+            Level[] levels = new Level[LevelsSettings.Default.MaxLevel];
+
+            levels[0] = new Level(
+                    1,
+                    LevelsSettings.Default.IterationLatency,
+                    LevelsSettings.Default.EnemyGenerationLanency,
+                    LevelsSettings.Default.MaxLevel,
+                    LevelsSettings.Default.Level1EnemyCount,
+                    LevelsSettings.Default.Level1EnemyDamage,
+                    LevelsSettings.Default.Level1EnemyVelocity,
+                    LevelsSettings.Default.Level1EnemyLife,
+                    LevelsSettings.Default.Level1EnemyPowerRising,
+                    LevelsSettings.Default.TowerLife,
+                    LevelsSettings.Default.TowerCannonBallLifeTime,
+                    LevelsSettings.Default.TurretCannonBallLifeTime,
+                    LevelsSettings.Default.TowerCannonDamage,
+                    LevelsSettings.Default.TurretCannonDamage,
+                    LevelsSettings.Default.AllHitSpellDamage,
+                    LevelsSettings.Default.AllSlowSpellRatio,
+                    LevelsSettings.Default.AllSlowSpellDuration,
+                    LevelsSettings.Default.EnemyCollierRadius,
+                    LevelsSettings.Default.TowerColliderRadius,
+                    LevelsSettings.Default.TurretColliderRadius,
+                    LevelsSettings.Default.CannonBallColliderRadius,
+                    LevelsSettings.Default.TowerCannonBallVelosity,
+                    LevelsSettings.Default.TurretCannonBallVelosity);
+
+            levels[1] = new Level(
+                    2,
+                    LevelsSettings.Default.IterationLatency,
+                    LevelsSettings.Default.EnemyGenerationLanency,
+                    LevelsSettings.Default.MaxLevel,
+                    LevelsSettings.Default.Level2EnemyCount,
+                    LevelsSettings.Default.Level2EnemyDamage,
+                    LevelsSettings.Default.Level2EnemyVelocity,
+                    LevelsSettings.Default.Level2EnemyLife,
+                    LevelsSettings.Default.Level2EnemyPowerRising,
+                    LevelsSettings.Default.TowerLife,
+                    LevelsSettings.Default.TowerCannonBallLifeTime,
+                    LevelsSettings.Default.TurretCannonBallLifeTime,
+                    LevelsSettings.Default.TowerCannonDamage,
+                    LevelsSettings.Default.TurretCannonDamage,
+                    LevelsSettings.Default.AllHitSpellDamage,
+                    LevelsSettings.Default.AllSlowSpellRatio,
+                    LevelsSettings.Default.AllSlowSpellDuration,
+                    LevelsSettings.Default.EnemyCollierRadius,
+                    LevelsSettings.Default.TowerColliderRadius,
+                    LevelsSettings.Default.TurretColliderRadius,
+                    LevelsSettings.Default.CannonBallColliderRadius,
+                    LevelsSettings.Default.TowerCannonBallVelosity,
+                    LevelsSettings.Default.TurretCannonBallVelosity);
+
+            levels[2] = new Level(
+                    3,
+                    LevelsSettings.Default.IterationLatency,
+                    LevelsSettings.Default.EnemyGenerationLanency,
+                    LevelsSettings.Default.MaxLevel,
+                    LevelsSettings.Default.Level3EnemyCount,
+                    LevelsSettings.Default.Level3EnemyDamage,
+                    LevelsSettings.Default.Level3EnemyVelocity,
+                    LevelsSettings.Default.Level3EnemyLife,
+                    LevelsSettings.Default.Level3EnemyPowerRising,
+                    LevelsSettings.Default.TowerLife,
+                    LevelsSettings.Default.TowerCannonBallLifeTime,
+                    LevelsSettings.Default.TurretCannonBallLifeTime,
+                    LevelsSettings.Default.TowerCannonDamage,
+                    LevelsSettings.Default.TurretCannonDamage,
+                    LevelsSettings.Default.AllHitSpellDamage,
+                    LevelsSettings.Default.AllSlowSpellRatio,
+                    LevelsSettings.Default.AllSlowSpellDuration,
+                    LevelsSettings.Default.EnemyCollierRadius,
+                    LevelsSettings.Default.TowerColliderRadius,
+                    LevelsSettings.Default.TurretColliderRadius,
+                    LevelsSettings.Default.CannonBallColliderRadius,
+                    LevelsSettings.Default.TowerCannonBallVelosity,
+                    LevelsSettings.Default.TurretCannonBallVelosity);
+
+            return levels;
         }
     }
 }
