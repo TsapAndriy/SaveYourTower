@@ -19,7 +19,7 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
            Field gameField,
            Point position,
            int colliderRaius = 1,
-           double velosity = 1,
+           double velocity = 1,
            int damage = 1,
            int lifePoints = 1)
             : base(
@@ -27,7 +27,7 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                 position,
                 colliderRaius: colliderRaius,
                 damage : damage,
-                velosity: velosity,
+                velosity: velocity,
                 lifePoints: lifePoints)
         {
             Collider bodyCollider = 
@@ -49,24 +49,27 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
         public void OnCollision(object sender, CollisionEventArgs e)
         {
             GameObject gameObject = sender as GameObject;
-            
-            if ((gameObject is CannonBall) 
-                && (e.OtherCollider.Tag == "BodyCollider") 
-                && (e.MyCollider.Tag == "BodyCollider"))
-            {
-                ReceiveDamage(gameObject.Damage);
 
-                if ((IsAlive) && (LifePoints <= 0))
+            if (gameObject != null)
+            {
+                if ((gameObject is Cannonball)
+                    && (e.OtherCollider.Tag == "BodyCollider")
+                    && (e.MyCollider.Tag == "BodyCollider"))
+                {
+                    ReceiveDamage(gameObject.Damage);
+
+                    if ((IsAlive) && (LifePoints <= 0))
+                    {
+                        IsAlive = false;
+                        GameField.GameScore.AddPoint(1);
+                    }
+                }
+                else if ((gameObject is Tower)
+                    && (e.OtherCollider.Tag == "BodyCollider")
+                    && (e.MyCollider.Tag == "BodyCollider"))
                 {
                     IsAlive = false;
-                    GameField.GameScore.AddPoint(1);
                 }
-            }
-            else if ((gameObject is Tower) 
-                && (e.OtherCollider.Tag == "BodyCollider") 
-                && (e.MyCollider.Tag == "BodyCollider"))
-            {
-                IsAlive = false;
             }
         }
 

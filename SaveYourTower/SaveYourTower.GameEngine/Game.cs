@@ -18,8 +18,8 @@ namespace SaveYourTower.GameEngine
         IsReadyToStart,
         IsStarted,
         IsPaused,
-        IsWinnedLevel,
-        IsWinned,
+        IsWonLevel,
+        IsWon,
         IsExit
     }
 
@@ -54,7 +54,7 @@ namespace SaveYourTower.GameEngine
 
         public Level[] Levels { get; private set; }
         public Status GameStatus { get; private set; }
-        public EnemiesGenerator GameEmeniesGenerator { get; private set; }
+        public EnemiesGenerator GameEnemiesGenerator { get; private set; }
         public Field GameField { get; private set; }
 
         #endregion
@@ -76,14 +76,14 @@ namespace SaveYourTower.GameEngine
 
             _gameTimer.Elapsed += Update;
 
-            GameEmeniesGenerator = new EnemiesGenerator(GameField.CurrenGameLevel);
+            GameEnemiesGenerator = new EnemiesGenerator(GameField.CurrentGameLevel);
 
             GameField.AddGameObject(
                 new Tower(GameField, 
                     new Point((GameField.Size.X / 2), 
                     (GameField.Size.Y / 2)), 
                     new UnitVector2(0, 0), 
-                    GameField.CurrenGameLevel.TowerColliderRadius,
+                    GameField.CurrentGameLevel.TowerColliderRadius,
                     levels[0].TowerLife));
         }
 
@@ -100,7 +100,7 @@ namespace SaveYourTower.GameEngine
             if (GameStatus != Status.IsReadyToRun)
             {
                 throw new InvalidOperationException(
-                    "Only game with status 'IsReadyToRu' can be started");
+                    "Only game with status 'IsReadyToRun' can be started");
             }
 
             #endregion
@@ -116,7 +116,7 @@ namespace SaveYourTower.GameEngine
 
             if (GameStatus != Status.IsReadyToStart)
             {
-                throw new InvalidOperationException("Only game with status 'IsReadyToRu' can be started");
+                throw new InvalidOperationException("Only game with status 'IsReadyToRun' can be started");
             }
 
             #endregion
@@ -154,7 +154,7 @@ namespace SaveYourTower.GameEngine
                 }
 
                 CheckTowerLose();
-                GameEmeniesGenerator.Generate(GameField);
+                GameEnemiesGenerator.Generate(GameField);
                 RemoveOutOfFieldObjects();
                 _collisionDetector.FindCollisions(GameField);
             }
@@ -219,8 +219,8 @@ namespace SaveYourTower.GameEngine
 
             if ((GameStatus != Status.IsStarted) 
                 && (GameStatus != Status.IsPaused)
-                && (GameStatus != Status.IsWinned)
-                && (GameStatus != Status.IsWinnedLevel))
+                && (GameStatus != Status.IsWon)
+                && (GameStatus != Status.IsWonLevel))
             {
                 throw new InvalidOperationException(
                     "Only game with status 'IsRuning' or 'IsPaused' can be stoped");
@@ -260,6 +260,7 @@ namespace SaveYourTower.GameEngine
 
         public BuingStatus BuyGameObject(GameObject gameObject)
         {
+
             if (IsObejectOnTheField(gameObject))
             {
                 throw new InvalidOperationException("Object already exist.");
@@ -278,6 +279,7 @@ namespace SaveYourTower.GameEngine
                 GameField.AddGameObject(gameObject);
                 return BuingStatus.Success;
             }
+            
         }
 
         private void RemoveOutOfFieldObjects()
@@ -354,23 +356,23 @@ namespace SaveYourTower.GameEngine
         {
             #region Validation
 
-            if (GameStatus != Status.IsWinnedLevel)
+            if (GameStatus != Status.IsWonLevel)
             {
                 throw new InvalidOperationException(
-                    "Only game with status 'IsWinned' can load next level");
+                    "Only game with status 'IsWon' can load next level");
             }
 
             #endregion
 
-            if (GameField.CurrenGameLevel.Number == _maxLevel)
+            if (GameField.CurrentGameLevel.Number == _maxLevel)
             {
-                GameStatus = Status.IsWinned;
+                GameStatus = Status.IsWon;
                 return;
             }
 
             GameStatus = Status.IsReadyToStart;
             PrepareFieldToNextLevel();
-            GameEmeniesGenerator = new EnemiesGenerator(GameField.CurrenGameLevel);
+            GameEnemiesGenerator = new EnemiesGenerator(GameField.CurrentGameLevel);
 
             Start();
         }
@@ -385,10 +387,10 @@ namespace SaveYourTower.GameEngine
                 GameField,
                 new Point((GameField.Size.X / 2), (GameField.Size.Y / 2)),
                 new UnitVector2(0, 0),
-                GameField.CurrenGameLevel.TowerColliderRadius,
-                GameField.CurrenGameLevel.TowerLife));
+                GameField.CurrentGameLevel.TowerColliderRadius,
+                GameField.CurrentGameLevel.TowerLife));
 
-            GameField.CurrenGameLevel = Levels[GameField.CurrenGameLevel.Number];
+            GameField.CurrentGameLevel = Levels[GameField.CurrentGameLevel.Number];
         }
 
         private void CheckLevelWin()
@@ -398,10 +400,10 @@ namespace SaveYourTower.GameEngine
 
             if (towerLive 
                 && enemiesNotExist 
-                && GameEmeniesGenerator.EnemiesAreEnded 
-                && GameStatus != Status.IsWinned)
+                && GameEnemiesGenerator.EnemiesAreEnded 
+                && GameStatus != Status.IsWon)
             {
-                GameStatus = Status.IsWinnedLevel;
+                GameStatus = Status.IsWonLevel;
 
                 if (WinLevelEventHandler != null)
                 {

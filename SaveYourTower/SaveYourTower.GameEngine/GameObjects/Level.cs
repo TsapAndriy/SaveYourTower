@@ -65,7 +65,7 @@ namespace SaveYourTower.GameEngine.GameObjects
         int enemyColliderRadius = 1,
         int towerColliderRadius = 1,
         int turretColliderRadius = 1,
-        int cannonBallColliderRadius = 1,
+        int cannonballColliderRadius = 1,
         double towerCannonBallVelosity = 10,
         double turretCannonBallVelosity = 10)
         {
@@ -89,7 +89,7 @@ namespace SaveYourTower.GameEngine.GameObjects
             EnemyColliderRadius = enemyColliderRadius;
             TowerColliderRadius = towerColliderRadius;
             TurretColliderRadius = turretColliderRadius;
-            CannonBallColliderRadius = cannonBallColliderRadius;
+            CannonBallColliderRadius = cannonballColliderRadius;
             TowerCannonBallVelosity = towerCannonBallVelosity;
             TurretCannonBallVelosity = turretCannonBallVelosity;
         } 

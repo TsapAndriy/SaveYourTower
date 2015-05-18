@@ -29,7 +29,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
                 colliderRaius: 0,
                 cost: cost)
         {
-            ReloadingTime = GameField.CurrenGameLevel.AllSlowSpellDuration; ;
+            ReloadingTime = GameField.CurrentGameLevel.AllSlowSpellDuration; ;
         } 
 
         #endregion
@@ -38,8 +38,8 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
 
         public void Cast()
         {
-            double divisor = GameField.CurrenGameLevel.AllSlowSpellRatio;
-            GameField.VelositiDivisor += divisor;
+            double divisor = GameField.CurrentGameLevel.AllSlowSpellRatio;
+            GameField.VelocityDivisor += divisor;
             IsUsed = true;
             Timer timer = new Timer(ReloadingTime);
             timer.AutoReset = false;
@@ -50,8 +50,8 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
 
         private void FinishEffect(object source, ElapsedEventArgs e)
         {
-            double divisor = GameField.CurrenGameLevel.AllSlowSpellRatio;
-            GameField.VelositiDivisor -= divisor;
+            double divisor = GameField.CurrentGameLevel.AllSlowSpellRatio;
+            GameField.VelocityDivisor -= divisor;
             IsAlive = false;
         }
 

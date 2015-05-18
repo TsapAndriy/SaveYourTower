@@ -230,6 +230,7 @@ namespace SaveYourTower.DesktopUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.tblMainGameView);
+            this.DoubleBuffered = true;
             this.Name = "PlaingPage";
             this.Size = new System.Drawing.Size(500, 500);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PlaingPage_KeyDown);

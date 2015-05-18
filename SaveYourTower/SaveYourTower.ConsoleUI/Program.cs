@@ -45,11 +45,11 @@ namespace SaveYourTower.ConsoleUI
             {
                 PlayingInput(game, new EventArgs());
             }
-            else if (game.GameStatus == Status.IsWinnedLevel)
+            else if (game.GameStatus == Status.IsWonLevel)
             {
                 WinLevelInput(game);
             }
-            else if (game.GameStatus == Status.IsWinned)
+            else if (game.GameStatus == Status.IsWon)
             {
                 WinInput(game);
             }
@@ -100,7 +100,7 @@ namespace SaveYourTower.ConsoleUI
                     game.BuyGameObject(new Turret(game.GameField, AskPosition(game.GameField), 1, 5, 30, cost: 1));
                     break;
                 case ConsoleKey.D2:
-                    AllHilSpell allHilSpell = new AllHilSpell(game.GameField, 100, 10);
+                    AllHitSpell allHilSpell = new AllHitSpell(game.GameField, 100, 10);
                     if (game.BuyGameObject(allHilSpell) == BuingStatus.Success)
                     {
                         allHilSpell.Cast();
@@ -155,11 +155,11 @@ namespace SaveYourTower.ConsoleUI
             {
                 PlayingOutput(game.GameField);
             }
-            else if (game.GameStatus == Status.IsWinnedLevel)
+            else if (game.GameStatus == Status.IsWonLevel)
             {
                 WinLevelOutput(game.GameField);
             }
-            else if (game.GameStatus == Status.IsWinned)
+            else if (game.GameStatus == Status.IsWon)
             {
                 WinOutput(game.GameField);
             }
@@ -199,7 +199,7 @@ namespace SaveYourTower.ConsoleUI
                             {
                                 output.Append('*');
                             }
-                            else if (obj is CannonBall)
+                            else if (obj is Cannonball)
                             {
                                 output.Append('.');
                             }
@@ -238,7 +238,7 @@ namespace SaveYourTower.ConsoleUI
             StringBuilder output = new StringBuilder();
             output.AppendFormat(
                 "You win lever : {0}, \n Score : {1} \nPress Enter to load next level, or ESK to exit",
-                gameField.CurrenGameLevel.Number,
+                gameField.CurrentGameLevel.Number,
                 gameField.GameScore.Value
                 );
             Console.Write(output);

@@ -6,19 +6,30 @@ namespace SaveYourTower.DesktopUI.GamePages
 {
     public partial class LosePage : UserControl, ILoadable
     {
+        #region Events
+
         public event EventHandler<PageEventArgs> PageEventHandler;
+        
+        #endregion
+
+        #region Constructors
 
         public LosePage()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
         }
+        
+        #endregion
+
+        #region Methds
 
         private void button1_Click(object sender, EventArgs e)
         {
             PageEventHandler(this, new PageEventArgs(typeof(PlaingPage)));
             this.Dispose();
         }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -35,6 +46,8 @@ namespace SaveYourTower.DesktopUI.GamePages
         {
             SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
             sound.Play();
-        }
+        } 
+
+        #endregion
     }
 }

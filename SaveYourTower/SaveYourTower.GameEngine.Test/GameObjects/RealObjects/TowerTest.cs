@@ -38,12 +38,12 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
 
             tower.Live();
 
-            Assert.IsNull(tower.GameField.GameObjects.Find(obj => { return (obj is CannonBall); }));
+            Assert.IsNull(tower.GameField.GameObjects.Find(obj => { return (obj is Cannonball); }));
 
             tower.Fire();
             tower.Live();
 
-            Assert.IsNotNull(tower.GameField.GameObjects.Find(obj => { return (obj is CannonBall); }));
+            Assert.IsNotNull(tower.GameField.GameObjects.Find(obj => { return (obj is Cannonball); }));
             Assert.AreEqual(1, field.GameObjects.Count);
 
         }
@@ -91,12 +91,12 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
 
             tower.Live();
 
-            Assert.IsNull(tower.GameField.GameObjects.Find(obj => { return (obj is CannonBall); }));
+            Assert.IsNull(tower.GameField.GameObjects.Find(obj => { return (obj is Cannonball); }));
 
             tower.Fire();
             tower.Live();
 
-            Assert.IsNotNull(tower.GameField.GameObjects.Find(obj => { return (obj is CannonBall); }));
+            Assert.IsNotNull(tower.GameField.GameObjects.Find(obj => { return (obj is Cannonball); }));
             Assert.AreEqual(1, field.GameObjects.Count);
         }
     }

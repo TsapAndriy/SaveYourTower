@@ -19,7 +19,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
         public void TestConsturtor()
         {
             Field gameField = new Field(new Point(10, 10), null);
-            AllHilSpell spell = new AllHilSpell(gameField, 5, 1);
+            AllHitSpell spell = new AllHitSpell(gameField, 5, 1);
 
             Assert.IsNotNull(spell);
             Assert.AreEqual(5, spell.ReloadingTime);
@@ -31,7 +31,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
         {
             Level level = new Level();
             Field gameField = new Field(new Point(10, 10), level);
-            AllHilSpell spell = new AllHilSpell(gameField, 5, 1);
+            AllHitSpell spell = new AllHitSpell(gameField, 5, 1);
 
             gameField.GameObjects.Add(new Enemy(null, null));
 
@@ -49,7 +49,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
         public void Live()
         {
             Field gameField = new Field(new Point(10, 10), new Level());
-            AllHilSpell spell = new AllHilSpell(gameField, 1, 1);
+            AllHitSpell spell = new AllHitSpell(gameField, 1, 1);
 
             spell.Cast();
 

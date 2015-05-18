@@ -35,7 +35,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
         {
 
             Field field = new Field(new Point(10, 10), null);
-            CannonBall cannonBall = new CannonBall(field, new Point(1, 1), new UnitVector2(90), 2, 1, 1, 10);
+            Cannonball cannonBall = new Cannonball(field, new Point(1, 1), new UnitVector2(90), 2, 1, 1, 10);
 
             GameObject enemy = new Enemy(field, new Point(1, 2), 2, 1, 1, 1);
 

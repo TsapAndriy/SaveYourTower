@@ -13,15 +13,18 @@ namespace SaveYourTower.GameEngine.GameLogic
 
         public void FindCollisions(Field gameField)
         {
-            GameObject[] gameObjects = gameField.GameObjects.ToArray();
-
-            for (int i = 0; i < gameObjects.Length; i++)
+            if (gameField != null)
             {
-                for (int j = 0; j < gameObjects.Length; j++)
+                GameObject[] gameObjects = gameField.GameObjects.ToArray();
+
+                for (int i = 0; i < gameObjects.Length; i++)
                 {
-                    if (i != j)
+                    for (int j = 0; j < gameObjects.Length; j++)
                     {
-                        CheckColliders(gameObjects[i], gameObjects[j]);
+                        if (i != j)
+                        {
+                            CheckColliders(gameObjects[i], gameObjects[j]);
+                        }
                     }
                 }
             }

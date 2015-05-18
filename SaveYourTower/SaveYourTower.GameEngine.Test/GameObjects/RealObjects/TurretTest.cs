@@ -71,7 +71,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             turret.Fire();
 
             Assert.AreEqual(3, field.GameObjects.Count);
-            Assert.IsNotNull(turret.GameField.GameObjects.Find(obj => { return (obj is CannonBall); }));
+            Assert.IsNotNull(turret.GameField.GameObjects.Find(obj => { return (obj is Cannonball); }));
 
             enemy.IsAlive = false;
 
@@ -95,7 +95,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             turret.Live();
 
             Assert.AreEqual(3, field.GameObjects.Count);
-            Assert.IsNotNull(turret.GameField.GameObjects.Find(obj => { return (obj is CannonBall); }));
+            Assert.IsNotNull(turret.GameField.GameObjects.Find(obj => { return (obj is Cannonball); }));
 
             enemy.IsAlive = false;
             turret.Live();

@@ -41,7 +41,7 @@
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(500, 520);
+            this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "SaveYourTowerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SaveYourTower";

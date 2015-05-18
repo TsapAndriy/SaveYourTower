@@ -34,7 +34,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Base
         public double Velosity
         {
             //get { return (_velosity / VelositiDivisor); }
-            get { return (_velosity / GameField.VelositiDivisor); }
+            get { return (_velosity / GameField.VelocityDivisor); }
             set { _velosity = value; }
         }
 

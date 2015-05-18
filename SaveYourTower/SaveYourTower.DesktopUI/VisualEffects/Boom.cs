@@ -14,7 +14,6 @@ namespace SaveYourTower.DesktopUI.VisualEffects
         
         #endregion
 
-
         #region Properties
         public Image Look { get; private set; }
         public bool IsAlive { get; private set; }

@@ -29,7 +29,7 @@ namespace SaveYourTower.DesktopUI
         private const int SpellCost = 10;
         private const int TimeOfSpellCostViewing = 2000;
         private const int SpellDuration = 100;
-        private const int TurretFIndingCollider = 150;
+        private const int TurretFindingCollider = 150;
         private const int TurretLifePoints = 30;
         private const int TurretFireRateDivisor = 10; 
 
@@ -55,6 +55,7 @@ namespace SaveYourTower.DesktopUI
         #region Fields
 
         private static object _sync = new object();
+
         private List<object> _effects = new List<object>();
         private Cursor _defaultCursor;
         private CursorStatus _cursorStatus = CursorStatus.Fire;
@@ -121,14 +122,14 @@ namespace SaveYourTower.DesktopUI
                         Invoke((Action<Field>)Draw, _game.GameField);
                     }
                 }
-                else if (_game.GameStatus == Status.IsWinnedLevel)
+                else if (_game.GameStatus == Status.IsWonLevel)
                 {
                     lock (_sync)
                     {
                         Invoke((Action<Field>)LevelWinOutput, _game.GameField);
                     }
                 }
-                else if (_game.GameStatus == Status.IsWinned)
+                else if (_game.GameStatus == Status.IsWon)
                 {
                     lock (_sync)
                     {
@@ -175,7 +176,7 @@ namespace SaveYourTower.DesktopUI
                 {
                     DrawEnemies(result, obj);
                 }
-                else if (obj is CannonBall)
+                else if (obj is Cannonball)
                 {
                     DrawCannonBalls(result, obj);
                 }
@@ -287,7 +288,7 @@ namespace SaveYourTower.DesktopUI
                 _effects.Add(new Boom(((GameObject)sender).Position, Properties.Resources.Boom, 200));
                 playSound(Properties.Resources.TurretExplosionSound);
             }
-            else if (sender is CannonBall)
+            else if (sender is Cannonball)
             {
                 _effects.Add(new Boom(((GameObject)sender).Position, Properties.Resources.CannonBallBoom, 100));
             }
@@ -433,8 +434,8 @@ namespace SaveYourTower.DesktopUI
                     Turret turret = new Turret(
                         _game.GameField,
                         turretPosision,
-                        _game.GameField.CurrenGameLevel.TurretColliderRadius,
-                        TurretFIndingCollider,
+                        _game.GameField.CurrentGameLevel.TurretColliderRadius,
+                        TurretFindingCollider,
                         TurretLifePoints,
                         TurretFireRateDivisor,
                         SpellCost);
@@ -457,16 +458,16 @@ namespace SaveYourTower.DesktopUI
             CreateStars();
             bntNextLevel.Visible = false;
 
-            if (_game.GameStatus == Status.IsWinnedLevel)
+            if (_game.GameStatus == Status.IsWonLevel)
             {
                 _effects.Clear();
                 _game.NextLevel();
 
-                if (_game.GameField.CurrenGameLevel.Number == 2)
+                if (_game.GameField.CurrentGameLevel.Number == 2)
                 {
                     btnTurret.Enabled = true;
                 }
-                if (_game.GameField.CurrenGameLevel.Number == 3)
+                if (_game.GameField.CurrentGameLevel.Number == 3)
                 {
                     btnHitAll.Enabled = true;
                     btnSlowAll.Enabled = true;
@@ -564,7 +565,7 @@ namespace SaveYourTower.DesktopUI
 
         private void HitAll()
         {
-            AllHilSpell allHilSpell = new AllHilSpell(_game.GameField, SpellDuration, SpellCost);
+            AllHitSpell allHilSpell = new AllHitSpell(_game.GameField, SpellDuration, SpellCost);
             if (_game.BuyGameObject(allHilSpell) == BuingStatus.Success)
             {
                 SoundPlayer sound = new SoundPlayer(Properties.Resources.HitAllSound);

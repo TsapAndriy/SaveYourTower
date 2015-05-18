@@ -12,8 +12,8 @@ namespace SaveYourTower.GameEngine.GameObjects
         public Point Size { get; private set; }
         public Score GameScore { get; private set; }
         public List<GameObject> GameObjects { get; private set; }
-        public Level CurrenGameLevel { get; set; }
-        public double VelositiDivisor { get; set; }
+        public Level CurrentGameLevel { get; set; }
+        public double VelocityDivisor { get; set; }
 
         #endregion
 
@@ -24,8 +24,8 @@ namespace SaveYourTower.GameEngine.GameObjects
             Size = size;
             GameScore = new Score();
             GameObjects = new List<GameObject>();
-            CurrenGameLevel = gameLevel;
-            VelositiDivisor = 1;
+            CurrentGameLevel = gameLevel;
+            VelocityDivisor = 1;
         } 
 
         #endregion

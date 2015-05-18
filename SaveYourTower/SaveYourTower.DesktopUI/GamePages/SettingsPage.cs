@@ -7,15 +7,24 @@ namespace SaveYourTower.DesktopUI.GamePages
 {
     public partial class SettingsPage : UserControl, ILoadable
     {
+        #region Events
+
         public event EventHandler<PageEventArgs> PageEventHandler;
+        
+        #endregion
+
+        #region Constructors
 
         public SettingsPage()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
             lblFullScreen.Text = Properties.Settings.Default.FullScreen.ToString();
-            lblDifficulty.Text = Properties.Settings.Default.Difficulty.ToString();
         }
+        
+        #endregion
+
+        #region Methods
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -25,46 +34,26 @@ namespace SaveYourTower.DesktopUI.GamePages
 
         private void lblFullScreen_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.FullScreen = 
+            Properties.Settings.Default.FullScreen =
                 !Properties.Settings.Default.FullScreen;
 
             lblFullScreen.Text = Properties.Settings.Default.FullScreen.ToString();
 
             if (Properties.Settings.Default.FullScreen)
             {
-                ((SaveYourTowerForm)this.Parent).FormBorderStyle = 
+                ((SaveYourTowerForm)this.Parent).FormBorderStyle =
                     System.Windows.Forms.FormBorderStyle.None;
 
-                ((SaveYourTowerForm)this.Parent).WindowState = 
+                ((SaveYourTowerForm)this.Parent).WindowState =
                     FormWindowState.Maximized;
             }
             else
             {
-                ((SaveYourTowerForm)this.Parent).FormBorderStyle = 
+                ((SaveYourTowerForm)this.Parent).FormBorderStyle =
                     System.Windows.Forms.FormBorderStyle.FixedDialog;
-                ((SaveYourTowerForm) this.Parent).WindowState = 
+                ((SaveYourTowerForm)this.Parent).WindowState =
                     FormWindowState.Normal;
             }
-        }
-
-        private void lblNextDifficulty_Click(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.Difficulty = 
-                Properties.Settings.Default.Difficulty < 10
-                ? Properties.Settings.Default.Difficulty + 1
-                : 0;
-
-            lblDifficulty.Text = Properties.Settings.Default.Difficulty.ToString();
-        }
-
-        private void lblPrevDifficulty_Click(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.Difficulty =
-                Properties.Settings.Default.Difficulty > 0
-                ? Properties.Settings.Default.Difficulty - 1
-                : 10;
-
-            lblDifficulty.Text = Properties.Settings.Default.Difficulty.ToString();
         }
 
         private void btnExit_MouseEnter(object sender, EventArgs e)
@@ -89,6 +78,8 @@ namespace SaveYourTower.DesktopUI.GamePages
         {
             SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
             sound.Play();
-        }
+        } 
+
+        #endregion
     }
 }

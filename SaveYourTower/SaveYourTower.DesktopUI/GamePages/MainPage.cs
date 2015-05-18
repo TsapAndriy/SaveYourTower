@@ -9,13 +9,23 @@ namespace SaveYourTower.DesktopUI
 
     public partial class MainPage : UserControl, ILoadable
     {
+        #region Events
+
         public event EventHandler<PageEventArgs> PageEventHandler;
+
+        #endregion
+
+        #region Constructors
 
         public MainPage()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
         }
+        
+        #endregion
+
+        #region Methods
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -62,6 +72,8 @@ namespace SaveYourTower.DesktopUI
         {
             SoundPlayer sound = new SoundPlayer(Properties.Resources.SelectSound);
             sound.Play();
-        }
+        } 
+
+        #endregion
     }
 }

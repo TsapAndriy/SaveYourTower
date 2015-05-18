@@ -6,7 +6,7 @@ using SaveYourTower.GameEngine.GameObjects.Spells.Interfaces;
 
 namespace SaveYourTower.GameEngine.GameObjects.Spells
 {
-    public class AllHilSpell : GameObject, ISpell, ILive
+    public class AllHitSpell : GameObject, ISpell, ILive
     {
         #region Properties
 
@@ -17,7 +17,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
 
         #region Constructors
 
-        public AllHilSpell(
+        public AllHitSpell(
            Field gameField,
            int reloadingTime = 5,
            int cost = int.MaxValue)
@@ -41,7 +41,7 @@ namespace SaveYourTower.GameEngine.GameObjects.Spells
             {
                 if (gameObject is Enemy)
                 {
-                    int damage = GameField.CurrenGameLevel.AllHitSpellDamage;
+                    int damage = GameField.CurrentGameLevel.AllHitSpellDamage;
                     gameObject.ReceiveDamage(damage);
                 }
             });

@@ -6,7 +6,7 @@ using SaveYourTower.GameEngine.GameLogic;
 
 namespace SaveYourTower.GameEngine.GameObjects.RealObjects
 {
-    public class CannonBall : GameObject, ICannonBall
+    public class Cannonball : GameObject, ICannonBall
     {
         #region Fields
 
@@ -16,12 +16,12 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
 
         #region Constructors
 
-        public CannonBall(
+        public Cannonball(
            Field gameField,
            Point position,
            UnitVector2 direction,
            int colliderRaius,
-           double velosity,
+           double velocity,
            int damage,
            int timeToLive)
             : base(
@@ -29,7 +29,7 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
                 position,
                 direction,
                 colliderRaius,
-                velosity,
+                velocity,
                 damage : damage,
                 lifePoints: 1)
         {
@@ -50,7 +50,7 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
         {
             GameObject gameObject = sender as GameObject;
 
-            if ((gameObject is Enemy) 
+            if ((gameObject != null) && (gameObject is Enemy) 
                 && (e.OtherCollider.Tag == "BodyCollider") 
                 && (e.MyCollider.Tag == "BodyCollider"))
             {

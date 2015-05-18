@@ -68,7 +68,7 @@ namespace SaveYourTower.GameEngine.Test
             tower.Live();
 
             Assert.AreEqual(2, game.GameField.GameObjects.Count);
-            Assert.IsTrue(game.GameField.GameObjects.Exists(obj => (obj is CannonBall)));
+            Assert.IsTrue(game.GameField.GameObjects.Exists(obj => (obj is Cannonball)));
         }
 
         [TestMethod]
@@ -145,9 +145,9 @@ namespace SaveYourTower.GameEngine.Test
             Game game = new Game(new Point(10, 10), levels);
 
             PrivateObject testGame = new PrivateObject(game);
-            testGame.SetProperty("GameStatus", Status.IsWinnedLevel);
+            testGame.SetProperty("GameStatus", Status.IsWonLevel);
 
-            Assert.AreEqual(Status.IsWinnedLevel, game.GameStatus);
+            Assert.AreEqual(Status.IsWonLevel, game.GameStatus);
         }
 
         [TestMethod]
@@ -158,17 +158,17 @@ namespace SaveYourTower.GameEngine.Test
 
             PrivateObject testGame = new PrivateObject(game);
             testGame.Invoke("CheckLevelWin");
-            Assert.AreNotEqual(Status.IsWinnedLevel, game.GameStatus);
+            Assert.AreNotEqual(Status.IsWonLevel, game.GameStatus);
 
-            for (int i = 0; !game.GameEmeniesGenerator.EnemiesAreEnded; i++)
+            for (int i = 0; !game.GameEnemiesGenerator.EnemiesAreEnded; i++)
             {
-                game.GameEmeniesGenerator.Generate(game.GameField);
+                game.GameEnemiesGenerator.Generate(game.GameField);
             }
 
             game.GameField.GameObjects.RemoveAll(obj => obj is Enemy);
 
             testGame.Invoke("CheckLevelWin");
-            Assert.AreEqual(Status.IsWinnedLevel, game.GameStatus);
+            Assert.AreEqual(Status.IsWonLevel, game.GameStatus);
         }
 
         [TestMethod]
@@ -181,14 +181,14 @@ namespace SaveYourTower.GameEngine.Test
 
             game.WinLevelEventHandler += ((sender, e) => eventHappend = true);
 
-            for (int i = 0; !game.GameEmeniesGenerator.EnemiesAreEnded; i++)
+            for (int i = 0; !game.GameEnemiesGenerator.EnemiesAreEnded; i++)
             {
-                game.GameEmeniesGenerator.Generate(game.GameField);
+                game.GameEnemiesGenerator.Generate(game.GameField);
             }
             game.GameField.GameObjects.RemoveAll(obj => obj is Enemy);
 
             privateGame.Invoke("CheckLevelWin");
-            Assert.AreEqual(Status.IsWinnedLevel, game.GameStatus);
+            Assert.AreEqual(Status.IsWonLevel, game.GameStatus);
             Assert.IsTrue(eventHappend);
         }
 
@@ -323,7 +323,7 @@ namespace SaveYourTower.GameEngine.Test
             Game game = new Game(new Point(10, 10), levels);
 
             PrivateObject privateGame = new PrivateObject(game);
-            privateGame.SetProperty("GameStatus", Status.IsWinnedLevel);
+            privateGame.SetProperty("GameStatus", Status.IsWonLevel);
 
             game.NextLevel();
 
@@ -333,7 +333,7 @@ namespace SaveYourTower.GameEngine.Test
                 return !((obj is Enemy) || (obj is Turret) || (obj is Tower));
             }));
 
-            Assert.IsFalse(game.GameEmeniesGenerator.EnemiesAreEnded);
+            Assert.IsFalse(game.GameEnemiesGenerator.EnemiesAreEnded);
             Assert.AreEqual(Status.IsStarted, game.GameStatus);
         }
 
@@ -347,13 +347,13 @@ namespace SaveYourTower.GameEngine.Test
             Game game = new Game(new Point(10, 10), levels);
 
             PrivateObject privateGame = new PrivateObject(game);
-            privateGame.SetProperty("GameStatus", Status.IsWinnedLevel);
+            privateGame.SetProperty("GameStatus", Status.IsWonLevel);
 
-            game.GameField.CurrenGameLevel = levels[game.GameField.CurrenGameLevel.MaxLevel - 1];
+            game.GameField.CurrentGameLevel = levels[game.GameField.CurrentGameLevel.MaxLevel - 1];
 
             game.NextLevel();
 
-            Assert.AreEqual(Status.IsWinned, game.GameStatus);
+            Assert.AreEqual(Status.IsWon, game.GameStatus);
         }
 
         [TestMethod]
@@ -368,7 +368,7 @@ namespace SaveYourTower.GameEngine.Test
             PrivateObject privateGame = new PrivateObject(game);
             privateGame.SetProperty("GameStatus", Status.IsStarted);
 
-            game.GameField.CurrenGameLevel = levels[game.GameField.CurrenGameLevel.MaxLevel - 1];
+            game.GameField.CurrentGameLevel = levels[game.GameField.CurrentGameLevel.MaxLevel - 1];
 
             GameObject enemy = new Enemy(game.GameField, new Point(3, 3));
 
@@ -397,7 +397,7 @@ namespace SaveYourTower.GameEngine.Test
             PrivateObject privateGame = new PrivateObject(game);
             privateGame.SetProperty("GameStatus", Status.IsStarted);
 
-            game.GameField.CurrenGameLevel = levels[game.GameField.CurrenGameLevel.MaxLevel - 1];
+            game.GameField.CurrentGameLevel = levels[game.GameField.CurrentGameLevel.MaxLevel - 1];
 
             GameObject tower = game.GameField.GameObjects.Find(obj => obj is Tower);
 

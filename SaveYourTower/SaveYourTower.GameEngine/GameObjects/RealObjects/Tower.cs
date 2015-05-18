@@ -65,14 +65,14 @@ namespace SaveYourTower.GameEngine.GameObjects.RealObjects
         {
             if (_isFiring)
             {
-                GameField.AddGameObject(new CannonBall(
+                GameField.AddGameObject(new Cannonball(
                     GameField,
                     (Point) Position.Clone(),
                     new UnitVector2(Direction.Angle),
-                    GameField.CurrenGameLevel.CannonBallColliderRadius,
-                    GameField.CurrenGameLevel.TowerCannonBallVelosity,
-                    GameField.CurrenGameLevel.TowerCannonDamage,
-                    GameField.CurrenGameLevel.TowerCannonBallLifeTime
+                    GameField.CurrentGameLevel.CannonBallColliderRadius,
+                    GameField.CurrentGameLevel.TowerCannonBallVelosity,
+                    GameField.CurrentGameLevel.TowerCannonDamage,
+                    GameField.CurrentGameLevel.TowerCannonBallLifeTime
                     ));
             }
             _isFiring = false;

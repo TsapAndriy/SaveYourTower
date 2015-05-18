@@ -21,7 +21,7 @@ namespace SaveYourTower.GameEngine.Test.GameObjects
             Assert.IsNotNull(field);
             Assert.IsNotNull(field.GameScore);
             Assert.IsNotNull(field.GameObjects);
-            Assert.IsNotNull(field.CurrenGameLevel);
+            Assert.IsNotNull(field.CurrentGameLevel);
             Assert.AreEqual(0, field.GameObjects.Count);
         }
 

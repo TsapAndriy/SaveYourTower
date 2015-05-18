@@ -29,19 +29,19 @@ namespace SaveYourTower.GameEngine.Test.GameObjects.Spells
             Field gameField = new Field(new Point(10, 10), new Level());
             AllSlowSpell spell = new AllSlowSpell(gameField, 1);
 
-            double oldSlowRatio = gameField.VelositiDivisor;
+            double oldSlowRatio = gameField.VelocityDivisor;
 
             spell.Cast();
 
             double slowRatio = 1;
 
             Assert.IsTrue(spell.IsUsed);
-            Assert.AreEqual((slowRatio + oldSlowRatio), gameField.VelositiDivisor);
+            Assert.AreEqual((slowRatio + oldSlowRatio), gameField.VelocityDivisor);
 
-            Thread.Sleep(20);
+            Thread.Sleep(200);
 
             Assert.IsFalse(spell.IsAlive);
-            Assert.AreEqual(oldSlowRatio, gameField.VelositiDivisor);
+            Assert.AreEqual(oldSlowRatio, gameField.VelocityDivisor);
         }
     }
 }
