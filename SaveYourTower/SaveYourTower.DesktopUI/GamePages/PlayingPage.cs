@@ -79,6 +79,7 @@ namespace SaveYourTower.DesktopUI
             btnSlowAll.Enabled = false;
             this.Cursor = new Cursor((Properties.Resources.Mark).GetHicon());
             _levels = LoadLevels();
+            bntPause.Parent = tblMainGameView;
         } 
 
         #endregion
